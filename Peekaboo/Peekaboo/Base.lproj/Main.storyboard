@@ -26,36 +26,35 @@
             </objects>
             <point key="canvasLocation" x="-625" y="84"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Title View Controller-->
         <scene sceneID="dDi-J9-B5A">
             <objects>
-                <viewController id="ORo-pa-9Cs" customClass="secondViewController" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ORo-pa-9Cs" customClass="titleViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jWI-ZF-2Dy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-                                <rect key="frame" x="150" y="288.5" width="75" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
+                                <rect key="frame" x="150" y="287.5" width="75" height="90"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0DP-u5-F6g">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0DP-u5-F6g">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="90"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt8-jY-RSK">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt8-jY-RSK">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
                                                 <state key="normal" title="New Game"/>
                                                 <connections>
                                                     <segue destination="EHa-1p-Yb4" kind="presentation" id="c0x-L9-deu"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tws-cw-pye">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tws-cw-pye">
                                                 <rect key="frame" x="0.0" y="30" width="75" height="30"/>
                                                 <state key="normal" title="Directions"/>
                                                 <connections>
                                                     <segue destination="HZw-5X-XJI" kind="show" id="lcR-JX-8fK"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yi-45-Rji">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Yi-45-Rji">
                                                 <rect key="frame" x="0.0" y="60" width="75" height="30"/>
                                                 <state key="normal" title="About Us"/>
                                                 <connections>
@@ -67,7 +66,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Game Title" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
-                                <rect key="frame" x="93" y="84" width="189" height="48"/>
+                                <rect key="frame" x="93" y="115" width="189" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -78,8 +77,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="20" id="OoJ-nH-HaG"/>
+                            <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="Yr8-Hn-y39" secondAttribute="trailing" constant="150" id="ALU-iy-GHq"/>
+                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="51" id="OoJ-nH-HaG"/>
                             <constraint firstItem="EvJ-NT-nQw" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="a6d-UV-Zeq"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="top" secondItem="EvJ-NT-nQw" secondAttribute="bottom" constant="124.5" id="aHC-Cd-rFw"/>
+                            <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="EvJ-NT-nQw" secondAttribute="trailing" constant="93" id="aoF-kT-Mh0"/>
+                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="93" id="gcp-m8-VWn"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="150" id="uGV-Ru-y2j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t1k-be-fQh"/>
                     </view>
@@ -96,40 +100,48 @@
             </objects>
             <point key="canvasLocation" x="297" y="83"/>
         </scene>
-        <!--Direction View Controller-->
+        <!--Directions View Controller-->
         <scene sceneID="iEl-ec-DbF">
             <objects>
-                <viewController id="HZw-5X-XJI" customClass="directionViewController" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HZw-5X-XJI" customClass="directionsViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3SL-ja-Sn8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="top" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YaA-g2-9e1">
-                                <rect key="frame" x="37" y="280" width="300" height="193"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="70" y="102" width="235" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
+                                <rect key="frame" x="78.5" y="115" width="218" height="60"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
+                                <rect key="frame" x="16" y="218.5" width="343" height="374.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ePI-bE-mbj" firstAttribute="centerX" secondItem="3SL-ja-Sn8" secondAttribute="centerX" id="D6x-Uo-gSM"/>
+                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="8ce-hy-toy" secondAttribute="trailing" constant="16" id="ceg-VF-Z1l"/>
+                            <constraint firstItem="ePI-bE-mbj" firstAttribute="top" secondItem="qDZ-TS-VFV" secondAttribute="top" constant="51" id="fAY-i7-wbN"/>
+                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="bottom" secondItem="8ce-hy-toy" secondAttribute="bottom" constant="30" id="qDB-63-u6K"/>
+                            <constraint firstItem="8ce-hy-toy" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="16" id="wfY-9S-MxL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qDZ-TS-VFV"/>
                     </view>
+                    <connections>
+                        <outlet property="direction" destination="ePI-bE-mbj" id="UAJ-PO-jTh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cvn-oP-xkw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-193" y="807"/>
+            <point key="canvasLocation" x="-194.40000000000001" y="806.44677661169419"/>
         </scene>
         <!--About Us View Controller-->
         <scene sceneID="uU6-eG-aRA">
@@ -150,15 +162,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="83" y="87" width="220" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
+                                <rect key="frame" x="85.5" y="115" width="203" height="60"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RBu-du-u25" firstAttribute="centerX" secondItem="sYE-HM-2sf" secondAttribute="centerX" id="4L2-9W-wcZ"/>
+                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="51" id="YoS-WH-tVs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tOK-Ca-TKF"/>
                     </view>
                 </viewController>
