@@ -98,11 +98,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    @IBAction func giveUp(_ sender: Any) {
-        let giveUp = UIAlertController(title: "Give Up?", message: "Are you sure?", preferredStyle: .alert)
-        giveUp.addAction(UIAlertAction(title: "Yes",style: .default, handler: {action in self.growObject()}))
-        giveUp.addAction(UIAlertAction(title: "No",style: .default, handler: nil))
-    }
+//    @IBAction func giveUp(_ sender: Any) {
+//        let giveUp = UIAlertController(title: "Give Up?", message: "Are you sure?", preferredStyle: .alert)
+//        giveUp.addAction(UIAlertAction(title: "Yes",style: .default, handler: {action in self.growObject()}))
+//        giveUp.addAction(UIAlertAction(title: "No",style: .default, handler: nil))
+//    }
     
     func growObject(){
         print("hi")
