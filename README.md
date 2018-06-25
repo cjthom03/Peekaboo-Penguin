@@ -1,53 +1,56 @@
-# Peekaboo
+# Peekaboo Penguin
 
 ## Background and Overview
+Peekaboo Penguin is a mobile application and hide-n-seek style game in which one player hides a small, digital 3D Penguin somewhere in augmented reality and another player must find that penguin within a given timeframe.
 
+The penguin can be placed on a flat surface or simply anywhere in 3d space that the hiding player would like. The hiding player is also subject to a time constraint, to keep the game play fast paced and interesting.
+
+The searching player will not be able to see the penguin unless they are within a certain distance, to avoid being able to detect the penguin through walls or other physical objects. If the searching player cannot find the penguin in the timeframe given, the penguin will become visible and will grow - revealing its hiding spot to the player.
+
+***
 
 ## Functionality and MVP
-### Terminology
-Treasure: hidden object
-Hider: Player who hides the “Treasure”
-Seeker: Player who searches for the “Treasure”
-Game: Includes Placing and Searching state
-Search state: period of the game where the seeker is looking for the “Treasure”
 ### Base Gameplay Logic
-- [ ] Hider will be able to attach an digital object on to a physical surface for a Seeker to find
-- [ ] Hider and Seeker will have limited time to place and find the object
-- [ ] Either player loses on timeout
-- [ ] “Treasure” will be invisible until Seeker is within a set distance of the object at which point audio feedback will be given
-- [ ] Seeker will be able to tap on the “Treasure” to win the game
-- [ ] If the Seeker gives up, the location will be revealed by the “Treasure” becoming visible and growing
+- [ ] Hider will be able to attach a digital object to a physical surface for a Seeker to find
+- [ ] Both the Hider and the Seeker will have limited time to place and find the object(players lose on timeout)
+- [ ] Object will be invisible until Seeker close enough to the object (at which point audio feedback will provided)
+- [ ] Seeker will be able to tap on the object to win the game
+- [ ] If the Seeker gives up or runs out of time, the object's location will be revealed
 
- ## User Interface and Experience
+## User Interface and Experience
 - [ ] App will include a main menu with a “Start Game” button, directions, and an about page
-- [ ] “Start Game” starts the hiding countdown, opens the camera, and tells the hider to place the “Treasure”
+- [ ] “Start Game” starts the hiding countdown, opens the camera, and tells the Hider to place the “Treasure”
 - [ ] Hider will be able to confirm or deny the correct placement of the object or cancel the game
 - [ ] If Hider runs out of time, a losing message is displayed which allows for a new game to start
-
- - [ ] The Game will have a staging screen for letting the Hider hand over the phone to the Seeker who can activate the Search
-- [ ] The Searching state will let the Seeker find the object, or give up
-- [ ] The Searching state ends with give up or timeout with will a winning or losing message, allowing the user to start a new Game
+- [ ] The Game will have a staging screen for letting the Hider hand over the phone to the Seeker who can activate the Search
+- [ ] The searching phase ends with give up or timeout and a winning or losing message, allowing the user to start a new Game
 - [ ] UX will be adequately styled with smooth, bug-free navigation
 
- ## Documentation
+## Documentation
 - [ ] Full readme
 - [ ] Demo Site
 - [ ] App Store details
 
 ### Bonus Features
-- [ ] Single player version
+- [ ] Single player version 
 - [ ] Instructions and UI components rendered in AR
 
+***
 
 ## Wireframes
-The application will consist of 4 views, outlines in the image below. There will be a main navigation view that directs the user to the other 3 views. There will be a Directions view, explaining the rules of the game to the user. There will be an 'About Us' view, with basic details about the application and the development team. And there will be an `ARSCNVIEW` or Augmented Reality Scene View, where nearly all of the
+The application will consist of 4 views, outlines in the image below. There will be a main navigation view that directs the user to the other 3 views. There will be a Directions view, explaining the rules of the game to the user. There will be an 'About Us' view, with basic details about the application and the development team. And there will be an `ARSCNVIEW` or Augmented Reality Scene View, where the game will be played (represented below as the blue frame).
+
 ![All Wireframe Panels](PlanningDocs/All_panels.png)
 
 The `ARSCNVIEW` will consist of basic navigation buttons, pop-ups and prompts to the user to confirm object location or start the 2nd player's turn, etc. Most of the application will take place through the users's camera with prompt's and pop-ups similar to the images below.
+
 ![Object Placement Confirmation](PlanningDocs/confirmation.jpg)
+
 ![Ready player 2](PlanningDocs/Ready.jpg)
 
 A full storyboard view of application is available in the Planning Docs folder.
+
+***
 
 ## Technologies and Technological Challenges
 This mobile iOS application will be built in Swift, using xCode 9.4 - Apple’s Model-View-Controller (MVC) framework and development environment. Given project time constraints, building this app in Swift has a few key advantages:
@@ -62,6 +65,8 @@ Technical challenges for this project will include:
 * Rendering and interacting with objects in augmented reality
 * Determining relative distance in 3d space between objects and registering events depending on that distance
 * Creating a fun user experience on a medium for which we have not developed before (mobile)
+
+***
 
 ## Completed over the weekend
 To get up to speed with the new technologies, each team member completed the following:
@@ -78,6 +83,8 @@ To get started on this project, the following was completed:
 * Basic UI setup using some demo code and objects to test functionality
 * Identified template for Demo Site
 * Determined 3d object model and animations to use as primary hidden object
+
+***
 
 ## Group Members and Responsibilities
 The team includes 4 members: Charlie Thomas, Aakash Sarang, Nate Cunha, and Daniel Chen
@@ -106,6 +113,8 @@ Daniel’s primary responsibilities include:
 * Rendering and placement of objects in 3D space
 * Styling ‘Directions’ & ‘About Us’ views
 * Manage Demo Site setup (will be assisted by all)
+
+***
 
 ## Schedule & Work Breakdown
 
