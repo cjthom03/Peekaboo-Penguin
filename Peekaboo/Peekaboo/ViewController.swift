@@ -15,8 +15,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var planeArray = [SCNNode]()
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var quit: UIBarButtonItem!
+    //@IBOutlet weak var quit: UIBarButtonItem!
     
+    @IBAction func goBack(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "I give up", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        //        let clearAction = UIAlertAction(title: "Clear", style: .default) { (alert: UIAlertAction!) -> Void in
+        //        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: { action in self.goBack(sender: <#UIBarButtonItem#>)})
+        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: {action in
+        }
+        )
+        //print("You pressed OK")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
+            //print("You pressed Cancel")
+        }
+        alert.addAction(clearAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion:nil)
+    }
+ 
+    // @IBOutlet var sceneView: ARSCNView!
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
@@ -96,6 +116,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         changePlayers.addAction(UIAlertAction(title: "Go!",style: .default, handler: nil))
         self.present(changePlayers,animated: true, completion: nil)
     }
+    
     
     
     
