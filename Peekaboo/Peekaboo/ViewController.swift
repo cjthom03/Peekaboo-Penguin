@@ -20,7 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
-        let alert = UIAlertController(title: "I give up", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
         //        let clearAction = UIAlertAction(title: "Clear", style: .default) { (alert: UIAlertAction!) -> Void in
         //        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: { action in self.goBack(sender: <#UIBarButtonItem#>)})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
@@ -58,7 +58,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         configuration.planeDetection = .horizontal
         
-          self.hidesUIButton = true
+//          self.hidesUIButton = true
         
         // Run the view's session
         sceneView.session.run(configuration)
