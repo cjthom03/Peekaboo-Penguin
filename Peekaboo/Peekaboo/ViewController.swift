@@ -55,7 +55,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let touch = touches.first {
             let touchLocation = touch.location(in: sceneView)
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
-            print(planeArray)
              if planeArray.isEmpty{
                 if let hitResult = results.first {
                     let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
