@@ -55,18 +55,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let touch = touches.first {
             let touchLocation = touch.location(in: sceneView)
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
-            
-            if let hitResult = results.first {
-                let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
-                alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-                self.present(alert,animated: true)
-                
+            print(planeArray)
+             if planeArray.isEmpty{
+                if let hitResult = results.first {
+                    let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
+                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+                    self.present(alert,animated: true)
+                    
+                }
             }
+         
         }
     }
     
     func addPlane(atLocation location: ARHitTestResult){
+       
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         if let sceneNode = scene.rootNode.childNode(withName: "ship",recursively:true) {
@@ -76,7 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 z: location.worldTransform.columns.3.z
             )
             
-            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
+//            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
             planeArray.append(sceneNode)
             
@@ -111,7 +115,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if !planeArray.isEmpty{
             for plane in planeArray{
                 plane.removeFromParentNode()
+            
             }
+            planeArray.removeAll()
         }
     }
     
