@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Flex Project
+//  test
 //
 //  Created by Daniel Chen on 6/23/18.
 //  Copyright © 2018 Daniel Chen. All rights reserved.
@@ -57,11 +57,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
             
             if let hitResult = results.first {
-//                let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
-//                alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-//                self.present(alert,animated: true)
-                addPlane(atLocation: hitResult)
+                let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+                self.present(alert,animated: true)
+                
             }
         }
     }
@@ -76,13 +76,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 z: location.worldTransform.columns.3.z
             )
             
-//            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
+            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
             planeArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-//            delay(2, closure: playerTwo)
-//            delay(3, closure: win )
+            delay(2, closure: playerTwo)
+            delay(3, closure: win )
         }
     }
     
@@ -98,14 +98,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-//    @IBAction func giveUp(_ sender: Any) {
-//        let giveUp = UIAlertController(title: "Give Up?", message: "Are you sure?", preferredStyle: .alert)
-//        giveUp.addAction(UIAlertAction(title: "Yes",style: .default, handler: {action in self.growObject()}))
-//        giveUp.addAction(UIAlertAction(title: "No",style: .default, handler: nil))
-//    }
+    //    @IBAction func giveUp(_ sender: Any) {
+    //        let giveUp = UIAlertController(title: "Give Up?", message: "Are you sure?", preferredStyle: .alert)
+    //        giveUp.addAction(UIAlertAction(title: "Yes",style: .default, handler: {action in self.growObject()}))
+    //        giveUp.addAction(UIAlertAction(title: "No",style: .default, handler: nil))
+    //    }
     
     func growObject(){
-      
+        print("hi")
     }
     
     
@@ -122,8 +122,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             for plane in planeArray{
                 plane.removeFromParentNode()
             }
-    }
-    
+        }
     }
     
     //MARK: - ARSCNViewDelegateMethods
@@ -132,10 +131,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
         
+        //        if anchor is ARPlaneAnchor {
+        //            let planeAnchor = anchor as! ARPlaneAnchor
+        
         let planeNode = createPlane(withPlaneAnchor: planeAnchor)
         
         node.addChildNode(planeNode)
         
+        //        }else{
+        //            return
+        //        }
     }
     
     //MARK: - Plane Rendering Methods

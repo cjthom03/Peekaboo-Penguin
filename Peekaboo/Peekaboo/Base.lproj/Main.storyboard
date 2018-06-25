@@ -63,22 +63,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Game Title" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
-                                <rect key="frame" x="65.5" y="71" width="189" height="48"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Peekaboo Penguin" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
+                                <rect key="frame" x="30" y="70" width="260" height="39"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="B2a-oL-AD6"/>
+                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="4Nq-8v-tkv"/>
                             <constraint firstItem="Yr8-Hn-y39" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="DhQ-Td-IOY"/>
+                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="50" id="MNq-bb-fLM"/>
                             <constraint firstItem="Yr8-Hn-y39" firstAttribute="centerY" secondItem="jWI-ZF-2Dy" secondAttribute="centerY" id="qjT-rY-fs8"/>
-                            <constraint firstItem="EvJ-NT-nQw" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="51" id="sOI-jt-cmZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t1k-be-fQh"/>
                     </view>
@@ -142,7 +142,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Lorem ipsum dolor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SLk-SH-gZw">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Lorem ipsum dolor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SLk-SH-gZw">
                                 <rect key="frame" x="83" y="144" width="209" height="36"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -162,7 +162,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="51" id="Ob9-cY-NEH"/>
+                            <constraint firstItem="SLk-SH-gZw" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="83" id="olu-dH-LH2"/>
                             <constraint firstItem="RBu-du-u25" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="78" id="ppy-zM-yvI"/>
+                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="SLk-SH-gZw" secondAttribute="trailing" constant="28" id="vys-xi-8To"/>
                             <constraint firstItem="SLk-SH-gZw" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="25" id="yOh-Bv-Rt9"/>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="RBu-du-u25" secondAttribute="trailing" constant="78" id="zyV-Ef-W9X"/>
                         </constraints>
@@ -204,6 +206,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="WeL-yw-umR"/>
         <segue reference="ATH-Hf-9pJ"/>
     </inferredMetricsTieBreakers>
 </document>
