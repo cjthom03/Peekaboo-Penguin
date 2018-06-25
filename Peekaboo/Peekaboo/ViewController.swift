@@ -58,7 +58,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         configuration.planeDetection = .horizontal
         
-        
+          self.hidesUIButton = true
         
         // Run the view's session
         sceneView.session.run(configuration)
