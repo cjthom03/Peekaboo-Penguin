@@ -57,12 +57,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
             
             if let hitResult = results.first {
-//                let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
-//                alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-//                self.present(alert,animated: true)
-                print(hitResult)
-                addPlane(atLocation: hitResult)
+                let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPlane(atLocation: hitResult)}))
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+                self.present(alert,animated: true)
                 
             }
         }
@@ -78,12 +76,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 z: location.worldTransform.columns.3.z
             )
             
-//            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
+            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
             planeArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-//            delay(2, closure: playerTwo)
+            delay(2, closure: playerTwo)
 //            delay(3, closure: win )
         }
     }
