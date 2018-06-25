@@ -64,7 +64,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Peekaboo Penguin" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
-                                <rect key="frame" x="30" y="114" width="260" height="39"/>
+                                <rect key="frame" x="30" y="70" width="260" height="39"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -99,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="115" width="177" height="48"/>
+                                <rect key="frame" x="71.5" y="71" width="177" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="177" width="288" height="302.5"/>
+                                <rect key="frame" x="16" y="133" width="288" height="302.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -147,7 +147,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="78" y="115" width="164" height="48"/>
+                                <rect key="frame" x="78" y="71" width="164" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -157,7 +157,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="168" width="288" height="346"/>
+                                <rect key="frame" x="16" y="124" width="288" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -221,6 +221,7 @@ Nate - Little description of Nate</string>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="qWP-RA-caZ">
                             <connections>
                                 <action selector="goBack:" destination="EHa-1p-Yb4" id="vaH-gU-rAC"/>
+                                <segue destination="ORo-pa-9Cs" kind="show" identifier="title" id="gfw-Wy-1qd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -233,4 +234,7 @@ Nate - Little description of Nate</string>
             <point key="canvasLocation" x="1158" y="83"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="gfw-Wy-1qd"/>
+    </inferredMetricsTieBreakers>
 </document>
