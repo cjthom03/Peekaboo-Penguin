@@ -98,8 +98,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="71" width="177" height="48"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
+                                <rect key="frame" x="71.5" y="60" width="177" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="133" width="288" height="302.5"/>
+                                <rect key="frame" x="16" y="122" width="288" height="302.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -123,7 +123,7 @@
                         <constraints>
                             <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="ePI-bE-mbj" secondAttribute="trailing" constant="71.5" id="HFo-8P-xsh"/>
                             <constraint firstItem="ePI-bE-mbj" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="71.5" id="HzR-sR-nAF"/>
-                            <constraint firstItem="ePI-bE-mbj" firstAttribute="top" secondItem="qDZ-TS-VFV" secondAttribute="top" constant="51" id="Mks-pg-7tT"/>
+                            <constraint firstItem="ePI-bE-mbj" firstAttribute="top" secondItem="qDZ-TS-VFV" secondAttribute="top" constant="40" id="Mks-pg-7tT"/>
                             <constraint firstItem="8ce-hy-toy" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="16" id="Tgu-th-luV"/>
                             <constraint firstItem="8ce-hy-toy" firstAttribute="top" secondItem="ePI-bE-mbj" secondAttribute="bottom" constant="14" id="YS6-ku-l5d"/>
                             <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="8ce-hy-toy" secondAttribute="trailing" constant="16" id="dE8-Bz-1Gp"/>
@@ -147,7 +147,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="78" y="71" width="164" height="48"/>
+                                <rect key="frame" x="78" y="60" width="164" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -157,13 +157,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="124" width="288" height="390"/>
+                                <rect key="frame" x="16" y="122" width="288" height="392"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <string key="text">Bored at home? 
+                                <mutableString key="text">Bored at home? 
 Don't wanna go out?
 
 Try Peekaboo! 
@@ -175,15 +175,13 @@ Niki the Panguine is waiting for you to find him.
 Peekaboo is totally free to download and use.
 So what are you waiting for? Download from the IOS app store now and start having fun!
 
-
-
 Creators of Peekaboo
 
 Charlie - Little description of charlie
 Aakash - Little description of Aakash
 Daniel - Little description of Daniel
-Nate - Little description of Nate</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+Nate - Little description of Nate</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -193,9 +191,9 @@ Nate - Little description of Nate</string>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="bottom" secondItem="I0F-MQ-Xy2" secondAttribute="bottom" constant="10" id="LyW-HG-5Ik"/>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="I0F-MQ-Xy2" secondAttribute="trailing" constant="16" id="Xcx-eq-9LU"/>
                             <constraint firstItem="I0F-MQ-Xy2" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="16" id="lyy-FR-Vta"/>
-                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="5" id="v0u-1r-8ms"/>
+                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="14" id="v0u-1r-8ms"/>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="RBu-du-u25" secondAttribute="trailing" constant="78" id="vZ0-Kp-oHQ"/>
-                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="51" id="zzh-W6-0af"/>
+                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="40" id="zzh-W6-0af"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tOK-Ca-TKF"/>
                     </view>
@@ -215,11 +213,6 @@ Nate - Little description of Nate</string>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAy-7e-IKW">
                                 <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLf-ZX-CQz" colorLabel="IBBuiltInLabel-Green">
-                                <rect key="frame" x="250" y="480" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
