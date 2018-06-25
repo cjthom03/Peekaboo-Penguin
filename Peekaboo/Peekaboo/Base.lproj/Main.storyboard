@@ -30,7 +30,7 @@
         <scene sceneID="dDi-J9-B5A">
             <objects>
                 <viewController id="ORo-pa-9Cs" customClass="titleViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jWI-ZF-2Dy">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="title" id="jWI-ZF-2Dy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

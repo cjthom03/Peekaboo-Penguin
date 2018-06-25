@@ -16,15 +16,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
-    
+  
+    @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
         let alert = UIAlertController(title: "I give up", message: "Are you sure you want to quit?", preferredStyle: .alert)
         //        let clearAction = UIAlertAction(title: "Clear", style: .default) { (alert: UIAlertAction!) -> Void in
         //        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: { action in self.goBack(sender: <#UIBarButtonItem#>)})
-        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: {action in
-        }
-        )
+        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
+        
+    
         //print("You pressed OK")
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
             //print("You pressed Cancel")
