@@ -19,7 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+//        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -55,33 +55,44 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
             
+            //No penguin on the screen yet? Try to add one
             if penguinArray.isEmpty {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
-            
                 if let hitPlaneResult = planeResults.first {
-                    let alert = UIAlertController(title: "Confirm?", message: "Add Plane at this point", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
-                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+//                    let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
+//                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+//                    self.present(alert,animated: true)
+                    addPenquin(atLocation: hitPlaneResult)
+                }
+            } else {
+                //penquin already on the screen? Test if the penguin was tapped
+                let hitTest = sceneView.hitTest(touchLocation)
+                if !hitTest.isEmpty{
+                   // If the penguin was tapped by player 2, the game is won!
+                    let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
                     self.present(alert,animated: true)
-                    
                 }
             }
         }
     }
     
     func addPenquin(atLocation location: ARHitTestResult){
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
-        if let sceneNode = scene.rootNode.childNode(withName: "ship",recursively:true) {
+        if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
             sceneNode.position = SCNVector3(
                 x: location.worldTransform.columns.3.x,
-                y: location.worldTransform.columns.3.y,
+                y: location.worldTransform.columns.3.y + 0.022,
                 z: location.worldTransform.columns.3.z
             )
             
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
+            sceneNode.name = "penguin"
+            print(sceneNode)
             penguinArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
@@ -121,32 +132,32 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     //MARK: - ARSCNViewDelegateMethods
-    
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
-        
-        let planeNode = createPlane(withPlaneAnchor: planeAnchor)
-        
-        node.addChildNode(planeNode)
-        
-    }
-    
-    //MARK: - Plane Rendering Methods
-    
-    func createPlane(withPlaneAnchor planeAnchor: ARPlaneAnchor) -> SCNNode{
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        let gridMaterial = SCNMaterial()
-        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-        plane.materials = [gridMaterial]
-        let planeNode = SCNNode()
-        planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-        
-        planeNode.geometry = plane
-        
-        return planeNode
-    }
-    
-    
+//
+//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//
+//        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
+//
+//        let planeNode = createPlane(withPlaneAnchor: planeAnchor)
+//
+//        node.addChildNode(planeNode)
+//
+//    }
+//
+//    //MARK: - Plane Rendering Methods
+//
+//    func createPlane(withPlaneAnchor planeAnchor: ARPlaneAnchor) -> SCNNode{
+//        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
+//        let gridMaterial = SCNMaterial()
+//        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
+//        plane.materials = [gridMaterial]
+//        let planeNode = SCNNode()
+//        planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
+//        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
+//
+//        planeNode.geometry = plane
+//
+//        return planeNode
+//    }
+
+
 }
