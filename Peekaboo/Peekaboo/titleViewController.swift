@@ -15,10 +15,6 @@ class titleViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
     }
     
-    @IBOutlet weak var newGameButton: UIButton!
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
