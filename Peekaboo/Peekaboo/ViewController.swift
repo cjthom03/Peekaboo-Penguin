@@ -13,7 +13,7 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     var penguinArray = [SCNNode]()
-    var penguinToPOVDistance = 0.0
+    var penguinToPOVDistance = 5.0
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
@@ -90,7 +90,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
 //                    self.present(alert,animated: true)
                     addPenquin(atLocation: hitPlaneResult)
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
+                        self.HideObject()
+                    })
                 }
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
