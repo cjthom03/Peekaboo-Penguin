@@ -13,6 +13,9 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     var penguinArray = [SCNNode]()
+    var timer = Timer()
+    var seconds = 0 //default timer set to 0 - start times must be explicitly set
+    
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -111,6 +114,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
             penguinArray.append(sceneNode)
+            setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
 //            delay(2, closure: playerTwo)
@@ -129,9 +133,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.present(changePlayers,animated: true, completion: nil)
     }
     
+    //TIMER FUNCTIONS -------------------------------------------------------------
+    func setTimer(startTime: Int) {
+        seconds = startTime
+        runTimer()
+    }
     
+    func stopTimer() {
+        timer.invalidate()
+    }
     
+    //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
     
+    @objc func updateTimer() {
+        
+        if seconds >= 0 {
+            seconds -= 1
+            // labelName.text = "\(seconds)"
+                //SET THE LABELTEXT TO WHATEVER TIMER LABEL WE END UP USING
+        } else {
+            stopTimer()
+            // this is where we would put lose conditions / call other methods etc
+            // depending on whoever is the current player
+        }
+    }
+    
+    // END OF TIMER FUNCTIONS ------------------------------------------------------------------
     
     func win(){
         //    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
