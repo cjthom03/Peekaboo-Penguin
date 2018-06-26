@@ -21,14 +21,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func goBack(_ sender: Any) {
         
         let alert = UIAlertController(title: "give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
-        //        let clearAction = UIAlertAction(title: "Clear", style: .default) { (alert: UIAlertAction!) -> Void in
-        //        let clearAction = UIAlertAction(title: "Clear", style: .default, handler: { action in self.goBack(sender: <#UIBarButtonItem#>)})
-        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
         
-    
-        //print("You pressed OK")
+        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
-            //print("You pressed Cancel")
+     
         }
         alert.addAction(clearAction)
         alert.addAction(cancelAction)
