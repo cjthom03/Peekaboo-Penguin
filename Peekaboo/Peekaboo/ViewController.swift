@@ -39,13 +39,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
  
     // @IBOutlet var sceneView: ARSCNView!
     
-    func HideObject() {
-        if Float(penguinToPOVDistance) <= winDistance {
-            penguinArray.first?.isHidden = false
-        } else {
-            penguinArray.first?.isHidden = true
-        }
-    }
+//    func HideObject() {
+//        if Float(penguinToPOVDistance) <= winDistance {
+//            penguinArray.first?.isHidden = false
+//        } else {
+//            penguinArray.first?.isHidden = true
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
