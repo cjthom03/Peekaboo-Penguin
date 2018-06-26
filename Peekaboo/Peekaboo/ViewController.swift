@@ -35,7 +35,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
  
     // @IBOutlet var sceneView: ARSCNView!
     
-  
+    func HideObject() {
+        if penguinToPOVDistance <= 3.0 {
+            penguinArray.first?.isHidden = false
+        } else {
+            penguinArray.first?.isHidden = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
@@ -85,6 +92,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
 //                    self.present(alert,animated: true)
                     addPenquin(atLocation: hitPlaneResult)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
+                        self.HideObject()
+                    })
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+                        self.penguinToPOVDistance = 3.0
+                        self.HideObject()
+                    })
                 }
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
