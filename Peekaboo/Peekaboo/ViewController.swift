@@ -14,7 +14,13 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
+
     var winDistance: Float = 1
+
+    var virtualText = SCNNode() // initialize as an empty scene node
+    var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
+
+
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
@@ -23,6 +29,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
+    @IBOutlet weak var timerLabel: UILabel!
+    
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
@@ -56,6 +64,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.autoenablesDefaultLighting = true
         
+        let startText = "Hide the Penguin!"
+        let startPos = SCNVector3(-0.45, 0, -1.5)
+        virtualText = createText(text: startText, atPosition: startPos)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,9 +87,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        if (self.isMovingFromParentViewController) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        }
+        
         // Pause the view's session
         sceneView.session.pause()
     }
+    
+    @objc func canRotate() -> Void {}
     
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -108,9 +126,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let hitTest = sceneView.hitTest(touchLocation)
                 if !hitTest.isEmpty{
                    // If the penguin was tapped by player 2, the game is won!
-                    let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
-                    self.present(alert,animated: true)
+                    if let nodeName = hitTest.first?.node.name {
+                        if nodeName == "penguin" {
+                            let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
+                            self.present(alert,animated: true)
+                        }
+                    }
                 }
             }
          
@@ -148,6 +170,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
+            sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
             setTimer(startTime: 5)
             
@@ -174,9 +197,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let yDistance = currentPosition.y - penguinArray[0].position.y
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
+
 //            print(tempPenguinToPOVDistance)
 //            self.HideObject()
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
+
                 withinView = true
                 penguinArray.first?.isHidden = false
                 // play event
@@ -200,6 +225,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         changePlayers.addAction(UIAlertAction(title: "Go!",style: .default, handler: nil))
         self.present(changePlayers,animated: true, completion: nil)
     }
+    
+    // TEXT FUNCTIONS -------------------------------------------------------------
+    
+    func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
+        let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
+        textGeometry.firstMaterial?.diffuse.contents = textColor
+        let textNode = SCNNode(geometry: textGeometry)
+        textNode.position = position
+        textNode.scale = SCNVector3(0.0075, 0.0075, 0.0075)
+        sceneView.scene.rootNode.addChildNode(textNode)
+        return textNode
+    }
+    
+    func updateText(textNode: SCNNode, text: String) {
+        let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
+        textGeometry.firstMaterial?.diffuse.contents = textColor
+        textNode.geometry = textGeometry
+    }
+    
+    // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
     //TIMER FUNCTIONS -------------------------------------------------------------
     func setTimer(startTime: Int) {

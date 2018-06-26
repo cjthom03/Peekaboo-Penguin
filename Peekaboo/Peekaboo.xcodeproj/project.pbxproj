@@ -13,6 +13,7 @@
 		3CED3EC920E023DA0081C9F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED3EC720E023DA0081C9F1 /* Main.storyboard */; };
 		3CED3ECB20E023DB0081C9F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CED3ECA20E023DB0081C9F1 /* Assets.xcassets */; };
 		3CED3ECE20E023DB0081C9F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CED3ECC20E023DB0081C9F1 /* LaunchScreen.storyboard */; };
+		7802058F20E29F190097A96A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7802058E20E29F190097A96A /* Button.swift */; };
 		784DA40F20E0415A009BA1A2 /* titleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA40E20E0415A009BA1A2 /* titleViewController.swift */; };
 		784DA41120E0417D009BA1A2 /* directionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41020E0417D009BA1A2 /* directionsViewController.swift */; };
 		784DA41320E04196009BA1A2 /* aboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41220E04196009BA1A2 /* aboutUsViewController.swift */; };
@@ -27,6 +28,7 @@
 		3CED3ECA20E023DB0081C9F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CED3ECD20E023DB0081C9F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CED3ECF20E023DB0081C9F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7802058E20E29F190097A96A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		784DA40E20E0415A009BA1A2 /* titleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleViewController.swift; sourceTree = "<group>"; };
 		784DA41020E0417D009BA1A2 /* directionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = directionsViewController.swift; sourceTree = "<group>"; };
 		784DA41220E04196009BA1A2 /* aboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutUsViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				784DA40E20E0415A009BA1A2 /* titleViewController.swift */,
 				784DA41020E0417D009BA1A2 /* directionsViewController.swift */,
 				784DA41220E04196009BA1A2 /* aboutUsViewController.swift */,
+				7802058E20E29F190097A96A /* Button.swift */,
 				3CED3EC720E023DA0081C9F1 /* Main.storyboard */,
 				3CED3EC320E023DA0081C9F1 /* art.scnassets */,
 				3CED3ECA20E023DB0081C9F1 /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				784DA41120E0417D009BA1A2 /* directionsViewController.swift in Sources */,
+				7802058F20E29F190097A96A /* Button.swift in Sources */,
 				784DA41320E04196009BA1A2 /* aboutUsViewController.swift in Sources */,
 				3CED3EC620E023DA0081C9F1 /* ViewController.swift in Sources */,
 				784DA40F20E0415A009BA1A2 /* titleViewController.swift in Sources */,
