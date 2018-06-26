@@ -270,7 +270,7 @@ Nate - Little description of Nate</string>
                     <navigationItem key="navigationItem" title="Plane" id="OWN-10-ehk">
                         <barButtonItem key="leftBarButtonItem" systemItem="trash" id="3E0-mq-0h4">
                             <connections>
-                                <action selector="removePlane:" destination="EHa-1p-Yb4" id="lwA-3Z-KW4"/>
+                                <action selector="RemovePenquin:" destination="EHa-1p-Yb4" id="VgB-bM-Kxt"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="qWP-RA-caZ">
