@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-                                <rect key="frame" x="105" y="286" width="110" height="116"/>
+                                <rect key="frame" x="105" y="242" width="110" height="116"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="38"/>
@@ -70,12 +70,15 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-nc-mtv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-nc-mtv">
                                 <rect key="frame" x="0.0" y="396" width="320" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="TyV-v4-uMG"/>
+                                    <constraint firstAttribute="height" constant="128" id="v2R-n6-9o6"/>
+                                </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iLm-y1-Xgu">
-                                <rect key="frame" x="57" y="104" width="206" height="136"/>
+                                <rect key="frame" x="57" y="60" width="206" height="136"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="48" translatesAutoresizingMaskIntoConstraints="NO" id="4Mu-OS-2hL">
                                         <rect key="frame" x="0.0" y="0.0" width="206" height="68"/>
@@ -116,9 +119,13 @@
                         <color key="backgroundColor" red="0.46671549479166669" green="0.73149956597222221" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="iLm-y1-Xgu" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="40" id="2De-Md-bPW"/>
-                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="top" secondItem="iLm-y1-Xgu" secondAttribute="bottom" constant="46" id="UOK-hl-YEr"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="top" secondItem="iLm-y1-Xgu" secondAttribute="bottom" constant="46" id="5bO-AP-LPY"/>
+                            <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="Yr8-Hn-y39" secondAttribute="trailing" constant="105" id="HbZ-7a-5FC"/>
+                            <constraint firstItem="U4f-nc-mtv" firstAttribute="trailing" secondItem="t1k-be-fQh" secondAttribute="trailing" id="JaT-wG-Cfv"/>
+                            <constraint firstItem="U4f-nc-mtv" firstAttribute="bottom" secondItem="t1k-be-fQh" secondAttribute="bottom" id="SWB-Wh-kzH"/>
                             <constraint firstItem="iLm-y1-Xgu" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="Yhy-Tg-aN4"/>
-                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="wUv-bJ-7Ic"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="105" id="aCK-6j-3XD"/>
+                            <constraint firstItem="U4f-nc-mtv" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" id="zSE-4A-bCI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t1k-be-fQh"/>
                     </view>
@@ -139,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="104" width="177" height="48"/>
+                                <rect key="frame" x="71.5" y="60" width="177" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -149,7 +156,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="166" width="288" height="302.5"/>
+                                <rect key="frame" x="16" y="122" width="288" height="302.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -187,7 +194,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="78" y="104" width="164" height="48"/>
+                                <rect key="frame" x="78" y="60" width="164" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -197,7 +204,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="166" width="288" height="348"/>
+                                <rect key="frame" x="16" y="122" width="288" height="392"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -251,7 +258,7 @@ Nate - Little description of Nate</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAy-7e-IKW">
-                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -300,6 +307,6 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LmT-4Q-7Kw"/>
+        <segue reference="Q3z-Vd-63G"/>
     </inferredMetricsTieBreakers>
 </document>

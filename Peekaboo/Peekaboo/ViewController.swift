@@ -48,6 +48,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.navigationBar.isHidden = false
+        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
@@ -108,8 +110,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
-            sceneNode.name = "penguin"
-            print(sceneNode)
             penguinArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
