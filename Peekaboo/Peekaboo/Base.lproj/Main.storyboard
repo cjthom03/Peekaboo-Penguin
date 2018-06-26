@@ -235,7 +235,7 @@
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <string key="text">Bored at home? 
+                                <mutableString key="text">Bored at home? 
 Don't wanna go out?
 
 Try Peekaboo! 
@@ -243,7 +243,7 @@ Try Peekaboo!
 An AR game inspired by the british series of children's puzzle book "Where's Waldo?"
 Whether you are a kid or not, Peekaboo is a fun game for everyone.
 Play it by yourself or play it with a partner!
-Niki the Panguine is waiting for you to find him.
+Panguine the Penguin is waiting for you to find him.
 Peekaboo is totally free to download and use.
 So what are you waiting for? Download from the IOS app store now and start having fun!
 
@@ -252,7 +252,7 @@ Creators of Peekaboo
 Charlie - Little description of charlie
 Aakash - Little description of Aakash
 Daniel - Little description of Daniel
-Nate - Little description of Nate</string>
+Nate - Little description of Nate</mutableString>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
