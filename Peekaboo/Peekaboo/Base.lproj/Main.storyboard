@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -171,9 +170,9 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="137" width="288" height="446"/>
-                                <color key="backgroundColor" red="0.54117647058823526" green="0.77647058823529413" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
+                                <rect key="frame" x="16" y="137" width="288" height="377"/>
+                                <color key="backgroundColor" red="0.54117647058823526" green="0.78159754136029413" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -187,13 +186,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8ce-hy-toy" firstAttribute="top" secondItem="ePI-bE-mbj" secondAttribute="bottom" constant="20" id="5GL-1h-LeT"/>
-                            <constraint firstItem="8ce-hy-toy" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="16" id="UCs-Id-vbQ"/>
+                            <constraint firstItem="8ce-hy-toy" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="16" id="Krq-uM-db3"/>
+                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="8ce-hy-toy" secondAttribute="trailing" constant="16" id="ZYD-Wf-dxd"/>
                             <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="ePI-bE-mbj" secondAttribute="trailing" constant="68.5" id="aA9-aR-53E"/>
+                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="bottom" secondItem="8ce-hy-toy" secondAttribute="bottom" constant="10" id="byO-iI-TPd"/>
                             <constraint firstItem="ePI-bE-mbj" firstAttribute="top" secondItem="qDZ-TS-VFV" secondAttribute="top" constant="40" id="efo-2c-kWO"/>
                             <constraint firstItem="ePI-bE-mbj" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="68.5" id="keo-ax-qhm"/>
-                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="8ce-hy-toy" secondAttribute="trailing" constant="16" id="shD-v9-6ja"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="8ce-hy-toy" secondAttribute="bottom" constant="-59" id="wst-UH-uCd"/>
+                            <constraint firstItem="8ce-hy-toy" firstAttribute="top" secondItem="ePI-bE-mbj" secondAttribute="bottom" constant="20" id="o5H-E3-bGd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qDZ-TS-VFV"/>
                     </view>
@@ -213,19 +212,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="78" y="60" width="164" height="48"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
+                                <rect key="frame" x="76" y="60" width="168" height="57"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="About Us">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="40" name="ChalkboardSE-Regular"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="122" width="288" height="392"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
+                                <rect key="frame" x="16" y="125" width="288" height="383"/>
+                                <color key="backgroundColor" red="0.53725490196078429" green="0.77718290441176463" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -248,26 +253,27 @@ Charlie - Little description of charlie
 Aakash - Little description of Aakash
 Daniel - Little description of Daniel
 Nate - Little description of Nate</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.53557304432189534" green="0.777020143995098" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RBu-du-u25" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="78" id="6jV-1E-H7g"/>
+                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="RBu-du-u25" secondAttribute="trailing" constant="76" id="AAA-fj-K1P"/>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="bottom" secondItem="I0F-MQ-Xy2" secondAttribute="bottom" constant="10" id="LyW-HG-5Ik"/>
+                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="14" id="RYd-Eo-ks3"/>
+                            <constraint firstItem="RBu-du-u25" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="76" id="Ult-f8-U0r"/>
                             <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="I0F-MQ-Xy2" secondAttribute="trailing" constant="16" id="Xcx-eq-9LU"/>
+                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="40" id="eIT-Nh-ceB"/>
                             <constraint firstItem="I0F-MQ-Xy2" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="16" id="lyy-FR-Vta"/>
-                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="14" id="v0u-1r-8ms"/>
-                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="RBu-du-u25" secondAttribute="trailing" constant="78" id="vZ0-Kp-oHQ"/>
-                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="40" id="zzh-W6-0af"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tOK-Ca-TKF"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPb-5n-pJY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="790.14084507042253"/>
+            <point key="canvasLocation" x="694" y="806"/>
         </scene>
         <!--Plane-->
         <scene sceneID="j18-vg-XEF">
@@ -336,7 +342,6 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WeL-yw-umR"/>
         <segue reference="Q3z-Vd-63G"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -21,7 +21,6 @@ class Button: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        contentEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         titleLabel?.adjustsFontForContentSizeCategory = true
         layer.backgroundColor = UIColor.white.cgColor
     }
