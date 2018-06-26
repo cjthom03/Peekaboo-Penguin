@@ -21,15 +21,14 @@ class Button: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-        contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        contentEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
         titleLabel?.adjustsFontForContentSizeCategory = true
+        layer.backgroundColor = UIColor.white.cgColor
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = 22
+        layer.cornerRadius = 20
     }
 
 }

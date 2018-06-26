@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cHq-ka-Qhp">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -17,7 +17,7 @@
             <objects>
                 <navigationController id="cHq-ka-Qhp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pJ2-pf-DaN">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -33,37 +33,37 @@
             <objects>
                 <viewController id="ORo-pa-9Cs" customClass="titleViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="title" id="jWI-ZF-2Dy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-                                <rect key="frame" x="90" y="318.5" width="195" height="146"/>
+                                <rect key="frame" x="90" y="286" width="140" height="146"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="195" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="38"/>
                                         <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="22"/>
                                         <state key="normal" title="New Game">
-                                            <color key="titleColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.73281304707777783" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="EHa-1p-Yb4" kind="show" id="WeL-yw-umR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfQ-S1-m2I" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="53" width="195" height="39"/>
+                                        <rect key="frame" x="0.0" y="53" width="140" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Directions">
-                                            <color key="titleColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.73243327277222225" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="HZw-5X-XJI" kind="show" id="nmK-5q-MzX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-qo-Wfj" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="107" width="195" height="39"/>
+                                        <rect key="frame" x="0.0" y="107" width="140" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="About Us">
-                                            <color key="titleColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.73251465298055551" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="cRu-jw-dPd" kind="show" id="SLo-nQ-eF5"/>
@@ -72,16 +72,16 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-nc-mtv">
-                                <rect key="frame" x="0.0" y="473" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="396" width="320" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="U4f-nc-mtv" secondAttribute="height" multiplier="5:2" id="k6a-Yy-4d1"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iLm-y1-Xgu">
-                                <rect key="frame" x="32" y="104" width="311" height="168.5"/>
+                                <rect key="frame" x="32" y="104" width="256" height="136"/>
                                 <subviews>
                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="48" translatesAutoresizingMaskIntoConstraints="NO" id="4Mu-OS-2hL">
-                                        <rect key="frame" x="25" y="0.0" width="261" height="83.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="206" height="68"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                             <bool key="isElement" value="NO"/>
@@ -98,7 +98,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="48" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
-                                        <rect key="frame" x="44" y="83.5" width="223" height="85"/>
+                                        <rect key="frame" x="44" y="68" width="168" height="68"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
@@ -150,11 +150,11 @@
             <objects>
                 <viewController id="HZw-5X-XJI" customClass="directionsViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3SL-ja-Sn8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="104" width="232" height="48"/>
+                                <rect key="frame" x="71.5" y="104" width="177" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -164,7 +164,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="166" width="343" height="264.5"/>
+                                <rect key="frame" x="16" y="166" width="288" height="302.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -198,11 +198,11 @@
             <objects>
                 <viewController id="cRu-jw-dPd" customClass="aboutUsViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sYE-HM-2sf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="78" y="104" width="219" height="48"/>
+                                <rect key="frame" x="78" y="104" width="164" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -212,7 +212,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="166" width="343" height="447"/>
+                                <rect key="frame" x="16" y="166" width="288" height="348"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -262,11 +262,11 @@ Nate - Little description of Nate</string>
             <objects>
                 <viewController id="EHa-1p-Yb4" customClass="ViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Emr-0w-0E0" customClass="ARSCNView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAy-7e-IKW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -292,7 +292,7 @@ Nate - Little description of Nate</string>
                             </barButtonItem>
                             <barButtonItem style="plain" id="2dC-zN-bYp">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hm2-nZ-aA1">
-                                    <rect key="frame" x="252" y="7" width="71" height="30"/>
+                                    <rect key="frame" x="197" y="7" width="71" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </button>
                                 <connections>
