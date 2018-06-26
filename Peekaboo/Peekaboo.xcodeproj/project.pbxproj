@@ -297,21 +297,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
+
 				DEVELOPMENT_TEAM = ZK974HXWK8;
-=======
-				DEVELOPMENT_TEAM = 749CYD36Q4;
->>>>>>> origin/Aakash
+
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
+
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathaniel.cunha;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
->>>>>>> origin/Aakash
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,21 +319,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
+
 				DEVELOPMENT_TEAM = ZK974HXWK8;
-=======
-				DEVELOPMENT_TEAM = 749CYD36Q4;
->>>>>>> origin/Aakash
+
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
+
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathaniel.cunha;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
->>>>>>> origin/Aakash
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
