@@ -91,8 +91,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
-            sceneNode.name = "penguin"
-            print(sceneNode)
             penguinArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
