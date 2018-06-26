@@ -235,7 +235,7 @@
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <mutableString key="text">Bored at home? 
+                                <string key="text">Bored at home? 
 Don't wanna go out?
 
 Try Peekaboo! 
@@ -252,7 +252,7 @@ Creators of Peekaboo
 Charlie - Little description of charlie
 Aakash - Little description of Aakash
 Daniel - Little description of Daniel
-Nate - Little description of Nate</mutableString>
+Nate - Little description of Nate</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
