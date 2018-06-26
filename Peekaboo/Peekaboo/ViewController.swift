@@ -25,7 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
-        let alert = UIAlertController(title: "give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
         
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
 
@@ -90,11 +90,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
-//                    let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
-//                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-//                    self.present(alert,animated: true)
-                    addPenquin(atLocation: hitPlaneResult)
+                    let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
+                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+                    self.present(alert,animated: true)
+//                    askConfirmation(atLocation: hitPlaneResult)
+//                    addPenquin(atLocation: hitPlaneResult)
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -116,6 +117,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
          
         }
     }
+    
+//    func askConfirmation(atLocation location: ARHitTestResult) {
+//        let position = location
+//        let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: position) }))
+//        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+//        self.present(alert,animated: true)
+//    }
 
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
@@ -149,7 +158,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let yDistance = currentPosition.y - penguinArray[0].position.y
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
-            print(tempPenguinToPOVDistance)
+//            print(tempPenguinToPOVDistance)
             self.HideObject()
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
                 withinView = true
