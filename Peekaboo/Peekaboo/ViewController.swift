@@ -92,13 +92,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
 //                    self.present(alert,animated: true)
                     addPenquin(atLocation: hitPlaneResult)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
-                        self.HideObject()
-                    })
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-                        self.penguinToPOVDistance = 3.0
-                        self.HideObject()
-                    })
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
+//                        self.HideObject()
+//                    })
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+//                        self.penguinToPOVDistance = 3.0
+//                        self.HideObject()
+//                    })
                 }
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
@@ -146,10 +146,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
             print(tempPenguinToPOVDistance)
+            self.HideObject()
             if (tempPenguinToPOVDistance <= 3 && !withinView) {
                 withinView = true
                 // play event
             } else {
+                
                 withinView = false
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
