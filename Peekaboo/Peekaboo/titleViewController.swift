@@ -27,7 +27,6 @@ class titleViewController: UIViewController {
     }
     
 
-    
 
     /*
     // MARK: - Navigation
