@@ -93,6 +93,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
                         self.HideObject()
                     })
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+                        self.penguinToPOVDistance = 3.0
+                        self.HideObject()
+                    })
                 }
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
