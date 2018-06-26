@@ -34,7 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // @IBOutlet var sceneView: ARSCNView!
     
     func HideObject() {
-        if penguinToPOVDistance <= 4.0 {
+        if penguinToPOVDistance <= 3.0 {
             penguinArray.first?.isHidden = false
         } else {
             penguinArray.first?.isHidden = true
