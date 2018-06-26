@@ -12,7 +12,7 @@ import ARKit
 import Foundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-    
+    penguineToPOVDistance
     var penguinArray = [SCNNode]()
     var withinView = false
     
@@ -130,7 +130,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let xDistance = currentPosition.x - penguinArray[0].position.x
             let yDistance = currentPosition.y - penguinArray[0].position.y
             let zDistance = currentPosition.z - penguinArray[0].position.z
-            let penguineToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
+            penguineToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
             print(penguineToPOVDistance)
             if (penguineToPOVDistance < 10 && !withinView) {
                 withinView = true
