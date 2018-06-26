@@ -175,13 +175,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 //            print(tempPenguinToPOVDistance)
-            self.HideObject()
+//            self.HideObject()
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
                 withinView = true
+                penguinArray.first?.isHidden = false
                 // play event
-            } else {
-                
+            } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
+                penguinArray.first?.isHidden = true
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
             
