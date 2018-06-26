@@ -25,7 +25,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
-     
         }
         alert.addAction(clearAction)
         alert.addAction(cancelAction)
