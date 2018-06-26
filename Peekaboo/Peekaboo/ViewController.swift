@@ -54,7 +54,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let touch = touches.first {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
-            
             //No penguin on the screen yet? Try to add one
             if penguinArray.isEmpty {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
@@ -76,9 +75,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     self.present(alert,animated: true)
                 }
             }
+         
         }
     }
-    
+
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
@@ -122,6 +122,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //        self.present(nextViewController, animated: true,completion: nil)
     }
     
+
     @IBAction func RemovePenquin(_ sender: Any) {
         if !penguinArray.isEmpty{
             for penquin in penguinArray{
@@ -132,7 +133,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     //MARK: - ARSCNViewDelegateMethods
-//
+
 //    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 //
 //        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
@@ -158,6 +159,5 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
 //        return planeNode
 //    }
-
 
 }

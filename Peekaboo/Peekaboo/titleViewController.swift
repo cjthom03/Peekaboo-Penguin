@@ -11,8 +11,13 @@ import UIKit
 class titleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
     }
+    
+    @IBOutlet weak var newGameButton: UIButton!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,8 @@ class titleViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
 
     /*
