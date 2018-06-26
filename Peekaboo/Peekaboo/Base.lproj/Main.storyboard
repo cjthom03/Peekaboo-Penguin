@@ -199,6 +199,7 @@
                     </view>
                     <connections>
                         <outlet property="direction" destination="ePI-bE-mbj" id="UAJ-PO-jTh"/>
+                        <outlet property="textView" destination="8ce-hy-toy" id="2s0-rE-FTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cvn-oP-xkw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,6 +273,9 @@ Nate - Little description of Nate</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tOK-Ca-TKF"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="I0F-MQ-Xy2" id="wSk-SB-YUf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPb-5n-pJY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

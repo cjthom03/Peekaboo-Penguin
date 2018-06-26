@@ -27,7 +27,13 @@ class directionsViewController: UIViewController {
     
     @IBOutlet weak var direction: UITextField!
     
-
+    @IBOutlet weak var textView: UITextView!
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textView.setContentOffset(.zero, animated: false)
+    }
+    
     /*
     // MARK: - Navigation
 
