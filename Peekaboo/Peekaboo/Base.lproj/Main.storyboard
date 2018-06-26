@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-                                <rect key="frame" x="105" y="242" width="110" height="116"/>
+                                <rect key="frame" x="105" y="286" width="110" height="116"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="38"/>
@@ -70,23 +70,12 @@
                                     </button>
                                 </subviews>
                             </stackView>
-<<<<<<< HEAD
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Peekaboo Penguin" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
-                                <rect key="frame" x="30" y="114" width="260" height="39"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-=======
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-nc-mtv">
                                 <rect key="frame" x="0.0" y="396" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iLm-y1-Xgu">
-                                <rect key="frame" x="57" y="60" width="206" height="136"/>
+                                <rect key="frame" x="57" y="104" width="206" height="136"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="48" translatesAutoresizingMaskIntoConstraints="NO" id="4Mu-OS-2hL">
                                         <rect key="frame" x="0.0" y="0.0" width="206" height="68"/>
@@ -123,7 +112,6 @@
                                     </textField>
                                 </subviews>
                             </stackView>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                         </subviews>
                         <color key="backgroundColor" red="0.46671549479166669" green="0.73149956597222221" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -137,11 +125,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="j8j-XZ-Bkr"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="aboutUsButton" destination="Mxh-qo-Wfj" id="PVf-wo-73A"/>
-                        <outlet property="directionsButton" destination="bfQ-S1-m2I" id="xq2-c1-Y6a"/>
-                        <outlet property="newGameButton" destination="ELV-et-S7O" id="fVu-T6-6yQ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkX-LT-WKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,13 +138,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-<<<<<<< HEAD
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="115" width="177" height="48"/>
-=======
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
-                                <rect key="frame" x="71.5" y="60" width="177" height="48"/>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
+                                <rect key="frame" x="71.5" y="104" width="177" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -171,11 +149,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-<<<<<<< HEAD
-                                <rect key="frame" x="16" y="177" width="288" height="302.5"/>
-=======
-                                <rect key="frame" x="16" y="122" width="288" height="302.5"/>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
+                                <rect key="frame" x="16" y="166" width="288" height="302.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -213,11 +187,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-<<<<<<< HEAD
-                                <rect key="frame" x="78" y="115" width="164" height="48"/>
-=======
-                                <rect key="frame" x="78" y="60" width="164" height="48"/>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
+                                <rect key="frame" x="78" y="104" width="164" height="48"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -227,11 +197,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-<<<<<<< HEAD
-                                <rect key="frame" x="16" y="168" width="288" height="346"/>
-=======
-                                <rect key="frame" x="16" y="122" width="288" height="392"/>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
+                                <rect key="frame" x="16" y="166" width="288" height="348"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -285,7 +251,7 @@ Nate - Little description of Nate</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAy-7e-IKW">
-                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -321,12 +287,8 @@ Nate - Little description of Nate</string>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-<<<<<<< HEAD
-                        <outlet property="sceneView" destination="Sdg-g7-1Zf" id="1Lp-yV-dU6"/>
-=======
                         <outlet property="quit" destination="qWP-RA-caZ" id="c1e-yO-Tk1"/>
                         <outlet property="sceneView" destination="QAy-7e-IKW" id="yyg-uC-eJ9"/>
->>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27K-gh-Tox" sceneMemberID="firstResponder"/>

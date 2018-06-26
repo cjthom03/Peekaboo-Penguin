@@ -319,13 +319,11 @@
 				CODE_SIGN_STYLE = Automatic;
 
 				DEVELOPMENT_TEAM = VT597ERBEY;
-
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = me.charliethomas.Peekaboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
