@@ -14,7 +14,7 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     var penguinArray = [SCNNode]()
-    
+    var withinView = false
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -132,7 +132,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let penguineToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
             print(penguineToPOVDistance)
+            if (penguineToPOVDistance < 10 && !withinView) {
+                withinView = true
+                // play event
+            }
         }
+        
     }
     
     func delay(_ delay:Double, closure:@escaping ()->()) {
