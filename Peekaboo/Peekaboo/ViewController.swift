@@ -15,8 +15,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinArray = [SCNNode]()
     
     @IBOutlet var sceneView: ARSCNView!
+    //@IBOutlet weak var quit: UIBarButtonItem!
+  
     @IBOutlet weak var quit: UIBarButtonItem!
+    @IBAction func goBack(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        
+        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
+        }
+        alert.addAction(clearAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion:nil)
+    }
+ 
+    // @IBOutlet var sceneView: ARSCNView!
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
@@ -109,6 +126,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         changePlayers.addAction(UIAlertAction(title: "Go!",style: .default, handler: nil))
         self.present(changePlayers,animated: true, completion: nil)
     }
+    
     
     
     
