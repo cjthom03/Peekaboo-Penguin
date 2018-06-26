@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,7 +31,7 @@
         <scene sceneID="dDi-J9-B5A">
             <objects>
                 <viewController id="ORo-pa-9Cs" customClass="titleViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jWI-ZF-2Dy">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="title" id="jWI-ZF-2Dy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -69,6 +70,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
+<<<<<<< HEAD
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Peekaboo Penguin" textAlignment="natural" minimumFontSize="49" translatesAutoresizingMaskIntoConstraints="NO" id="EvJ-NT-nQw">
+                                <rect key="frame" x="30" y="114" width="260" height="39"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+=======
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-nc-mtv">
                                 <rect key="frame" x="0.0" y="396" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,6 +123,7 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                         </subviews>
                         <color key="backgroundColor" red="0.46671549479166669" green="0.73149956597222221" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -142,8 +155,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+<<<<<<< HEAD
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
+                                <rect key="frame" x="71.5" y="115" width="177" height="48"/>
+=======
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Directions" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ePI-bE-mbj">
                                 <rect key="frame" x="71.5" y="60" width="177" height="48"/>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -153,7 +171,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
+<<<<<<< HEAD
+                                <rect key="frame" x="16" y="177" width="288" height="302.5"/>
+=======
                                 <rect key="frame" x="16" y="122" width="288" height="302.5"/>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -191,7 +213,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="About Us" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
+<<<<<<< HEAD
+                                <rect key="frame" x="78" y="115" width="164" height="48"/>
+=======
                                 <rect key="frame" x="78" y="60" width="164" height="48"/>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
@@ -201,7 +227,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
+<<<<<<< HEAD
+                                <rect key="frame" x="16" y="168" width="288" height="346"/>
+=======
                                 <rect key="frame" x="16" y="122" width="288" height="392"/>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -273,15 +303,30 @@ Nate - Little description of Nate</string>
                                 <action selector="RemovePenquin:" destination="EHa-1p-Yb4" id="VgB-bM-Kxt"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="qWP-RA-caZ">
-                            <connections>
-                                <segue destination="ORo-pa-9Cs" kind="show" id="ATH-Hf-9pJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="stop" id="qWP-RA-caZ">
+                                <connections>
+                                    <action selector="goBack:" destination="EHa-1p-Yb4" id="vaH-gU-rAC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="2dC-zN-bYp">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hm2-nZ-aA1">
+                                    <rect key="frame" x="197" y="7" width="71" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </button>
+                                <connections>
+                                    <segue destination="ORo-pa-9Cs" kind="show" identifier="title" id="Q3z-Vd-63G"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+<<<<<<< HEAD
+                        <outlet property="sceneView" destination="Sdg-g7-1Zf" id="1Lp-yV-dU6"/>
+=======
                         <outlet property="quit" destination="qWP-RA-caZ" id="c1e-yO-Tk1"/>
                         <outlet property="sceneView" destination="QAy-7e-IKW" id="yyg-uC-eJ9"/>
+>>>>>>> b798832ce9ca4559c24f09dc6e7e23055014de54
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="27K-gh-Tox" sceneMemberID="firstResponder"/>
@@ -293,6 +338,6 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ATH-Hf-9pJ"/>
+        <segue reference="LmT-4Q-7Kw"/>
     </inferredMetricsTieBreakers>
 </document>
