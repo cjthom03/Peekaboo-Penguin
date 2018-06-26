@@ -18,6 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
+    var currentPlayer = 1
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -49,7 +50,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        
+//        print(currentPlayer)
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -122,10 +123,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             penguinArray = [SCNNode]()
         }
     }
+    
+    func switchPlayers() {
+           delay(2, closure: getPlayer2Ready)
+            currentPlayer = 2
+//        print(currentPlayer)
+    }
 
     func askConfirmation() {
         let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in self.switchPlayers()}))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in self.deletePenquin()}))
         self.present(alert,animated: true)
     }
@@ -145,7 +152,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-            delay(2, closure: getPlayer2Ready)
+         
 //            delay(3, closure: win )
         }
     }
