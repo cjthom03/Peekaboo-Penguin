@@ -17,6 +17,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
+    @IBOutlet weak var timerLabel: UILabel!
+    
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
