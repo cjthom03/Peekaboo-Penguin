@@ -14,7 +14,7 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-
+    var winDistance: Float = 1
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
@@ -39,7 +39,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // @IBOutlet var sceneView: ARSCNView!
     
     func HideObject() {
-        if penguinToPOVDistance <= 3.0 {
+        if Float(penguinToPOVDistance) <= winDistance {
             penguinArray.first?.isHidden = false
         } else {
             penguinArray.first?.isHidden = true
@@ -151,7 +151,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
             print(tempPenguinToPOVDistance)
             self.HideObject()
-            if (tempPenguinToPOVDistance <= 3 && !withinView) {
+            if (tempPenguinToPOVDistance <= winDistance && !withinView) {
                 withinView = true
                 // play event
             } else {
