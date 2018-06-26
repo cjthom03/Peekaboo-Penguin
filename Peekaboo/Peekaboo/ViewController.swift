@@ -90,12 +90,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
-                    let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
-                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-                    self.present(alert,animated: true)
-//                    askConfirmation(atLocation: hitPlaneResult)
-//                    addPenquin(atLocation: hitPlaneResult)
+                   
+//
+                    addPenquin(atLocation: hitPlaneResult)
+                    askConfirmation()
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -118,14 +116,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-//    func askConfirmation(atLocation location: ARHitTestResult) {
-//        let position = location
-//        let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: position) }))
-//        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-//        self.present(alert,animated: true)
-//    }
+    func deletePenquin() {
+        for penquin in penguinArray{
+            penquin.removeFromParentNode()
+            penguinArray = [SCNNode]()
+        }
+    }
 
+    func askConfirmation() {
+        let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in self.deletePenquin()}))
+        self.present(alert,animated: true)
+    }
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
@@ -142,9 +145,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-//            delay(2, closure: playerTwo)
+            delay(2, closure: getPlayer2Ready)
 //            delay(3, closure: win )
         }
+    }
+    
+    func getPlayer2Ready() {
+        let alert = UIAlertController(title: "Ready?", message: "It's time to find pogo, player 2 is on now!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: nil))
+        self.present(alert,animated: true)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
@@ -221,6 +230,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //        self.present(nextViewController, animated: true,completion: nil)
     }
     
+
 
     @IBAction func RemovePenquin(_ sender: Any) {
         if !penguinArray.isEmpty{
