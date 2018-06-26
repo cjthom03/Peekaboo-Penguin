@@ -9,10 +9,12 @@
 import UIKit
 import SceneKit
 import ARKit
+import Foundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     var penguinArray = [SCNNode]()
+    
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -115,6 +117,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sceneView.scene.rootNode.addChildNode(sceneNode)
 //            delay(2, closure: playerTwo)
 //            delay(3, closure: win )
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
+//      guard let currentFrame = self.sceneView.session.currentFrame else {return}
+        
+        if(!penguinArray.isEmpty){
+            guard let pointOfView = self.sceneView.pointOfView else {return}
+            let transform = pointOfView.transform
+            let currentPosition = SCNVector3(transform.m41, transform.m42, transform.m43)
+            let xDistance = currentPosition.x - penguinArray[0].position.x
+            let yDistance = currentPosition.y - penguinArray[0].position.y
+            let zDistance = currentPosition.z - penguinArray[0].position.z
+            let penguineToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
+            print(penguineToPOVDistance)
         }
     }
     
