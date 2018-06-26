@@ -30,7 +30,6 @@ class titleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    newGameButton.layer.borderWidth = 1
 
     
 
