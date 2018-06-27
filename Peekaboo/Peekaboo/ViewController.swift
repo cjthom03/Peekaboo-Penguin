@@ -22,6 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 
     var timer = Timer()
+    var timerIsRunning = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
     var currentPlayer = 1
@@ -254,8 +255,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         runTimer()
     }
     
+    func toggleTimer() {
+        if timerIsRunning == true {
+            timer.invalidate()
+        } else {
+            runTimer()
+        }
+    }
+    
     func stopTimer() {
         timer.invalidate()
+        timerIsRunning = false
         timerLabel.text = ""
         timerLabel.isHidden = true
     }
@@ -263,6 +273,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        timerIsRunning = true
     }
     
     @objc func updateTimer() {
