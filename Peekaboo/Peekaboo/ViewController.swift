@@ -10,16 +10,24 @@ import UIKit
 import SceneKit
 import ARKit
 import Foundation
+import AVFoundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
+
+    
+   
+    var audioSource: SCNAudioSource?
+
+    
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
 //    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
+
 
     var timer = Timer()
     var timerIsRunning = false
@@ -70,6 +78,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             present(alert, animated: true, completion:nil)
         }
     }
+
     func cancelQuit() {
         toggleTimer()
     }
@@ -102,12 +111,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         sceneView.autoenablesDefaultLighting = true
-        
+        audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
+        audioSource?.load()
+        audioSource?.loops = true
+        audioSource?.shouldStream = false
         let startText = "Hide the Penguin!"
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 5)
+        setTimer(startTime: 15)
         
     }
         
@@ -122,6 +134,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         configuration.planeDetection = .horizontal
         
+
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -184,7 +197,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func deletePenquin() {
-        for penquin in penguinArray{
+        for penquin in penguinArray {
             penquin.removeFromParentNode()
             penguinArray = [SCNNode]()
         }
@@ -250,9 +263,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
           currentPlayer = 2
     }
     
+
     func readyPlayer2() {
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+    }
+    
+    func playWithinRangeSound (){
+         penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
@@ -268,12 +286,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
-
+                
                 withinView = true
                 penguinArray.first?.isHidden = false
+                self.playWithinRangeSound()
                 // play event
             } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
+
                 if (currentPlayer == 2 ) { penguinArray.first?.isHidden = true }
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
@@ -282,11 +302,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
 //        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
         winTimer = DispatchWorkItem { closure() }
 //        queue = DispatchQueue(label: "delayQueue")
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
+
     }
     
     func playerTwo(){
@@ -427,5 +449,4 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
 //        return planeNode
 //    }
-
 }
