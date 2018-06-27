@@ -33,7 +33,6 @@ class aboutUsViewController: UIViewController {
         textView.setContentOffset(.zero, animated: false)
     }
     
-
     /*
     // MARK: - Navigation
 

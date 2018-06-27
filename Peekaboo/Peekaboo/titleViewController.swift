@@ -26,7 +26,16 @@ class titleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //change navbar color and font color
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.black
+        nav?.tintColor = UIColor.white
+        
+    }
 
+    
 
     /*
     // MARK: - Navigation
