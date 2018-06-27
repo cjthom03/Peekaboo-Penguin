@@ -56,7 +56,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func biggerObject() {
-        
+        let scale = 2
+        let penguineNode = penguinArray.first
+        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
+        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
+        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
+        penguinArray.first?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
  
     // @IBOutlet var sceneView: ARSCNView!
