@@ -238,10 +238,10 @@
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <string key="text">Bored at home? 
+                                <string key="text">Bored at home?
 Don't wanna go out?
 
-Try Peekaboo! 
+Try Peekaboo!
 
 An AR game inspired by the british series of children's puzzle book "Where's Waldo?"
 Whether you are a kid or not, Peekaboo is a fun game for everyone.
@@ -348,11 +348,7 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="LmT-4Q-7Kw"/>
-=======
         <segue reference="WeL-yw-umR"/>
         <segue reference="Q3z-Vd-63G"/>
->>>>>>> 13ebba39037e721904a092da64c42d81df01b332
     </inferredMetricsTieBreakers>
 </document>
