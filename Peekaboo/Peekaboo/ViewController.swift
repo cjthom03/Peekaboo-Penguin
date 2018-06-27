@@ -68,6 +68,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
+        setTimer(startTime: 15)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +151,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func switchPlayers() {
            delay(2, closure: getPlayer2Ready)
             currentPlayer = 2
-//        print(currentPlayer)
+        // Stop the hide timer; Start the search timer
+        stopTimer()
+        setTimer(startTime: 30)
     }
 
     func askConfirmation() {
@@ -172,11 +176,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
-            setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-         
-//            delay(3, closure: win )
         }
     }
     
@@ -249,11 +250,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //TIMER FUNCTIONS -------------------------------------------------------------
     func setTimer(startTime: Int) {
         seconds = startTime
+        timerLabel.isHidden = false
         runTimer()
     }
     
     func stopTimer() {
         timer.invalidate()
+        timerLabel.text = ""
+        timerLabel.isHidden = true
     }
     
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
@@ -264,9 +268,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func updateTimer() {
         
         if seconds >= 0 {
+            timerLabel.text = "\(seconds)"
             seconds -= 1
-            // labelName.text = "\(seconds)"
-                //SET THE LABELTEXT TO WHATEVER TIMER LABEL WE END UP USING
         } else {
             stopTimer()
             // this is where we would put lose conditions / call other methods etc
