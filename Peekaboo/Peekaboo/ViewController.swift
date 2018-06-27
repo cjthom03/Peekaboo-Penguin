@@ -35,12 +35,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func goBack(_ sender: Any) {
         
         let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
-        
+         let scaleObject = UIAlertAction(title: "Yes", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
-
+        let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
         }
+        if currentPlayer == 1 {
         alert.addAction(clearAction)
+        } else if currentPlayer == 2 {
+            alert.addAction(scaleObject)
+            alert.addAction(pushQuit)
+        }
         alert.addAction(cancelAction)
         present(alert, animated: true, completion:nil)
     }
@@ -48,6 +53,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func quitGame() {
     winTimer.cancel()
     self.performSegue(withIdentifier: "title", sender: self)
+    }
+    
+    func biggerObject() {
+        
     }
  
     // @IBOutlet var sceneView: ARSCNView!
