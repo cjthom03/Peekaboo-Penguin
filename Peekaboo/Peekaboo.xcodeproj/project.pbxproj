@@ -301,13 +301,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = ZK974HXWK8;
+=======
+				DEVELOPMENT_TEAM = VT597ERBEY;
+>>>>>>> 2f000f778d3968bc73b7b171e1263739d34440db
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = me.nathaniel.cunha;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = me.charliethomas.Peekaboo;
+>>>>>>> 2f000f778d3968bc73b7b171e1263739d34440db
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -319,13 +327,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = ZK974HXWK8;
+=======
+				DEVELOPMENT_TEAM = VT597ERBEY;
+>>>>>>> 2f000f778d3968bc73b7b171e1263739d34440db
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = me.nathaniel.cunha;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = me.charliethomas.Peekaboo;
+>>>>>>> 2f000f778d3968bc73b7b171e1263739d34440db
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

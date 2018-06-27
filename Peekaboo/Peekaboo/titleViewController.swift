@@ -13,6 +13,11 @@ class titleViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
+        //force orientation to portrait
+        if (UIDevice.current.orientation != .portrait) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        }
+
     }
     
     override func viewDidLoad() {
@@ -26,7 +31,16 @@ class titleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //change navbar color and font color
+    override func viewDidAppear(_ animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.black
+        nav?.tintColor = UIColor.white
+        
+    }
 
+    
 
     /*
     // MARK: - Navigation
