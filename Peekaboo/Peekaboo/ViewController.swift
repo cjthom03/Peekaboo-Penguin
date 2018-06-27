@@ -10,16 +10,17 @@ import UIKit
 import SceneKit
 import ARKit
 import Foundation
+import AVFoundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-
+    
     var winDistance: Float = 1
+    var audioSource: SCNAudioSource?
 
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
-
 
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
@@ -63,7 +64,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         sceneView.autoenablesDefaultLighting = true
-        
+        audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
+        audioSource?.load()
+        audioSource?.loops = true
+        audioSource?.shouldStream = false
         let startText = "Hide the Penguin!"
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
@@ -80,6 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         configuration.planeDetection = .horizontal
         
+
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -186,6 +191,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.present(alert,animated: true)
     }
     
+    
+    func playWithinRangeSound (){
+         penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
         
@@ -198,22 +208,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 
-//            print(tempPenguinToPOVDistance)
-//            self.HideObject()
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
-
+                
                 withinView = true
                 penguinArray.first?.isHidden = false
+                self.playWithinRangeSound()
                 // play event
             } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
                 penguinArray.first?.isHidden = true
+                // sounds from object sources only play when the object is not hidden
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
             
         }
         
     }
+    
     
     func delay(_ delay:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(
