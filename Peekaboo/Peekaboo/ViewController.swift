@@ -68,29 +68,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func biggerObject() {
-//        queue?.resume()
-       
         winDistance += 50
-    
-//        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
-//        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
-//        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
-//        penguinArray.first?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
-//        let originalTransform = penguineNode?.transform
-//        let scaledTransform = originalTransform.scale(x: 2, y: 2)
-//        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0, y: 0)
-//        ---------------
-//        penguineNode.animate(withDuration: 0.7, animations: {
-////
-//            let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
-//            let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
-//            let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
-//            penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
-//        })
-//        ---------------
         animate()
-
-   
     }
     
     func animate() {
@@ -102,18 +81,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
         gaveUp = true
-//        animate()
     }
- 
-    // @IBOutlet var sceneView: ARSCNView!
-    
-//    func HideObject() {
-//        if Float(penguinToPOVDistance) <= winDistance {
-//            penguinArray.first?.isHidden = false
-//        } else {
-//            penguinArray.first?.isHidden = true
-//        }
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
