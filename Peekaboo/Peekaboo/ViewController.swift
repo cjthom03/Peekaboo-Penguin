@@ -14,7 +14,6 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-//    var winTimer = ;
     var winTimer = DispatchWorkItem(block: <#@convention(block) () -> Void#>)
     var winDistance: Float = 1
 
@@ -153,7 +152,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func switchPlayers() {
-           delay(2, closure: getPlayer2Ready)
+           playerDelay(2, closure: getPlayer2Ready)
             currentPlayer = 2
 //        print(currentPlayer)
     }
@@ -182,7 +181,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
          
-//            delay(3, closure: win )
         }
     }
     
@@ -221,7 +219,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    func delay(_ delay:Double, closure:@escaping ()->()) {
+    func playerDelay(_ delay:Double, closure:@escaping ()->()) {
 //        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
         winTimer = DispatchWorkItem { closure() }
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer)
