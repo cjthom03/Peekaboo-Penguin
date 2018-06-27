@@ -181,7 +181,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func switchPlayers() {
            playerDelay(0.3, closure: getPlayer2Ready)
-        
 //        print(currentPlayer)
     }
 
