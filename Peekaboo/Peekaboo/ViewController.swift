@@ -15,9 +15,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
 
+    var winDistance: Float = 1
+
+    var virtualText = SCNNode() // initialize as an empty scene node
+    var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
+
+
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
+    var currentPlayer = 1
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -27,7 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         
-        let alert = UIAlertController(title: "give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
         
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
 
@@ -40,22 +47,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
  
     // @IBOutlet var sceneView: ARSCNView!
     
-    func HideObject() {
-        if penguinToPOVDistance <= 3.0 {
-            penguinArray.first?.isHidden = false
-        } else {
-            penguinArray.first?.isHidden = true
-        }
-    }
+//    func HideObject() {
+//        if Float(penguinToPOVDistance) <= winDistance {
+//            penguinArray.first?.isHidden = false
+//        } else {
+//            penguinArray.first?.isHidden = true
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        
+//        print(currentPlayer)
         // Set the view's delegate
         sceneView.delegate = self
         
         sceneView.autoenablesDefaultLighting = true
+        
+        let startText = "Hide the Penguin!"
+        let startPos = SCNVector3(-0.45, 0, -1.5)
+        virtualText = createText(text: startText, atPosition: startPos)
         
     }
     
@@ -98,11 +109,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
-//                    let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "Yes",style: .default, handler: { action in self.addPenquin(atLocation: hitPlaneResult)}))
-//                    alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-//                    self.present(alert,animated: true)
+                   
+//
                     addPenquin(atLocation: hitPlaneResult)
+                    askConfirmation()
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -116,15 +126,38 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let hitTest = sceneView.hitTest(touchLocation)
                 if !hitTest.isEmpty{
                    // If the penguin was tapped by player 2, the game is won!
-                    let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
-                    self.present(alert,animated: true)
+                    if let nodeName = hitTest.first?.node.name {
+                        if nodeName == "penguin" {
+                            let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
+                            self.present(alert,animated: true)
+                        }
+                    }
                 }
             }
          
         }
     }
+    
+    func deletePenquin() {
+        for penquin in penguinArray{
+            penquin.removeFromParentNode()
+            penguinArray = [SCNNode]()
+        }
+    }
+    
+    func switchPlayers() {
+           delay(2, closure: getPlayer2Ready)
+            currentPlayer = 2
+//        print(currentPlayer)
+    }
 
+    func askConfirmation() {
+        let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in self.switchPlayers()}))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in self.deletePenquin()}))
+        self.present(alert,animated: true)
+    }
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
@@ -137,13 +170,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
 //            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
             
+            sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
             setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-//            delay(2, closure: playerTwo)
+         
 //            delay(3, closure: win )
         }
+    }
+    
+    func getPlayer2Ready() {
+        let alert = UIAlertController(title: "Ready?", message: "It's time to find pogo, player 2 is on now!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: nil))
+        self.present(alert,animated: true)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
@@ -157,14 +197,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let yDistance = currentPosition.y - penguinArray[0].position.y
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
-            print(tempPenguinToPOVDistance)
-            self.HideObject()
-            if (tempPenguinToPOVDistance <= 3 && !withinView) {
+
+//            print(tempPenguinToPOVDistance)
+//            self.HideObject()
+            if (tempPenguinToPOVDistance <= winDistance && !withinView) {
+
                 withinView = true
+                penguinArray.first?.isHidden = false
                 // play event
-            } else {
-                
+            } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
+                penguinArray.first?.isHidden = true
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
             
@@ -182,6 +225,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         changePlayers.addAction(UIAlertAction(title: "Go!",style: .default, handler: nil))
         self.present(changePlayers,animated: true, completion: nil)
     }
+    
+    // TEXT FUNCTIONS -------------------------------------------------------------
+    
+    func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
+        let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
+        textGeometry.firstMaterial?.diffuse.contents = textColor
+        let textNode = SCNNode(geometry: textGeometry)
+        textNode.position = position
+        textNode.scale = SCNVector3(0.0075, 0.0075, 0.0075)
+        sceneView.scene.rootNode.addChildNode(textNode)
+        return textNode
+    }
+    
+    func updateText(textNode: SCNNode, text: String) {
+        let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
+        textGeometry.firstMaterial?.diffuse.contents = textColor
+        textNode.geometry = textGeometry
+    }
+    
+    // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
     //TIMER FUNCTIONS -------------------------------------------------------------
     func setTimer(startTime: Int) {
@@ -220,6 +283,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //        self.present(nextViewController, animated: true,completion: nil)
     }
     
+
 
     @IBAction func RemovePenquin(_ sender: Any) {
         if !penguinArray.isEmpty{
