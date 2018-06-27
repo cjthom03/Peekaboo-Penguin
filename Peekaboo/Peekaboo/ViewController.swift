@@ -14,7 +14,8 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-
+//    var winTimer = ;
+    var winTimer = DispatchWorkItem(block: <#@convention(block) () -> Void#>)
     var winDistance: Float = 1
 
     var virtualText = SCNNode() // initialize as an empty scene node
@@ -36,13 +37,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
         
-        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.performSegue(withIdentifier: "title", sender: self)})
+        let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
         }
         alert.addAction(clearAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion:nil)
+    }
+    
+    func quitGame() {
+    winTimer.cancel()
+    self.performSegue(withIdentifier: "title", sender: self)
     }
  
     // @IBOutlet var sceneView: ARSCNView!
@@ -216,8 +222,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func delay(_ delay:Double, closure:@escaping ()->()) {
-        DispatchQueue.main.asyncAfter(
-            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+//        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
+        winTimer = DispatchWorkItem { closure() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer)
     }
     
     func playerTwo(){
