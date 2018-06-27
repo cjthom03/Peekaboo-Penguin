@@ -185,6 +185,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                    // If the penguin was tapped by player 2, the game is won!
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
+                            stopTimer()
                             let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
                             self.present(alert,animated: true)
@@ -207,6 +208,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         currentPlayer = 2
         //reset timeisUp
         timeIsUp = false
+        if winDistance < Float(penguinToPOVDistance) { penguinArray.first?.isHidden = true }
         // Stop the hide timer; Start the search timer
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
