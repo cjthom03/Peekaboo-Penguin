@@ -13,6 +13,11 @@ class titleViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.hidesBackButton = true
+        //force orientation to portrait
+        if (UIDevice.current.orientation != .portrait) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        }
+
     }
     
     override func viewDidLoad() {
