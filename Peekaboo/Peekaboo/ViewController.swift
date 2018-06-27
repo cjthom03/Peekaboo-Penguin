@@ -22,6 +22,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var gaveUp = false
 
     var timer = Timer()
+    var timerIsRunning = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
     var currentPlayer = 1
@@ -95,6 +96,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startText = "Hide the Penguin!"
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
+        
+        setTimer(startTime: 15)
         
     }
         
@@ -177,8 +180,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func switchPlayers() {
+            currentPlayer = 2
+        // Stop the hide timer; Start the search timer
+        stopTimer()
+        setTimer(startTime: 30)
            playerDelay(0.3, closure: getPlayer2Ready)
-//        print(currentPlayer)
+
     }
 
     func askConfirmation() {
@@ -201,10 +208,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
-            setTimer(startTime: 5)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
-         
         }
     }
     
@@ -281,24 +286,36 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //TIMER FUNCTIONS -------------------------------------------------------------
     func setTimer(startTime: Int) {
         seconds = startTime
+        timerLabel.isHidden = false
         runTimer()
+    }
+    
+    func toggleTimer() {
+        if timerIsRunning == true {
+            timer.invalidate()
+        } else {
+            runTimer()
+        }
     }
     
     func stopTimer() {
         timer.invalidate()
+        timerIsRunning = false
+        timerLabel.text = ""
+        timerLabel.isHidden = true
     }
     
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        timerIsRunning = true
     }
     
     @objc func updateTimer() {
         
         if seconds >= 0 {
+            timerLabel.text = "\(seconds)"
             seconds -= 1
-            // labelName.text = "\(seconds)"
-                //SET THE LABELTEXT TO WHATEVER TIMER LABEL WE END UP USING
         } else {
             stopTimer()
             // this is where we would put lose conditions / call other methods etc
