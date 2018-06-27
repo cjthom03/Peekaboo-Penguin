@@ -16,7 +16,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinArray = [SCNNode]()
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
-
+    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
 
@@ -33,6 +33,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
+        queue?.suspend()
         var textforPlayer = ""
         let textforPlayer1 = "Are you sure you want to quit?"
         let textforPlayer2 = "You can retry finding penguine, it will be bigger and hence easier to find!"
@@ -46,8 +47,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let scaleObject = UIAlertAction(title: "Yes, retry!", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
         let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {action in self.cancelQuit()})
         // Add buttons to alert depending on currentPlayer
         if currentPlayer == 1 {
         alert.addAction(clearAction)
@@ -58,14 +58,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion:nil)
     }
-    
+    func cancelQuit() {
+        queue?.resume()
+    }
     func quitGame() {
         winTimer?.cancel()
+        currentPlayer = 1
     self.performSegue(withIdentifier: "title", sender: self)
     }
     
     func biggerObject() {
+        queue?.resume()
         let scale = 2
+        winDistance += 1
         let penguineNode = penguinArray.first
         let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
         let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
@@ -176,7 +181,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func switchPlayers() {
            playerDelay(2, closure: getPlayer2Ready)
-            currentPlayer = 2
+        
 //        print(currentPlayer)
     }
 
@@ -208,9 +213,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func getPlayer2Ready() {
-        let alert = UIAlertController(title: "Ready?", message: "It's time to find pogo, player 2 is on now!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ready?", message: "It's time to find penguine, player 2 is on now!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: nil))
         self.present(alert,animated: true)
+          currentPlayer = 2
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
@@ -245,6 +251,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
 //        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
         winTimer = DispatchWorkItem { closure() }
+        queue = DispatchQueue(label: "delayQueue")
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
     }
     
