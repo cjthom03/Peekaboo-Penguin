@@ -36,6 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         var textforPlayer = ""
         let textforPlayer1 = "Are you sure you want to quit?"
         let textforPlayer2 = "You can retry finding penguine, it will be bigger and hence easier to find!"
+        //Check which player it playing and change options of alert depending on that
         if currentPlayer == 1 {
             textforPlayer = textforPlayer1
         } else if currentPlayer == 2 {
@@ -47,6 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
         }
+        // Add buttons to alert depending on currentPlayer
         if currentPlayer == 1 {
         alert.addAction(clearAction)
         } else if currentPlayer == 2 {
