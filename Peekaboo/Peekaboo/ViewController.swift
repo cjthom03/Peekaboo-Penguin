@@ -67,6 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion:nil)
     }
+
     func cancelQuit() {
 //        queue?.resume()
     }
@@ -185,7 +186,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func deletePenquin() {
-        for penquin in penguinArray{
+        for penquin in penguinArray {
             penquin.removeFromParentNode()
             penguinArray = [SCNNode]()
         }
@@ -389,5 +390,4 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
 //        return planeNode
 //    }
-
 }
