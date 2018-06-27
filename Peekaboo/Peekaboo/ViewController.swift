@@ -129,12 +129,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
-                if !hitTest.isEmpty{
+                if (!hitTest.isEmpty && currentPlayer == 2){
                    // If the penguin was tapped by player 2, the game is won!
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
                             let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: nil ))
+                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
                             self.present(alert,animated: true)
                         }
                     }
