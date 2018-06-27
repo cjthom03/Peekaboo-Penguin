@@ -20,14 +20,6 @@ class directionsViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
-    //change navbar color and font color
-    override func viewDidAppear(_ animated: Bool) {
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.black
-        nav?.tintColor = UIColor.white
-        
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
