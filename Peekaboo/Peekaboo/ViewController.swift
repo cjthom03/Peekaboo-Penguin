@@ -33,8 +33,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
+        var textforPlayer = ""
+        let textforPlayer1 = "Are you sure you want to quit?"
+        let textforPlayer2 = "You can retry finding penguine, it will be bigger and hence easier to find!"
+        if currentPlayer == 1 {
+            textforPlayer = textforPlayer1
+        } else if currentPlayer == 2 {
+            textforPlayer = textforPlayer2
+        }
+        let alert = UIAlertController(title: "Give up?", message: textforPlayer, preferredStyle: .alert)
         let scaleObject = UIAlertAction(title: "Yes, retry!", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
         let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
