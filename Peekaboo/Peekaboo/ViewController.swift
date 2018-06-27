@@ -119,7 +119,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 5)
+        setTimer(startTime: 15)
         
     }
         
