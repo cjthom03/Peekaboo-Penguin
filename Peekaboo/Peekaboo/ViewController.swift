@@ -44,7 +44,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             textforPlayer = textforPlayer2
         }
         let alert = UIAlertController(title: "Give up?", message: textforPlayer, preferredStyle: .alert)
-        let scaleObject = UIAlertAction(title: "Yes, retry!", style: .default, handler: {action in self.biggerObject()})
+        let scaleObject = UIAlertAction(title: "Show me the penguine!", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
         let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {action in self.cancelQuit()})
@@ -70,12 +70,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func biggerObject() {
 //        queue?.resume()
         let scale = 2
-        winDistance += 1
+        winDistance += 50
         let penguineNode = penguinArray.first
         let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
         let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
-        penguinArray.first?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+//        penguinArray.first?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+//        let originalTransform = penguineNode?.transform
+//        let scaledTransform = originalTransform.scale(x: 2, y: 2)
+//        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0, y: 0)
+        UIView.animate(withDuration: 0.7, animations: {
+            penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+        })
     }
  
     // @IBOutlet var sceneView: ARSCNView!
@@ -215,6 +221,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let alert = UIAlertController(title: "Ready?", message: "It's time to find penguine, player 2 is on now!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: nil))
         self.present(alert,animated: true)
+              penguinArray.first?.isHidden = true
           currentPlayer = 2
     }
     
@@ -239,7 +246,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 // play event
             } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
-                penguinArray.first?.isHidden = true
+                if (currentPlayer == 2 ) { penguinArray.first?.isHidden = true }
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
             
