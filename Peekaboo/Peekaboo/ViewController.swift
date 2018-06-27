@@ -23,9 +23,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     var timer = Timer()
     var timerIsRunning = false
+    var timeIsUp = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
     var currentPlayer = 1
+    var alert: UIAlertController = UIAlertController()
     
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
@@ -34,38 +36,48 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
-//        queue?.suspend()
+        if timerIsRunning == true {
+            toggleTimer()
+            
+        }
         var textforPlayer = ""
         let textforPlayer1 = "Are you sure you want to quit?"
-        let textforPlayer2 = "You can retry finding penguine, it will be bigger and hence easier to find!"
+        let textforPlayer2 = "Do you want to see where the penguin is hiding?"
         //Check which player it playing and change options of alert depending on that
         if currentPlayer == 1 {
             textforPlayer = textforPlayer1
         } else if currentPlayer == 2 {
+            if gaveUp == true {
+                quitGame()
+            }
             textforPlayer = textforPlayer2
         }
         let alert = UIAlertController(title: "Give up?", message: textforPlayer, preferredStyle: .alert)
-        let scaleObject = UIAlertAction(title: "Show me the penguine!", style: .default, handler: {action in self.biggerObject()})
+        let scaleObject = UIAlertAction(title: "Show me the penguin!", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
-        let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
+        let pushQuit = UIAlertAction(title: "No, I'm good", style: .default, handler: {action in self.quitGame()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {action in self.cancelQuit()})
         // Add buttons to alert depending on currentPlayer
         if currentPlayer == 1 {
         alert.addAction(clearAction)
         } else if currentPlayer == 2 {
+            
             if(gaveUp == false) { alert.addAction(scaleObject) }
             alert.addAction(pushQuit)
         }
         alert.addAction(cancelAction)
-        present(alert, animated: true, completion:nil)
+        if gaveUp == false {
+            present(alert, animated: true, completion:nil)
+        }
     }
     func cancelQuit() {
-//        queue?.resume()
+        toggleTimer()
     }
+    
     func quitGame() {
-//        winTimer?.cancel()
+        stopTimer()
         currentPlayer = 1
-    self.performSegue(withIdentifier: "title", sender: self)
+        self.performSegue(withIdentifier: "title", sender: self)
     }
     
     func biggerObject() {
@@ -74,21 +86,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func animate() {
-         let scale = 20
+        gaveUp = true
+        stopTimer()
+        let scale = 20
         SCNTransaction.animationDuration = 10.0
         let penguineNode = penguinArray.first
         let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
         let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
-        gaveUp = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-//        print(currentPlayer)
-        // Set the view's delegate
         sceneView.delegate = self
         
         sceneView.autoenablesDefaultLighting = true
@@ -97,7 +107,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 15)
+        setTimer(startTime: 5)
         
     }
         
@@ -105,6 +115,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.hidesBackButton = true
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
@@ -157,7 +168,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
-                if (!hitTest.isEmpty && currentPlayer == 2){
+                if (!hitTest.isEmpty && currentPlayer == 2 && gaveUp == false && timeIsUp == false){
                    // If the penguin was tapped by player 2, the game is won!
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
@@ -180,20 +191,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func switchPlayers() {
-            currentPlayer = 2
+        currentPlayer = 2
+        //reset timeisUp
+        timeIsUp = false
         // Stop the hide timer; Start the search timer
         stopTimer()
-        setTimer(startTime: 30)
-           playerDelay(0.3, closure: getPlayer2Ready)
-
+        playerDelay(0.3, closure: getPlayer2Ready)
     }
 
     func askConfirmation() {
-        let alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
+        alert = UIAlertController(title: "Confirm?", message: "Hide Penguin here?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in self.switchPlayers()}))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: {action in self.deletePenquin()}))
         self.present(alert,animated: true)
     }
+    
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
@@ -204,8 +216,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 z: location.worldTransform.columns.3.z
             )
             
-//            sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
+            sceneNode.name = "penguin"
+            penguinArray.append(sceneNode)
             
+            sceneView.scene.rootNode.addChildNode(sceneNode)
+        }
+    }
+    
+    func addPenguin(matrix: float4x4) {
+        let scene = SCNScene(named: "art.scnassets/tux.scn")!
+        
+        if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
+            let x = matrix.columns.3.x
+            let y = matrix.columns.3.y
+            let z = matrix.columns.3.z
+            sceneNode.position = SCNVector3(x, y, z)
+
             sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
             
@@ -214,11 +240,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func getPlayer2Ready() {
-        let alert = UIAlertController(title: "Ready?", message: "It's time to find penguine, player 2 is on now!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: nil))
+        var title = "Ready?"
+        if timeIsUp {
+            title = "Time's Up!"
+        }
+        let alert = UIAlertController(title: title, message: "It's time to find the penguin, player 2 is on now!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: {action in self.readyPlayer2()}))
         self.present(alert,animated: true)
-              penguinArray.first?.isHidden = true
           currentPlayer = 2
+    }
+    
+    func readyPlayer2() {
+        setTimer(startTime: 30)
+        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
@@ -233,8 +267,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 
-//            print(tempPenguinToPOVDistance)
-//            self.HideObject()
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
 
                 withinView = true
@@ -293,6 +325,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func toggleTimer() {
         if timerIsRunning == true {
             timer.invalidate()
+            timerIsRunning = false
         } else {
             runTimer()
         }
@@ -308,11 +341,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+        
         timerIsRunning = true
     }
     
     @objc func updateTimer() {
-        
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
             seconds -= 1
@@ -320,18 +353,42 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             stopTimer()
             // this is where we would put lose conditions / call other methods etc
             // depending on whoever is the current player
+            if currentPlayer == 1 {
+                // put the penguin somewhere
+                if penguinArray.count == 0 {
+                    guard let currentFrame = self.sceneView.session.currentFrame else {return}
+                    let transform = currentFrame.camera.transform
+                    var translateMatrix = matrix_identity_float4x4
+                    translateMatrix.columns.3.z = -0.2
+                    let modifiedMatrix = simd_mul(transform, translateMatrix)
+                    addPenguin(matrix: modifiedMatrix)
+                }
+                
+                //remove any alerts that are present
+                alert.dismiss(animated: true, completion: nil)
+                
+                // trigger changing players
+                timeIsUp = true
+                switchPlayers()
+                
+            } else if currentPlayer == 2 {
+                timeIsUp = true
+                gameOver()
+            }
         }
     }
     
     // END OF TIMER FUNCTIONS ------------------------------------------------------------------
+
     
-    func win(){
-        //    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        //        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "gameOver") as! gameOverViewController
-        //
-        //        self.present(nextViewController, animated: true,completion: nil)
+    func gameOver() {
+        let alert = UIAlertController(title: "Game over!", message: "Oh no! You could not find the penguin in time... wanna know where it was hiding?", preferredStyle: .alert)
+        let scaleObject = UIAlertAction(title: "YES! Show me the penguin!", style: .default, handler: {action in self.biggerObject()})
+        let pushQuit = UIAlertAction(title: "Nope", style: .default, handler: {action in self.quitGame()})
+        alert.addAction(scaleObject)
+        alert.addAction(pushQuit)
+        present(alert, animated: true, completion:nil)
     }
-    
 
 
     @IBAction func RemovePenquin(_ sender: Any) {
