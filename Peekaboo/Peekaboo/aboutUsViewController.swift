@@ -26,6 +26,8 @@ class aboutUsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //align text to top of page
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setContentOffset(.zero, animated: false)

@@ -20,6 +20,7 @@ class directionsViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    //change navbar color and font color
     override func viewDidAppear(_ animated: Bool) {
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
@@ -36,6 +37,7 @@ class directionsViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     
+    //align text to top of text field box
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setContentOffset(.zero, animated: false)
