@@ -14,7 +14,7 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-    var winTimer = DispatchWorkItem(block: <#@convention(block) () -> Void#>)
+    var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
 
     var virtualText = SCNNode() // initialize as an empty scene node
@@ -60,7 +60,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func quitGame() {
-    winTimer.cancel()
+        winTimer?.cancel()
     self.performSegue(withIdentifier: "title", sender: self)
     }
     
@@ -245,7 +245,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
 //        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
         winTimer = DispatchWorkItem { closure() }
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
     }
     
     func playerTwo(){
