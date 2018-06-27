@@ -19,7 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
-
+    var gaveUp = false
 
     var timer = Timer()
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
@@ -52,7 +52,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if currentPlayer == 1 {
         alert.addAction(clearAction)
         } else if currentPlayer == 2 {
-            alert.addAction(scaleObject)
+            if(gaveUp == false) { alert.addAction(scaleObject) }
             alert.addAction(pushQuit)
         }
         alert.addAction(cancelAction)
@@ -69,19 +69,40 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func biggerObject() {
 //        queue?.resume()
-        let scale = 2
+       
         winDistance += 50
-        let penguineNode = penguinArray.first
-        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
-        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
-        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
+    
+//        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
+//        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
+//        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
 //        penguinArray.first?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
 //        let originalTransform = penguineNode?.transform
 //        let scaledTransform = originalTransform.scale(x: 2, y: 2)
 //        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: 0, y: 0)
-        UIView.animate(withDuration: 0.7, animations: {
-            penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
-        })
+//        ---------------
+//        penguineNode.animate(withDuration: 0.7, animations: {
+////
+//            let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
+//            let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
+//            let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
+//            penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+//        })
+//        ---------------
+        animate()
+
+   
+    }
+    
+    func animate() {
+         let scale = 20
+        SCNTransaction.animationDuration = 10.0
+        let penguineNode = penguinArray.first
+        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
+        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
+        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
+        penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+        gaveUp = true
+//        animate()
     }
  
     // @IBOutlet var sceneView: ARSCNView!
