@@ -69,7 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         virtualText = createText(text: startText, atPosition: startPos)
         
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -95,6 +95,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+    
+    // Allow rotation
     @objc func canRotate() -> Void {}
     
     // called when a touch is detected in the view/window
