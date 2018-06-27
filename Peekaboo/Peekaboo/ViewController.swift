@@ -35,7 +35,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func goBack(_ sender: Any) {
         
         let alert = UIAlertController(title: "Give up?", message: "Are you sure you want to quit?", preferredStyle: .alert)
-         let scaleObject = UIAlertAction(title: "Yes", style: .default, handler: {action in self.biggerObject()})
+        let scaleObject = UIAlertAction(title: "Yes, retry!", style: .default, handler: {action in self.biggerObject()})
         let clearAction = UIAlertAction(title: "Yes", style: .default, handler: {action in self.quitGame()})
         let pushQuit = UIAlertAction(title: "I'm good", style: .default, handler: {action in self.quitGame()})
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (alert: UIAlertAction!) -> Void in
