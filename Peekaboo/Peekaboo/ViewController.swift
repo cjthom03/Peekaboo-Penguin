@@ -414,7 +414,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     //MARK: - Win Logic
     func win() {
-        
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 2))
         let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
