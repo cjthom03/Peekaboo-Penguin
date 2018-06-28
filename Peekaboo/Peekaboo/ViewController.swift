@@ -12,6 +12,28 @@ import ARKit
 import Foundation
 import AVFoundation
 
+extension UIButton {
+    private func actionHandleBlock(action:(() -> Void)? = nil) {
+        struct __ {
+            static var action :(() -> Void)?
+        }
+        if action != nil {
+            __.action = action
+        } else {
+            __.action?()
+        }
+    }
+    
+    @objc private func triggerActionHandleBlock() {
+        self.actionHandleBlock()
+    }
+    
+    func actionHandle(controlEvents control :UIControlEvents, ForAction action:@escaping () -> Void) {
+        self.actionHandleBlock(action: action)
+        self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
+    }
+}
+
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
@@ -170,7 +192,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
                     addPenquin(atLocation: hitPlaneResult)
 //                    askConfirmation()
-                    addSubView()
+                    addSubViewWithAction(closure: switchPlayers)
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -205,7 +227,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func switchPlayers() {
+    @objc func switchPlayers() {
         currentPlayer = 2
         //reset timeisUp
         timeIsUp = false
@@ -370,7 +392,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = true
     }
     
-    func addSubView() {
+    func addSubViewWithAction(closure:@escaping ()->()) {
         let window = UIApplication.shared.keyWindow!
         let v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
@@ -381,12 +403,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
         goButton.backgroundColor = UIColor.blue
         goButton.setTitle("Button", for: UIControlState.normal)
-        goButton.addTarget(self, action: "Action:", for: UIControlEvents.touchUpInside)
+        goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside,
+                            ForAction:closure)
         v.addSubview(goButton)
         window.addSubview(v);
   
 
     }
+    
+
     
     @objc func updateTimer() {
         if seconds >= 0 {
