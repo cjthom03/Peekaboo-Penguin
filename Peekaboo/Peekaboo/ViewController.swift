@@ -252,6 +252,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    func findPenguinLocation(){
+        guard let currentFrame = self.sceneView.session.currentFrame else {return}
+        let transform = currentFrame.camera.transform
+        var translateMatrix = matrix_identity_float4x4
+        translateMatrix.columns.3.z = -0.2
+        let modifiedMatrix = simd_mul(transform, translateMatrix)
+        addPenguin(matrix: modifiedMatrix)
+    }
+    
     func getPlayer2Ready() {
         var title = "Ready?"
         if timeIsUp {
@@ -361,7 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 15)
+        setTimer(startTime: 2)
     }
     
     // MARK: - Timer Functions
@@ -406,12 +415,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if currentPlayer == 1 {
                 // put the penguin somewhere
                 if penguinArray.count == 0 {
-                    guard let currentFrame = self.sceneView.session.currentFrame else {return}
-                    let transform = currentFrame.camera.transform
-                    var translateMatrix = matrix_identity_float4x4
-                    translateMatrix.columns.3.z = -0.2
-                    let modifiedMatrix = simd_mul(transform, translateMatrix)
-                    addPenguin(matrix: modifiedMatrix)
+                    findPenguinLocation()
                 }
                 
                 //remove any alerts that are present
