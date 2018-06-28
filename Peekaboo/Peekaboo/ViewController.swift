@@ -166,7 +166,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
             //No penguin on the screen yet? Try to add one
-            if penguinArray.isEmpty {
+            if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
@@ -355,7 +355,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             readySeconds -= 1
         }else if(readySeconds == 0) {
             readyLabel.font = readyLabel.font.withSize(180)
-            readyLabel.fontColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            readyLabel.textColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
             readyLabel.text = "GO!"
             readySeconds -= 1
         }else{
