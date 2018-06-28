@@ -169,7 +169,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                    
 //
                     addPenquin(atLocation: hitPlaneResult)
-                    askConfirmation()
+//                    askConfirmation()
+                    addSubView()
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -367,6 +368,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
         
         timerIsRunning = true
+    }
+    
+    func addSubView() {
+        let window = UIApplication.shared.keyWindow!
+        let v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
+        v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
+        window.addSubview(v);
+        v.backgroundColor = UIColor.white
+//        let v2 = UIView(frame: CGRect(x: 50, y: 50, width: 100, height: 50))
+//        v2.backgroundColor = UIColor.white
+//        v.addSubview(v2)
     }
     
     @objc func updateTimer() {
