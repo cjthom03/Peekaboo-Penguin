@@ -41,7 +41,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
    
     var audioSource: SCNAudioSource?
-        var goButton = UIButton(type: .system)
+//        var goButton = UIButton(type: .system)
     
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
@@ -49,7 +49,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
-            var cancelButton = UIButton(type: .system)
+//            var cancelButton = UIButton(type: .system)
     var v = UIView()
     var timer = Timer()
     var timerIsRunning = false
@@ -283,19 +283,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func getPlayer2Ready() {
-        var title = "Ready?"
+    @objc func getPlayer2Ready() {
+        var title = "Get Ready! "
         if timeIsUp {
-            title = "Time's Up!"
+            title = "Time's Up! "
         }
-        let alert = UIAlertController(title: title, message: "It's time to find the penguin, player 2 is on now!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: {action in self.readyPlayer2()}))
-        self.present(alert,animated: true)
+        let titleField = title + "player 2 is on now!"
+        addSubView(titleField, "", "Go!", "GetPlayer2")
+//        let alert = UIAlertController(title: title, message: "It's time to find the penguin, player 2 is on now!", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: {action in self.readyPlayer2()}))
+//        self.present(alert,animated: true)
           currentPlayer = 2
     }
     
 
     func readyPlayer2() {
+        removeSubView()
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
     }
@@ -411,25 +414,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let buttonHeight = v.frame.height/4
         
         //Define goButton
-        //        let goButton = UIButton(type: .system)
+                let goButton = UIButton(type: .system)
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
         goButton.layer.borderWidth = 3
         goButton.layer.borderColor = UIColor.green.cgColor
         goButton.backgroundColor = UIColor.yellow
         goButton.setTitle(button1Text, for: UIControlState.normal)
         goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
-//        goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:switchPlayers)
         goButton.layer.cornerRadius = 5
         
         //Define CancelButton
-        //        let cancelButton = UIButton(type: .system)
-        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
+                let cancelButton = UIButton(type: .system)
         cancelButton.layer.borderWidth = 3
         cancelButton.layer.borderColor = UIColor.green.cgColor
         cancelButton.backgroundColor = UIColor.green
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
-        cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
-//        cancelButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:deletePenquin)
+        if typeOfView == "GetPlayer2"
+        {
+            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2, width: buttonWidth, height: buttonHeight)
+            cancelButton.addTarget(self, action:#selector(getPlayer2Ready), for: .touchUpInside)
+        }
+        else {
+            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
+            cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
+        }
+
         cancelButton.layer.cornerRadius = 5
         
         
@@ -443,8 +452,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.addSubview(titleField)
         if (typeOfView == "HIDE") {
         v.addSubview(goButton)
-        v.addSubview(cancelButton)
         }
+        v.addSubview(cancelButton)
         v.layer.cornerRadius = 8
         
         //Add subView to main view
