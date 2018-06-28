@@ -409,15 +409,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         //Define subView
         let window = UIApplication.shared.keyWindow!
+        if typeOfView == "HIDE" || typeOfView == "gameOver" {
         v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
+        } else {
+        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/5))
+        }
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
         v.backgroundColor = UIColor.white
-        let buttonWidth = v.frame.width/2.5
-        let buttonHeight = v.frame.height/4
+        let buttonWidth = v.frame.width
+        let buttonHeight: CGFloat = 45
         
         //Define goButton
                 let goButton = UIButton(type: .system)
-        goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
+
         goButton.layer.borderWidth = 3
         goButton.layer.borderColor = UIColor.green.cgColor
         goButton.backgroundColor = UIColor.yellow
@@ -428,29 +432,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else if typeOfView == "gameOver" {
         goButton.addTarget(self, action:#selector(biggerObject), for: .touchUpInside)
         }
+        goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
         goButton.layer.cornerRadius = 5
         
+        
+        let distanceBetweenButtons: CGFloat = 5
         //Define CancelButton
                 let cancelButton = UIButton(type: .system)
         cancelButton.layer.borderWidth = 3
         cancelButton.layer.borderColor = UIColor.green.cgColor
         cancelButton.backgroundColor = UIColor.green
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
+        var firstButtonHeight = buttonHeight
         if typeOfView == "GetPlayer2"
-        {
-            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2, width: buttonWidth, height: buttonHeight)
+        {   firstButtonHeight = 0
             cancelButton.addTarget(self, action:#selector(readyPlayer2), for: .touchUpInside)
         }
         else if typeOfView == "GameWon" || typeOfView == "gameOver"
         {
-            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
             cancelButton.addTarget(self, action:#selector(quitGame), for: .touchUpInside)
             
         }
         else {
-            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         }
+        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+firstButtonHeight, width: buttonWidth, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 5
         
@@ -476,12 +482,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.layer.cornerRadius = 8
         
         //Add subView to main view
-        //        window.addSubview(v)
-        //        UIView.animate(withDuration: 0.6, animations: {window.addSubview(self.v)}, completion: {finished in })
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { window.addSubview(self.v) })
     }
     
-    //Fucntion to add subview to replace popup
+    //Fucntion to add subview with actions passed as arguments to replace popup
     
 //    func addSubViewWithAction(_ titleString:String, _ button1Text:String, _ button2Text:String, closureYes:@escaping ()->(), closureNo:@escaping ()->()) {
 //
