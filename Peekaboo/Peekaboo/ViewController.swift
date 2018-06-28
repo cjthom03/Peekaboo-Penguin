@@ -17,7 +17,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinArray = [SCNNode]()
 
     
-   
+    @IBOutlet weak var readyLabel: UILabel!
+    
     var audioSource: SCNAudioSource?
 
     
@@ -30,6 +31,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 
     var timer = Timer()
+    var readyTimer = Timer()
+    var readySeconds = 3
     var timerIsRunning = false
     var timeIsUp = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
@@ -119,8 +122,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 15)
-        
+        runReadyTimer()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -162,7 +164,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
             //No penguin on the screen yet? Try to add one
-            if penguinArray.isEmpty {
+            if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
@@ -334,6 +336,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     // END OF TEXT FUNCTIONS -------------------------------------------------------------
+    
+    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    
+    func runReadyTimer(){
+        readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateReadyTimer(){
+        if readySeconds > 0 {
+            readyLabel.text = "\(readySeconds)"
+            readySeconds -= 1
+        }else if(readySeconds == 0) {
+            readyLabel.font = readyLabel.font.withSize(180)
+            readyLabel.textColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            readyLabel.text = "GO!"
+            readySeconds -= 1
+        }else{
+            stopReadyTimer()
+        }
+    }
+    
+    func stopReadyTimer(){
+        readyTimer.invalidate()
+        readyLabel.text = ""
+        readyLabel.isHidden = true
+        setTimer(startTime: 15)
+    }
     
     // MARK: - Timer Functions
     //-------------------------------------------------------------
