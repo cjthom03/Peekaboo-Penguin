@@ -192,7 +192,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
                     addPenquin(atLocation: hitPlaneResult)
 //                    askConfirmation()
-                    addSubViewWithAction(closure: switchPlayers)
+                    addSubViewWithAction("Hide Penguin here?","Yes","Cancel", closureYes: switchPlayers, closureNo: deletePenquin )
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -393,23 +393,44 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = true
     }
     
-    func addSubViewWithAction(closure:@escaping ()->()) {
+    //Fucntion to add subview to replace popup
+    
+    func addSubViewWithAction(_ titleString:String, _ button1Text:String, _ button2Text:String,closureYes:@escaping ()->(), closureNo:@escaping ()->()) {
+        
+        //Define subView
         let window = UIApplication.shared.keyWindow!
         v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
               v.backgroundColor = UIColor.white
+        
+        //Define goButton
         let goButton = UIButton(type: .system)
         let buttonWidth = v.frame.width/2.5
         let buttonHeight = v.frame.height/3.8
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
-        goButton.backgroundColor = UIColor.blue
-        goButton.setTitle("Button", for: UIControlState.normal)
+        goButton.layer.borderWidth = 3
+        goButton.layer.borderColor = UIColor.green.cgColor
+        goButton.backgroundColor = UIColor.yellow
+        goButton.setTitle(button1Text, for: UIControlState.normal)
         goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside,
-                            ForAction:closure)
+                            ForAction:closureYes)
+        goButton.layer.cornerRadius = 5
+        
+     
+        //Define title field
+        let titleField = UILabel(frame: CGRect(x: v.frame.width/2, y: v.frame.height/2, width: 300, height: 40))
+        titleField.text = titleString
+        
+        //Add all buttons and text to subView
+        v.addSubview(titleField)
         v.addSubview(goButton)
-//        v.tag = 2081
+        v.layer.cornerRadius = 8
+        
+        //Add subView to main view
         window.addSubview(v);
     }
+    
+    //Function to remove subView
     
     func removeSubView() {
         v.removeFromSuperview()
