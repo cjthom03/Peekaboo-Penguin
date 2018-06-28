@@ -12,6 +12,8 @@ import ARKit
 import Foundation
 import AVFoundation
 
+
+
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
         struct __ {
@@ -300,6 +302,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
 
     @objc func readyPlayer2() {
+        print("ready player2")
         removeSubView()
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
@@ -406,22 +409,55 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Function to add subview without acitons
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
-        
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+        navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
         let window = UIApplication.shared.keyWindow!
-        if typeOfView == "HIDE" || typeOfView == "gameOver" {
+        //Define height of frame depending on number of buttons needed
+        if typeOfView == "HIDE" || typeOfView == "gameOver"{
         v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
-        } else {
+        } else if typeOfView == "GetPlayer2" || typeOfView == "GameWon"{
+        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/4))
+        }
+        else {
         v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/5))
         }
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
         v.backgroundColor = UIColor.white
+        //Add subView styling here
+        
         let buttonWidth = v.frame.width
         let buttonHeight: CGFloat = 45
         
+        //Define title field
+        let titleFieldHeight: CGFloat = 40
+        let titleFieldY: CGFloat = v.frame.height/7
+        let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
+        titleField.text = titleString
+        titleField.backgroundColor = UIColor.cyan
+        titleField.textAlignment = NSTextAlignment.center
+        //Add title field styling here
+        
+        
+        //Define text field
+        let textFieldY: CGFloat = titleFieldY + titleFieldHeight
+        var textFieldHeight: CGFloat = 40
+        if typeOfView == "gameOver" { textFieldHeight = 80 }
+        let textField = UILabel(frame: CGRect(x: 0, y: textFieldY, width: v.frame.width, height: textFieldHeight))
+        textField.text = textString
+        textField.backgroundColor = UIColor.cyan
+        textField.textAlignment = NSTextAlignment.center
+        if typeOfView == "gameOver" {
+            
+            NSLayoutConstraint(item: textField, attribute: .leading, relatedBy: .equal, toItem: v, attribute: .leadingMargin, multiplier: 1.0, constant: 15.0).isActive = true
+            textField.lineBreakMode = .byWordWrapping
+            textField.numberOfLines = 2
+        }
+        //Add text field styling here
+        
         //Define goButton
-                let goButton = UIButton(type: .system)
-
+        let goButton = UIButton(type: .system)
+        let goButtonY: CGFloat = textFieldY + textFieldHeight
         goButton.layer.borderWidth = 3
         goButton.layer.borderColor = UIColor.green.cgColor
         goButton.backgroundColor = UIColor.yellow
@@ -432,20 +468,22 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else if typeOfView == "gameOver" {
         goButton.addTarget(self, action:#selector(biggerObject), for: .touchUpInside)
         }
-        goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
+        goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: goButtonY, width: buttonWidth, height: buttonHeight)
         goButton.layer.cornerRadius = 5
+        //Add goButton styling here
         
         
-        let distanceBetweenButtons: CGFloat = 5
         //Define CancelButton
-                let cancelButton = UIButton(type: .system)
+        let cancelButton = UIButton(type: .system)
         cancelButton.layer.borderWidth = 3
+        var cancelButtonY: CGFloat = goButtonY
         cancelButton.layer.borderColor = UIColor.green.cgColor
         cancelButton.backgroundColor = UIColor.green
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
-        var firstButtonHeight = buttonHeight
+        //Add cancelbutton styling here
+  
         if typeOfView == "GetPlayer2"
-        {   firstButtonHeight = 0
+        {
             cancelButton.addTarget(self, action:#selector(readyPlayer2), for: .touchUpInside)
         }
         else if typeOfView == "GameWon" || typeOfView == "gameOver"
@@ -456,22 +494,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else {
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         }
-        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+firstButtonHeight, width: buttonWidth, height: buttonHeight)
+        if typeOfView == "HIDE" || typeOfView == "gameOver" {
+        cancelButtonY = goButtonY + buttonHeight
+        }
+        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: cancelButtonY, width: buttonWidth, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 5
         
         
-        //Define title field
-        let titleField = UILabel(frame: CGRect(x: 0, y: v.frame.height/7, width: v.frame.width, height: 40))
-        titleField.text = titleString
-        titleField.backgroundColor = UIColor.cyan
-        titleField.textAlignment = NSTextAlignment.center
-        
-        //Define text field
-        let textField = UILabel(frame: CGRect(x: 0, y: v.frame.height/6, width: v.frame.width, height: 40))
-        textField.text = textString
-        textField.backgroundColor = UIColor.cyan
-        textField.textAlignment = NSTextAlignment.center
+  
+
         
         //Add all buttons and text to subView
         v.addSubview(titleField)
@@ -479,6 +511,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.addSubview(goButton)
         }
         v.addSubview(cancelButton)
+        v.addSubview(textField)
         v.layer.cornerRadius = 8
         
         //Add subView to main view
@@ -540,6 +573,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Function to remove subView
     
     func removeSubView() {
+        navigationController?.navigationBar.isUserInteractionEnabled = true
+        navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
     }
     
