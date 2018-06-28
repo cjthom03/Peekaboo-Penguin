@@ -178,7 +178,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     askConfirmation()
                 }
             } else {
-                //penquin already on the screen? Test if the penguin was tapped
+                //penguin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
                 if (!hitTest.isEmpty && currentPlayer == 2 && gaveUp == false && timeIsUp == false){
                    // If the penguin was tapped by player 2, the game is won!
