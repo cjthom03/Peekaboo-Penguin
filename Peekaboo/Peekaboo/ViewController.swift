@@ -172,13 +172,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
                     addPenquin(atLocation: hitPlaneResult)
                     askConfirmation()
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
-//                        self.HideObject()
-//                    })
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-//                        self.penguinToPOVDistance = 3.0
-//                        self.HideObject()
-//                    })
+
+                }else {
+                    findPenguinLocation()
+                    askConfirmation()
                 }
             } else {
                 //penquin already on the screen? Test if the penguin was tapped
@@ -252,6 +249,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    //Add penguin in front of camera
     func findPenguinLocation(){
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
         let transform = currentFrame.camera.transform
@@ -370,7 +368,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 2)
+        setTimer(startTime: 15)
     }
     
     // MARK: - Timer Functions
