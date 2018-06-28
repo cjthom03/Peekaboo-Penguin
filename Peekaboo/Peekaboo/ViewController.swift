@@ -15,19 +15,15 @@ import AVFoundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-
-    
    
     var audioSource: SCNAudioSource?
 
-    
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
 //    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
-
 
     var timer = Timer()
     var timerIsRunning = false
@@ -145,6 +141,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if (self.isMovingFromParentViewController) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
+        penguinArray.first?.isHidden = true
         
         // Pause the view's session
         sceneView.session.pause()
@@ -204,8 +201,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func switchPlayers() {
-        currentPlayer = 2
+//        currentPlayer = 2
         //reset timeisUp
+        
+        // NATE start animation of making transparent
+        penguinArray[0].runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
+        withinView = true
         timeIsUp = false
         // Stop the hide timer; Start the search timer
         stopTimer()
@@ -260,11 +261,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let alert = UIAlertController(title: title, message: "It's time to find the penguin, player 2 is on now!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: {action in self.readyPlayer2()}))
         self.present(alert,animated: true)
-          currentPlayer = 2
+//          currentPlayer = 2
     }
     
 
     func readyPlayer2() {
+        currentPlayer = 2
+        // NATE ADD SOUND HERE
+        penguinArray[0].runAction(SCNAction.fadeOpacity(to: 1, duration: 0.1))
+//        penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
     }
@@ -275,7 +280,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
-        
+        print(currentPlayer)
         if(!penguinArray.isEmpty){
             guard let pointOfView = self.sceneView.pointOfView else {return}
             let transform = pointOfView.transform
@@ -285,16 +290,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 
-            if (tempPenguinToPOVDistance <= winDistance && !withinView) {
-                
+            if (tempPenguinToPOVDistance <= winDistance && !withinView && currentPlayer == 2) {
+                //sceneNode.runAction(SCNAction.fadeOpacity(to: 0, duration: 5))
                 withinView = true
                 penguinArray.first?.isHidden = false
-                self.playWithinRangeSound()
+                playWithinRangeSound()
                 // play event
             } else if(withinView && tempPenguinToPOVDistance > winDistance){
-                withinView = false
-
-                if (currentPlayer == 2 ) { penguinArray.first?.isHidden = true }
+                
+                if (currentPlayer == 2 ) {
+                    penguinArray.first?.isHidden = true
+                    withinView = false
+                }
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
             
