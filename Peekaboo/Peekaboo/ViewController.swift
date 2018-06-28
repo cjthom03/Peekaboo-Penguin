@@ -119,10 +119,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 15)
+        runReadyTimer()
         
     }
-        
+    
+    
+    @IBOutlet weak var readyLabel: UILabel!
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -337,6 +341,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
+    // MARK: - READY TIMER
+    var readySeconds = 3
+    var readyTimer = Timer()
+    
+    func runReadyTimer(){
+        readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateReadyTimer(){
+        if readySeconds > 0 {
+            readyLabel.text = "\(readySeconds)"
+            readySeconds -= 1
+        }else if(readySeconds == 0) {
+            readyLabel.font = readyLabel.font.withSize(180)
+            readyLabel.fontColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            readyLabel.text = "GO!"
+            readySeconds -= 1
+        }else{
+            stopReadyTimer()
+        }
+    }
+    
+    func stopReadyTimer(){
+        readyTimer.invalidate()
+        readyLabel.text = ""
+        readyLabel.isHidden = true
+        setTimer(startTime: 15)
+    }
+    
     //TIMER FUNCTIONS -------------------------------------------------------------
     func setTimer(startTime: Int) {
         seconds = startTime
@@ -422,31 +455,4 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    //MARK: - ARSCNViewDelegateMethods
-
-//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//
-//        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
-//
-//        let planeNode = createPlane(withPlaneAnchor: planeAnchor)
-//
-//        node.addChildNode(planeNode)
-//
-//    }
-//
-//    //MARK: - Plane Rendering Methods
-//
-//    func createPlane(withPlaneAnchor planeAnchor: ARPlaneAnchor) -> SCNNode{
-//        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-//        let gridMaterial = SCNMaterial()
-//        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-//        plane.materials = [gridMaterial]
-//        let planeNode = SCNNode()
-//        planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-//        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-//
-//        planeNode.geometry = plane
-//
-//        return planeNode
-//    }
 }
