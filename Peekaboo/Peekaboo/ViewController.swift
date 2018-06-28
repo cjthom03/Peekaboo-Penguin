@@ -121,6 +121,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         virtualText = createText(text: startText, atPosition: startPos)
         
         runReadyTimer()
+
+        self.navigationItem.title = "Get Ready!"
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -205,6 +207,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Stop the hide timer; Start the search timer
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
+        self.navigationItem.title = ""
     }
 
     func askConfirmation() {
@@ -272,6 +275,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func readyPlayer2() {
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+        self.navigationItem.title = "Player 2"
     }
     
     func playWithinRangeSound (){
@@ -366,6 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         readyLabel.text = ""
         readyLabel.isHidden = true
         setTimer(startTime: 15)
+        self.navigationItem.title = "Player 1"
     }
     
     // MARK: - Timer Functions
