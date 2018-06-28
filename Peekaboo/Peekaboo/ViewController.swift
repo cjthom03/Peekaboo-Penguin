@@ -105,13 +105,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         toggleTimer()
     }
     
-    func quitGame() {
+    @objc func quitGame() {
+        removeSubView()
         stopTimer()
         currentPlayer = 1
         self.performSegue(withIdentifier: "title", sender: self)
     }
     
-    func biggerObject() {
+    @objc func biggerObject() {
+        removeSubView()
         winDistance += 50
         animate()
     }
@@ -193,7 +195,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     addPenquin(atLocation: hitPlaneResult)
 //                    askConfirmation()
 //                    addSubViewWithAction("Hide Penguin here?","Yes","Cancel", closureYes: switchPlayers, closureNo: deletePenquin)
-                         addSubView("Hide Penguin here?","Yes","Cancel", "HIDE")
+                         addSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -210,9 +212,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
                             stopTimer()
-                            let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
-                            self.present(alert,animated: true)
+                            addSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
+//                            let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
+//                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
+//                            self.present(alert,animated: true)
                         }
                     }
                 }
@@ -288,8 +291,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if timeIsUp {
             title = "Time's Up! "
         }
-        let titleField = title + "player 2 is on now!"
-        addSubView(titleField, "", "Go!", "GetPlayer2")
+        addSubView(title, "player 2 is on now!", "", "Go!", "GetPlayer2")
 //        let alert = UIAlertController(title: title, message: "It's time to find the penguin, player 2 is on now!", preferredStyle: .alert)
 //        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: {action in self.readyPlayer2()}))
 //        self.present(alert,animated: true)
@@ -297,7 +299,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
 
-    func readyPlayer2() {
+    @objc func readyPlayer2() {
         removeSubView()
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
@@ -403,7 +405,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     //Function to add subview without acitons
     
-    func addSubView(_ titleString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
+    func addSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
         
         //Define subView
         let window = UIApplication.shared.keyWindow!
@@ -420,7 +422,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         goButton.layer.borderColor = UIColor.green.cgColor
         goButton.backgroundColor = UIColor.yellow
         goButton.setTitle(button1Text, for: UIControlState.normal)
+        if typeOfView == "HIDE" {
         goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
+        }
+        else if typeOfView == "gameOver" {
+        goButton.addTarget(self, action:#selector(biggerObject), for: .touchUpInside)
+        }
         goButton.layer.cornerRadius = 5
         
         //Define CancelButton
@@ -432,7 +439,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if typeOfView == "GetPlayer2"
         {
             cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2, width: buttonWidth, height: buttonHeight)
-            cancelButton.addTarget(self, action:#selector(getPlayer2Ready), for: .touchUpInside)
+            cancelButton.addTarget(self, action:#selector(readyPlayer2), for: .touchUpInside)
+        }
+        else if typeOfView == "GameWon" || typeOfView == "gameOver"
+        {
+            cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2, width: buttonWidth, height: buttonHeight)
+            cancelButton.addTarget(self, action:#selector(quitGame), for: .touchUpInside)
+            
         }
         else {
             cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
@@ -448,9 +461,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         titleField.backgroundColor = UIColor.cyan
         titleField.textAlignment = NSTextAlignment.center
         
+        //Define text field
+        let textField = UILabel(frame: CGRect(x: 0, y: v.frame.height/6, width: v.frame.width, height: 40))
+        textField.text = textString
+        textField.backgroundColor = UIColor.cyan
+        textField.textAlignment = NSTextAlignment.center
+        
         //Add all buttons and text to subView
         v.addSubview(titleField)
-        if (typeOfView == "HIDE") {
+        if (typeOfView == "HIDE" || typeOfView == "gameOver") {
         v.addSubview(goButton)
         }
         v.addSubview(cancelButton)
@@ -559,6 +578,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     
     func gameOver() {
+        addSubView("Game Over", "Oh no! You could not find the penguin in time... wanna know where it was hiding?", "YES! Show me the penguin!", "Nope", "gameOver")
         let alert = UIAlertController(title: "Game over!", message: "Oh no! You could not find the penguin in time... wanna know where it was hiding?", preferredStyle: .alert)
         let scaleObject = UIAlertAction(title: "YES! Show me the penguin!", style: .default, handler: {action in self.biggerObject()})
         let pushQuit = UIAlertAction(title: "Nope", style: .default, handler: {action in self.quitGame()})
