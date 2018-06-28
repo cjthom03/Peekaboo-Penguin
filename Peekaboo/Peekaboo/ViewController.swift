@@ -185,9 +185,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                    // If the penguin was tapped by player 2, the game is won!
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
-                            let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
-                            self.present(alert,animated: true)
+                            win()
                         }
                     }
                 }
@@ -337,7 +335,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
-    //TIMER FUNCTIONS -------------------------------------------------------------
+    // MARK: - Timer Functions
+    //-------------------------------------------------------------
     func setTimer(startTime: Int) {
         seconds = startTime
         timerLabel.isHidden = false
@@ -403,6 +402,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // END OF TIMER FUNCTIONS ------------------------------------------------------------------
 
     
+    //MARK: - Game Over
     func gameOver() {
         let alert = UIAlertController(title: "Game over!", message: "Oh no! You could not find the penguin in time... wanna know where it was hiding?", preferredStyle: .alert)
         let scaleObject = UIAlertAction(title: "YES! Show me the penguin!", style: .default, handler: {action in self.biggerObject()})
@@ -411,42 +411,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         alert.addAction(pushQuit)
         present(alert, animated: true, completion:nil)
     }
-
-
-    @IBAction func RemovePenquin(_ sender: Any) {
-        if !penguinArray.isEmpty{
-            for penquin in penguinArray{
-                penquin.removeFromParentNode()
-                penguinArray = [SCNNode]()
-            }
-        }
-    }
     
-    //MARK: - ARSCNViewDelegateMethods
+    //MARK: - Win Logic
+    func win() {
+        
+        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 2))
+        let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
+        self.present(alert,animated: true)
+    }
 
-//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//
-//        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
-//
-//        let planeNode = createPlane(withPlaneAnchor: planeAnchor)
-//
-//        node.addChildNode(planeNode)
-//
+//    @IBAction func RemovePenquin(_ sender: Any) {
+//        if !penguinArray.isEmpty{
+//            for penquin in penguinArray{
+//                penquin.removeFromParentNode()
+//                penguinArray = [SCNNode]()
+//            }
+//        }
 //    }
-//
-//    //MARK: - Plane Rendering Methods
-//
-//    func createPlane(withPlaneAnchor planeAnchor: ARPlaneAnchor) -> SCNNode{
-//        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-//        let gridMaterial = SCNMaterial()
-//        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-//        plane.materials = [gridMaterial]
-//        let planeNode = SCNNode()
-//        planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-//        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-//
-//        planeNode.geometry = plane
-//
-//        return planeNode
-//    }
+    
 }
