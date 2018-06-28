@@ -41,7 +41,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
    
     var audioSource: SCNAudioSource?
-
+        var goButton = UIButton(type: .system)
     
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
@@ -49,7 +49,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
-
+            var cancelButton = UIButton(type: .system)
     var v = UIView()
     var timer = Timer()
     var timerIsRunning = false
@@ -192,7 +192,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
                     addPenquin(atLocation: hitPlaneResult)
 //                    askConfirmation()
-                    addSubViewWithAction("Hide Penguin here?","Yes","Cancel", closureYes: switchPlayers, closureNo: deletePenquin )
+//                    addSubViewWithAction("Hide Penguin here?","Yes","Cancel", closureYes: switchPlayers, closureNo: deletePenquin)
+                         addSubView("Hide Penguin here?","Yes","Cancel", "HIDE")
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
 //                        self.HideObject()
 //                    })
@@ -220,14 +221,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func deletePenquin() {
+    @objc func deletePenquin() {
+        removeSubView()
         for penquin in penguinArray {
             penquin.removeFromParentNode()
             penguinArray = [SCNNode]()
         }
+        print("deletepenguin")
     }
     
     @objc func switchPlayers() {
+        print("Switchplayers")
+        removeSubView()
         currentPlayer = 2
         //reset timeisUp
         timeIsUp = false
@@ -235,7 +240,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Stop the hide timer; Start the search timer
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
-        removeSubView()
+        
     }
 
     func askConfirmation() {
@@ -393,42 +398,112 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = true
     }
     
-    //Fucntion to add subview to replace popup
+    //Function to add subview without acitons
     
-    func addSubViewWithAction(_ titleString:String, _ button1Text:String, _ button2Text:String,closureYes:@escaping ()->(), closureNo:@escaping ()->()) {
+    func addSubView(_ titleString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
         
         //Define subView
         let window = UIApplication.shared.keyWindow!
         v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
-              v.backgroundColor = UIColor.white
+        v.backgroundColor = UIColor.white
+        let buttonWidth = v.frame.width/2.5
+        let buttonHeight = v.frame.height/4
         
         //Define goButton
-        let goButton = UIButton(type: .system)
-        let buttonWidth = v.frame.width/2.5
-        let buttonHeight = v.frame.height/3.8
+        //        let goButton = UIButton(type: .system)
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
         goButton.layer.borderWidth = 3
         goButton.layer.borderColor = UIColor.green.cgColor
         goButton.backgroundColor = UIColor.yellow
         goButton.setTitle(button1Text, for: UIControlState.normal)
-        goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside,
-                            ForAction:closureYes)
+        goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
+//        goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:switchPlayers)
         goButton.layer.cornerRadius = 5
         
-     
+        //Define CancelButton
+        //        let cancelButton = UIButton(type: .system)
+        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
+        cancelButton.layer.borderWidth = 3
+        cancelButton.layer.borderColor = UIColor.green.cgColor
+        cancelButton.backgroundColor = UIColor.green
+        cancelButton.setTitle(button2Text, for: UIControlState.normal)
+        cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
+//        cancelButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:deletePenquin)
+        cancelButton.layer.cornerRadius = 5
+        
+        
         //Define title field
-        let titleField = UILabel(frame: CGRect(x: v.frame.width/2, y: v.frame.height/2, width: 300, height: 40))
+        let titleField = UILabel(frame: CGRect(x: 0, y: v.frame.height/7, width: v.frame.width, height: 40))
         titleField.text = titleString
+        titleField.backgroundColor = UIColor.cyan
+        titleField.textAlignment = NSTextAlignment.center
         
         //Add all buttons and text to subView
         v.addSubview(titleField)
+        if (typeOfView == "HIDE") {
         v.addSubview(goButton)
+        v.addSubview(cancelButton)
+        }
         v.layer.cornerRadius = 8
         
         //Add subView to main view
-        window.addSubview(v);
+        //        window.addSubview(v)
+        //        UIView.animate(withDuration: 0.6, animations: {window.addSubview(self.v)}, completion: {finished in })
+        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { window.addSubview(self.v) })
     }
+    
+    //Fucntion to add subview to replace popup
+    
+//    func addSubViewWithAction(_ titleString:String, _ button1Text:String, _ button2Text:String, closureYes:@escaping ()->(), closureNo:@escaping ()->()) {
+//
+//        //Define subView
+//        let window = UIApplication.shared.keyWindow!
+//        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
+//        v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
+//              v.backgroundColor = UIColor.white
+//        let buttonWidth = v.frame.width/2.5
+//        let buttonHeight = v.frame.height/4
+//
+//        //Define goButton
+////        let goButton = UIButton(type: .system)
+//        goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2-buttonHeight/2, width: buttonWidth, height: buttonHeight)
+//        goButton.layer.borderWidth = 3
+//        goButton.layer.borderColor = UIColor.green.cgColor
+//        goButton.backgroundColor = UIColor.yellow
+//        goButton.setTitle(button1Text, for: UIControlState.normal)
+//        goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:closureYes)
+//        goButton.layer.cornerRadius = 5
+//
+//        //Define CancelButton
+////        let cancelButton = UIButton(type: .system)
+//        cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: v.frame.height/2+buttonHeight/2+10, width: buttonWidth, height: buttonHeight)
+//        cancelButton.layer.borderWidth = 3
+//        cancelButton.layer.borderColor = UIColor.green.cgColor
+//        cancelButton.backgroundColor = UIColor.green
+//        cancelButton.setTitle(button2Text, for: UIControlState.normal)
+//        cancelButton.actionHandle(controlEvents: UIControlEvents.touchUpInside, ForAction:closureNo)
+//        cancelButton.layer.cornerRadius = 5
+//
+//
+//        //Define title field
+//        let titleField = UILabel(frame: CGRect(x: 0, y: v.frame.height/7, width: v.frame.width, height: 40))
+//        titleField.text = titleString
+//        titleField.backgroundColor = UIColor.cyan
+//        titleField.textAlignment = NSTextAlignment.center
+//
+//        //Add all buttons and text to subView
+//        v.addSubview(titleField)
+//        v.addSubview(goButton)
+//        v.addSubview(cancelButton)
+//        v.layer.cornerRadius = 8
+//
+//        //Add subView to main view
+////        window.addSubview(v)
+////        UIView.animate(withDuration: 0.6, animations: {window.addSubview(self.v)}, completion: {finished in })
+//        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { window.addSubview(self.v) })
+//    }
+    
     
     //Function to remove subView
     
@@ -520,4 +595,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
 //        return planeNode
 //    }
+    
+    
+    
+    
 }
+
