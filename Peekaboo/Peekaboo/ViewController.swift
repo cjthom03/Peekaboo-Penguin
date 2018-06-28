@@ -15,15 +15,11 @@ import AVFoundation
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-
     
-   
     var audioSource: SCNAudioSource?
 
-    
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
-//    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
@@ -300,7 +296,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
 //        timer = Timer.scheduledTimer(timeInterval: 11, target: self, selector: #selector(closure), userInfo: nil, repeats: false)
         winTimer = DispatchWorkItem { closure() }
@@ -315,7 +310,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.present(changePlayers,animated: true, completion: nil)
     }
     
-    // TEXT FUNCTIONS -------------------------------------------------------------
+    //MARK: - Text Functions
+    //-------------------------------------------------------------
     
     func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
@@ -332,8 +328,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textGeometry.firstMaterial?.diffuse.contents = textColor
         textNode.geometry = textGeometry
     }
-    
-    // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
     // MARK: - Timer Functions
     //-------------------------------------------------------------
@@ -398,8 +392,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
-    // END OF TIMER FUNCTIONS ------------------------------------------------------------------
 
     
     //MARK: - Game Over
@@ -414,11 +406,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     //MARK: - Win Logic
     func win() {
-        
-        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 2))
+        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
+            self.winAlert()
+            print(self)
+        })
+    }
+    
+    func winAlert() {
         let alert = UIAlertController(title: "You Win!", message: "You are awesome", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok!",style: .default, handler: {action in self.quitGame()} ))
-        self.present(alert,animated: true)
+        self.present(alert , animated: true)
     }
 
 //    @IBAction func RemovePenquin(_ sender: Any) {
