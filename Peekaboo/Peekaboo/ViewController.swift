@@ -16,6 +16,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
     
+
+    @IBOutlet weak var readyLabel: UILabel!
+    
     var audioSource: SCNAudioSource?
 
     var winTimer: DispatchWorkItem?
@@ -26,6 +29,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 
     var timer = Timer()
+    var readyTimer = Timer()
+    var readySeconds = 3
     var timerIsRunning = false
     var timeIsUp = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
@@ -115,8 +120,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 15)
-        
+        runReadyTimer()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +162,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
             //No penguin on the screen yet? Try to add one
-            if penguinArray.isEmpty {
+            if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
@@ -166,16 +170,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //
                     addPenquin(atLocation: hitPlaneResult)
                     askConfirmation()
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: {
-//                        self.HideObject()
-//                    })
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-//                        self.penguinToPOVDistance = 3.0
-//                        self.HideObject()
-//                    })
+
+                }else {
+                    findPenguinLocation()
+                    askConfirmation()
                 }
             } else {
-                //penquin already on the screen? Test if the penguin was tapped
+                //penguin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
                 if (!hitTest.isEmpty && currentPlayer == 2 && gaveUp == false && timeIsUp == false){
                    // If the penguin was tapped by player 2, the game is won!
@@ -244,6 +245,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
         }
+    }
+    
+    //Add penguin in front of camera
+    func findPenguinLocation(){
+        guard let currentFrame = self.sceneView.session.currentFrame else {return}
+        let transform = currentFrame.camera.transform
+        var translateMatrix = matrix_identity_float4x4
+        translateMatrix.columns.3.z = -0.2
+        let modifiedMatrix = simd_mul(transform, translateMatrix)
+        addPenguin(matrix: modifiedMatrix)
     }
     
     func getPlayer2Ready() {
@@ -329,6 +340,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textNode.geometry = textGeometry
     }
     
+    
+    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    
+    func runReadyTimer(){
+        readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateReadyTimer(){
+        if readySeconds > 0 {
+            readyLabel.text = "\(readySeconds)"
+            readySeconds -= 1
+        }else if(readySeconds == 0) {
+            readyLabel.font = readyLabel.font.withSize(180)
+            readyLabel.textColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            readyLabel.text = "GO!"
+            readySeconds -= 1
+        }else{
+            stopReadyTimer()
+        }
+    }
+    
+    func stopReadyTimer(){
+        readyTimer.invalidate()
+        readyLabel.text = ""
+        readyLabel.isHidden = true
+        setTimer(startTime: 15)
+    }
+    
     // MARK: - Timer Functions
     //-------------------------------------------------------------
     func setTimer(startTime: Int) {
@@ -371,12 +410,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if currentPlayer == 1 {
                 // put the penguin somewhere
                 if penguinArray.count == 0 {
-                    guard let currentFrame = self.sceneView.session.currentFrame else {return}
-                    let transform = currentFrame.camera.transform
-                    var translateMatrix = matrix_identity_float4x4
-                    translateMatrix.columns.3.z = -0.2
-                    let modifiedMatrix = simd_mul(transform, translateMatrix)
-                    addPenguin(matrix: modifiedMatrix)
+                    findPenguinLocation()
                 }
                 
                 //remove any alerts that are present
