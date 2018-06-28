@@ -50,7 +50,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
 
-
+    var v = UIView()
     var timer = Timer()
     var timerIsRunning = false
     var timeIsUp = false
@@ -235,6 +235,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Stop the hide timer; Start the search timer
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
+        removeSubView()
     }
 
     func askConfirmation() {
@@ -394,7 +395,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addSubViewWithAction(closure:@escaping ()->()) {
         let window = UIApplication.shared.keyWindow!
-        let v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
+        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: window.frame.width/1.2, height: window.frame.height/3))
         v.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
               v.backgroundColor = UIColor.white
         let goButton = UIButton(type: .system)
@@ -406,9 +407,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         goButton.actionHandle(controlEvents: UIControlEvents.touchUpInside,
                             ForAction:closure)
         v.addSubview(goButton)
+//        v.tag = 2081
         window.addSubview(v);
-  
-
+    }
+    
+    func removeSubView() {
+        v.removeFromSuperview()
     }
     
 
