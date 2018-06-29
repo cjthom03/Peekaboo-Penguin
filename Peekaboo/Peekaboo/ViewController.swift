@@ -13,6 +13,9 @@ import Foundation
 import AVFoundation
 
 var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+
+var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
+
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
         struct __ {
@@ -25,8 +28,6 @@ extension UIButton {
         }
         
     }
-    
-
     
     @objc private func triggerActionHandleBlock() {
         self.actionHandleBlock()
@@ -42,6 +43,8 @@ extension UIButton {
             backgroundColor = isHighlighted ? highlitedColor : UIColor.white
         }
     }
+    
+    
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate {
@@ -178,6 +181,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if (UIDevice.current.orientation != .portrait) {
+//            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+//        }
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
@@ -469,6 +475,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Function to add subview without acitons
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
+        
+
 //        let window = UIApplication.shared.keyWindow!
 //        if (UIDevice.current.orientation == .portrait) {
             subViewX = window.frame.width/2
@@ -512,6 +520,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
         titleField.textColor = UIColor.blue
+        let fontSize: CGFloat = 20
+        titleField.font = UIFont.boldSystemFont(ofSize: fontSize)
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
         
@@ -521,8 +531,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textField.text = textString
         textField.textAlignment = NSTextAlignment.center
         if typeOfView == "gameOver" {
-            
-//            NSLayoutConstraint(item: textField, attribute: .leading, relatedBy: .equal, toItem: v, attribute: .leadingMargin, multiplier: 1.0, constant: 15.0).isActive = true
             textField.lineBreakMode = .byWordWrapping
             textField.numberOfLines = 3
         }
