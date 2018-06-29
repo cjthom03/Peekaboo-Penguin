@@ -12,8 +12,7 @@ import ARKit
 import Foundation
 import AVFoundation
 
-
-
+var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
         struct __ {
@@ -24,7 +23,10 @@ extension UIButton {
         } else {
             __.action?()
         }
+        
     }
+    
+
     
     @objc private func triggerActionHandleBlock() {
         self.actionHandleBlock()
@@ -33,6 +35,12 @@ extension UIButton {
     func actionHandle(controlEvents control :UIControlEvents, ForAction action:@escaping () -> Void) {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
+    }
+    
+    override open var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
+        }
     }
 }
 
@@ -74,6 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var quit: UIBarButtonItem!
     
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 //        if UIDevice.current.orientation.isLandscape {
@@ -211,6 +220,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+
     
     // Allow rotation
     @objc func canRotate() -> Void {}
@@ -501,6 +511,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //Define title field
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
+        titleField.textColor = UIColor.blue
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
         
