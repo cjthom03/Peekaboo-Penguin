@@ -61,7 +61,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var withinView = false
     var currentPlayer = 1
     var alert: UIAlertController = UIAlertController()
-    
+    var window = UIApplication.shared.keyWindow!
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
@@ -161,18 +161,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let configuration = ARWorldTrackingConfiguration()
         
         configuration.planeDetection = .horizontal
-         let window = UIApplication.shared.keyWindow!
-        if (UIDevice.current.orientation == .portrait) {
-            subViewX = window.frame.width/2
-            subViewY = window.frame.height/2
-        } else {
-            subViewX = window.frame.width/2
-            subViewY = window.frame.height/2
-        }
+
 
         // Run the view's session
         sceneView.session.run(configuration)
     }
+    
+//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+//        super.viewWillLayoutSubviews()
+//
+//        if (UIDevice.current.orientation == .portrait) {
+//            subViewX = window.frame.width/2
+//            subViewY = window.frame.height/2
+//        } else {
+//            subViewX = window.frame.width/2
+//            subViewY = window.frame.height/2
+//        }
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -386,11 +391,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Function to add subview without acitons
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
-
+//        let window = UIApplication.shared.keyWindow!
+        if (UIDevice.current.orientation == .portrait) {
+            subViewX = window.frame.width/2
+            subViewY = window.frame.height/2
+        } else {
+            subViewX = window.frame.width/2
+            subViewY = window.frame.height/2
+        }
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
-        let window = UIApplication.shared.keyWindow!
+//        let window = UIApplication.shared.keyWindow!
   
            let popupWidth = window.frame.width/1.5
         //Define height of frame depending on number of buttons needed
@@ -504,7 +516,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        let borderColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 0.5)
         v.layer.backgroundColor = background
         //Add subView to main view
-        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { window.addSubview(self.v) })
+        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
 
     
