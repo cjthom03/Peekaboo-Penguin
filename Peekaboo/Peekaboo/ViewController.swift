@@ -91,6 +91,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var timerLabel: UILabel!
     
+    @IBOutlet weak var instructionLabel: UILabel!
+  
     @IBOutlet weak var quit: UIBarButtonItem!
     
 
@@ -217,9 +219,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
-        let startText = "Hide the Penguin!"
-        let startPos = SCNVector3(-0.45, 0, -1.5)
-        virtualText = createText(text: startText, atPosition: startPos)
+//        let startText = "Hide the Penguin!"
+//        let startPos = SCNVector3(-0.45, 0, -1.5)
+//        virtualText = createText(text: startText, atPosition: startPos)
         
         runReadyTimer()
 
@@ -373,7 +375,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func readyPlayer2() {
         removeSubView()
         setTimer(startTime: 30)
-        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+        instructionLabel.text = "Find Panguine!"
+        instructionLabel.isHidden = false
+//        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
         self.navigationItem.title = "Player 2"
         currentPlayer = 2
     }
@@ -440,9 +444,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    // MARK: - READY TIMER
     
     func runReadyTimer(){
+          instructionLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
     }
     
@@ -490,6 +495,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = false
         timerLabel.text = ""
         timerLabel.isHidden = true
+        instructionLabel.isHidden = true
     }
     
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
