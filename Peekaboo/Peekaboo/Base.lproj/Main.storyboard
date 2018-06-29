@@ -37,10 +37,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-                                <rect key="frame" x="90" y="242" width="140" height="146"/>
+                                <rect key="frame" x="80" y="236" width="160" height="146"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="38"/>
                                         <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="22"/>
                                         <state key="normal" title="New Game">
                                             <color key="titleColor" red="0.0" green="0.73281304707777783" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,7 +50,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfQ-S1-m2I" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="53" width="140" height="39"/>
+                                        <rect key="frame" x="0.0" y="53" width="160" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Directions">
                                             <color key="titleColor" red="0.0" green="0.73243327277222225" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,7 +60,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-qo-Wfj" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="107" width="140" height="39"/>
+                                        <rect key="frame" x="0.0" y="107" width="160" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="About Us">
                                             <color key="titleColor" red="0.0" green="0.73251465298055551" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -92,6 +92,7 @@
                                                     <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="60" name="ChalkboardSE-Regular"/>
                                                     <font key="NSOriginalFont" size="40" name="ChalkboardSE-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -107,7 +108,7 @@
                                                 <attributes>
                                                     <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <font key="NSFont" size="60" name="ChalkboardSE-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -126,14 +127,14 @@
                         <constraints>
                             <constraint firstItem="U4f-nc-mtv" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" id="C95-Ir-kJ1"/>
                             <constraint firstItem="iLm-y1-Xgu" firstAttribute="centerX" secondItem="jWI-ZF-2Dy" secondAttribute="centerX" id="Jle-7H-9Ro"/>
-                            <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="Yr8-Hn-y39" secondAttribute="trailing" constant="90" id="K37-qX-feS"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="centerY" secondItem="jWI-ZF-2Dy" secondAttribute="centerY" constant="25" id="MWd-kz-KO9"/>
                             <constraint firstItem="iLm-y1-Xgu" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="32" id="TRO-5A-dzV"/>
+                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="80" id="YL7-Ut-SB2"/>
                             <constraint firstItem="iLm-y1-Xgu" firstAttribute="top" secondItem="t1k-be-fQh" secondAttribute="top" constant="40" id="c6C-Bs-ysE"/>
                             <constraint firstItem="U4f-nc-mtv" firstAttribute="bottom" secondItem="t1k-be-fQh" secondAttribute="bottom" id="exz-ef-zqP"/>
                             <constraint firstItem="U4f-nc-mtv" firstAttribute="trailing" secondItem="t1k-be-fQh" secondAttribute="trailing" id="kKg-HK-Ydg"/>
-                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="leading" secondItem="t1k-be-fQh" secondAttribute="leading" constant="90" id="laR-fo-kLf"/>
                             <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="iLm-y1-Xgu" secondAttribute="trailing" constant="32" id="qJk-lh-aHX"/>
-                            <constraint firstItem="Yr8-Hn-y39" firstAttribute="top" secondItem="iLm-y1-Xgu" secondAttribute="bottom" constant="46" id="tfb-Ds-TSh"/>
+                            <constraint firstItem="t1k-be-fQh" firstAttribute="trailing" secondItem="Yr8-Hn-y39" secondAttribute="trailing" constant="80" id="rsN-BN-9bC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="t1k-be-fQh"/>
                     </view>
@@ -353,16 +354,27 @@ Nate - Little description of Nate</string>
                                 <color key="shadowColor" red="0.059397034347057343" green="0.035557430237531662" blue="0.0145633639767766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide Panguine by tapping!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLY-xf-wdZ">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MFu-1R-7qF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="25"/>
+                                <color key="textColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="centerX" secondItem="Emr-0w-0E0" secondAttribute="centerX" id="7ZZ-rk-Cx5"/>
+                            <constraint firstAttribute="bottom" secondItem="jLY-xf-wdZ" secondAttribute="bottom" id="8e0-E0-onq"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="top" secondItem="8o4-45-NuQ" secondAttribute="top" constant="30" id="BRi-d4-DZw"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="FJF-YH-KeR"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="bottom" secondItem="QAy-7e-IKW" secondAttribute="bottom" id="Mmn-bB-fie"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="RfK-yP-3bH"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="centerX" secondItem="Emr-0w-0E0" secondAttribute="centerX" id="Twx-mp-fnX"/>
                             <constraint firstItem="QAy-7e-IKW" firstAttribute="top" secondItem="8o4-45-NuQ" secondAttribute="top" id="UKx-0G-WKU"/>
+                            <constraint firstItem="jLY-xf-wdZ" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" id="WVY-M5-JvW"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="QAy-7e-IKW" secondAttribute="trailing" id="aPd-Qj-dch"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="cBg-X7-wP0"/>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" id="e8o-eU-csS"/>
@@ -371,13 +383,14 @@ Nate - Little description of Nate</string>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="centerY" secondItem="Emr-0w-0E0" secondAttribute="centerY" id="p9n-jo-Tch"/>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="trailing" secondItem="8o4-45-NuQ" secondAttribute="trailing" id="t56-pv-aZw"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" constant="80" id="tBJ-bi-hw1"/>
+                            <constraint firstItem="jLY-xf-wdZ" firstAttribute="trailing" secondItem="8o4-45-NuQ" secondAttribute="trailing" id="tNm-zs-Fcc"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" constant="80" id="ueD-DA-chO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8o4-45-NuQ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Test" id="OWN-10-ehk">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="stop" id="qWP-RA-caZ">
+                            <barButtonItem tag="10" systemItem="stop" id="qWP-RA-caZ">
                                 <connections>
                                     <action selector="goBack:" destination="EHa-1p-Yb4" id="vaH-gU-rAC"/>
                                 </connections>
@@ -394,6 +407,7 @@ Nate - Little description of Nate</string>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="instructionLabel" destination="jLY-xf-wdZ" id="4lE-eC-Wb9"/>
                         <outlet property="quit" destination="qWP-RA-caZ" id="c1e-yO-Tk1"/>
                         <outlet property="readyLabel" destination="ZYv-KD-vv4" id="n9K-ht-lOu"/>
                         <outlet property="sceneView" destination="QAy-7e-IKW" id="yyg-uC-eJ9"/>

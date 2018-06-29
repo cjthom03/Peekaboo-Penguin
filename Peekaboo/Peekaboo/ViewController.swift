@@ -12,6 +12,9 @@ import ARKit
 import Foundation
 import AVFoundation
 
+//var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+
+var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
 
 
 extension UIButton {
@@ -24,6 +27,7 @@ extension UIButton {
         } else {
             __.action?()
         }
+        
     }
     
     @objc private func triggerActionHandleBlock() {
@@ -34,6 +38,20 @@ extension UIButton {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
     }
+
+//    override open var isHighlighted: Bool {
+//        didSet {
+//            if self.currentTitleColor != CGColorSpace.extendedGray {
+//            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
+//            }
+//        }
+//    }
+//
+//    @IBAction func buttonReleased(sender: AnyObject) { //Touch Down action
+//        print(sender.tag)
+//    }
+    
+    
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate {
@@ -48,7 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var audioSource: SCNAudioSource?
 
     @IBOutlet weak var readyLabel: UILabel!
-
+    var popupOnScreen = false
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
     var virtualText = SCNNode() // initialize as an empty scene node
@@ -56,6 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var gaveUp = false
 //            var cancelButton = UIButton(type: .system)
     var v = UIView()
+    var savedView = UIView()
     var timer = Timer()
     var readyTimer = Timer()
     var readySeconds = 3
@@ -69,9 +88,56 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
+
     @IBOutlet weak var timerLabel: UILabel!
     
+    @IBOutlet weak var instructionLabel: UILabel!
+  
     @IBOutlet weak var quit: UIBarButtonItem!
+    
+
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        if UIDevice.current.orientation.isLandscape {
+//            let savedView = v
+//            print(savedView.center)
+//            self.removeSubView()
+//            savedView.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
+//            print(savedView.center)
+//            window.addSubview(savedView)
+//            print("Landscape")
+//        } else {
+//            print("Portrait")
+//            let savedView = v
+////            v.center = window.convert(window.center, from: v)
+//            self.removeSubView()
+//            savedView.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
+//            window.addSubview(savedView)
+//        }
+//    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if popupOnScreen == true {
+        self.removeSubView()
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+            if UIDevice.current.orientation.isLandscape {
+                            self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+                            self.window.addSubview(self.savedView)
+                            self.popupOnScreen = true
+                        }
+            if UIDevice.current.orientation.isPortrait {
+                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+                self.window.addSubview(self.savedView)
+                self.popupOnScreen = true
+            }
+ 
+        })
+       }
+    }
+
+    
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
@@ -138,18 +204,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
     
+    
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if (UIDevice.current.orientation != .portrait) {
+//            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+//        }
         sceneView.delegate = self
-        
         sceneView.autoenablesDefaultLighting = true
         audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
-        let startText = "Hide the Penguin!"
-        let startPos = SCNVector3(-0.45, 0, -1.5)
-        virtualText = createText(text: startText, atPosition: startPos)
+//        let startText = "Hide the Penguin!"
+//        let startPos = SCNVector3(-0.45, 0, -1.5)
+//        virtualText = createText(text: startText, atPosition: startPos)
         
         runReadyTimer()
 
@@ -172,18 +244,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(configuration)
     }
     
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        super.viewWillLayoutSubviews()
-//
-//        if (UIDevice.current.orientation == .portrait) {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        } else {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        }
-//    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -195,6 +255,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
+
     
     // Allow rotation
     @objc func canRotate() -> Void {}
@@ -314,7 +375,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func readyPlayer2() {
         removeSubView()
         setTimer(startTime: 30)
-        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+        instructionLabel.text = "Find Panguine!"
+        instructionLabel.isHidden = false
+//        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
         self.navigationItem.title = "Player 2"
         currentPlayer = 2
     }
@@ -381,9 +444,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    // MARK: - READY TIMER
     
     func runReadyTimer(){
+          instructionLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
     }
     
@@ -431,6 +495,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = false
         timerLabel.text = ""
         timerLabel.isHidden = true
+        instructionLabel.isHidden = true
     }
     
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
@@ -443,62 +508,65 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Function to add subview without acitons
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
+        
+//            self.removeSubView()
 //        let window = UIApplication.shared.keyWindow!
-        if (UIDevice.current.orientation == .portrait) {
+//        if (UIDevice.current.orientation == .portrait) {
             subViewX = window.frame.width/2
             subViewY = window.frame.height/2
-        } else {
-            subViewX = window.frame.width/2
-            subViewY = window.frame.height/2
-        }
+//        } else {
+//            subViewX = window.frame.width/2
+//            subViewY = window.frame.height/2
+//        }
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
-  
-           let popupWidth = window.frame.width/1.5
+        var popupWidth = window.frame.width/1.5
+        if (UIDevice.current.orientation != .portrait) {
+        popupWidth = window.frame.height/1.5
+        }
+        
+        
+        let titleFieldHeight: CGFloat = 40
+        let titleFieldY: CGFloat = 10
+        let buttonHeight: CGFloat = 45
+        let textFieldY: CGFloat = titleFieldY + titleFieldHeight
+        var textFieldHeight: CGFloat = 40
+        if typeOfView == "gameOver" { textFieldHeight += 80 }
+        let goButtonY: CGFloat = textFieldY + textFieldHeight
+        var cancelButtonY: CGFloat = goButtonY
+        let spaceBetweenButtons = 10
+        if typeOfView == "HIDE" || typeOfView == "gameOver" {
+            cancelButtonY = goButtonY + buttonHeight + CGFloat(spaceBetweenButtons)
+        }
+        let subViewHeight = cancelButtonY + buttonHeight + 20
         //Define height of frame depending on number of buttons needed
-        if typeOfView == "HIDE" {
-        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: popupWidth, height: window.frame.height/3))
-        } else if typeOfView == "GetPlayer2" || typeOfView == "GameWon"{
-        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: popupWidth, height: window.frame.height/4))
-        }
-        else if typeOfView == "gameOver" {
-            v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: popupWidth, height: window.frame.height/2.2))
-        }
-        else {
-        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: popupWidth, height: window.frame.height/5))
-        }
-        v.center = CGPoint(x: subViewX, y: subViewY)
+
+        v = UIView(frame: CGRect(x: 0, y: 0, width: popupWidth, height: subViewHeight))
+        v.center = window.convert(window.center, from: v)
         v.backgroundColor = UIColor.white
         v.layer.borderWidth = 2
         
         //Add subView styling here
         
         let buttonWidth = v.frame.width/2
-        let buttonHeight: CGFloat = 45
         
         //Define title field
-        let titleFieldHeight: CGFloat = 40
-        let titleFieldY: CGFloat = v.frame.height/7
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
-//        titleField.backgroundColor = UIColor.cyan
+        titleField.textColor = UIColor.blue
+        let fontSize: CGFloat = 20
+        titleField.font = UIFont.boldSystemFont(ofSize: fontSize)
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
         
         
         //Define text field
-        let textFieldY: CGFloat = titleFieldY + titleFieldHeight
-        var textFieldHeight: CGFloat = 40
-        if typeOfView == "gameOver" { textFieldHeight = 80 }
         let textField = UILabel(frame: CGRect(x: 0, y: textFieldY, width: v.frame.width, height: textFieldHeight))
         textField.text = textString
-//        textField.backgroundColor = UIColor.cyan
         textField.textAlignment = NSTextAlignment.center
         if typeOfView == "gameOver" {
-            
-//            NSLayoutConstraint(item: textField, attribute: .leading, relatedBy: .equal, toItem: v, attribute: .leadingMargin, multiplier: 1.0, constant: 15.0).isActive = true
             textField.lineBreakMode = .byWordWrapping
             textField.numberOfLines = 3
         }
@@ -506,9 +574,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         //Define goButton
         let goButton = UIButton(type: .system)
-        let goButtonY: CGFloat = textFieldY + textFieldHeight
         goButton.layer.borderWidth = 1
         goButton.backgroundColor = UIColor.white
+        goButton.showsTouchWhenHighlighted = true
         goButton.setTitle(button1Text, for: UIControlState.normal)
         if typeOfView == "HIDE" {
         goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
@@ -519,16 +587,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: goButtonY, width: buttonWidth - 10, height: buttonHeight)
         goButton.layer.cornerRadius = 20
         //Add goButton styling here
-        
-        let spaceBetweenButtons = 10
+
         //Define CancelButton
         let cancelButton = UIButton(type: .system)
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = UIColor.white
-        var cancelButtonY: CGFloat = goButtonY
-//        cancelButton.layer.borderColor = UIColor.green.cgColor
-//        cancelButton.backgroundColor = UIColor.green
+        cancelButton.showsTouchWhenHighlighted = true
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
         //Add cancelbutton styling here
   
@@ -544,16 +609,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else {
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         }
-        if typeOfView == "HIDE" || typeOfView == "gameOver" {
-        cancelButtonY = goButtonY + buttonHeight + CGFloat(spaceBetweenButtons)
-        }
+
         cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: cancelButtonY, width: buttonWidth - 10, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 20
-        
-        
-  
-
         
         //Add all buttons and text to subView
         v.addSubview(titleField)
@@ -565,20 +624,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.layer.cornerRadius = 20
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
-//        let borderColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 0.5)
         v.layer.backgroundColor = background
+        savedView = v
         //Add subView to main view
+        popupOnScreen = true
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
 
-    
-    
     //Function to remove subView
     
     func removeSubView() {
+        popupOnScreen = false
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
+        savedView.removeFromSuperview()
     }
     
 
