@@ -149,9 +149,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
-        let startText = "Hide the Penguin!"
-        let startPos = SCNVector3(-0.45, 0, -1.5)
-        virtualText = createText(text: startText, atPosition: startPos)
+//        let startText = "Hide the Penguin!"
+//        let startPos = SCNVector3(-0.45, 0, -1.5)
+//        virtualText = createText(text: startText, atPosition: startPos)
         
         runReadyTimer()
 
@@ -316,7 +316,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func readyPlayer2() {
         removeSubView()
         setTimer(startTime: 30)
-        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+        instructionLabel.text = "Find Panguine!"
+        instructionLabel.isHidden = false
+//        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
         self.navigationItem.title = "Player 2"
         currentPlayer = 2
     }
