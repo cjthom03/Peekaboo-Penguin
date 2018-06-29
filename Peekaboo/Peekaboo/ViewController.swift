@@ -64,7 +64,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var subViewY: CGFloat = 1
    
     var audioSource: SCNAudioSource?
-
     @IBOutlet weak var readyLabel: UILabel!
     var popupOnScreen = false
     var winTimer: DispatchWorkItem?
@@ -74,7 +73,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var gaveUp = false
 //            var cancelButton = UIButton(type: .system)
     var v = UIView()
-    var savedView = UIView()
+    var savedView = UIView() //Remove me for forced portrait
     var timer = Timer()
     var readyTimer = Timer()
     var readySeconds = 3
@@ -95,27 +94,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
   
     @IBOutlet weak var quit: UIBarButtonItem!
     
-
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        if UIDevice.current.orientation.isLandscape {
-//            let savedView = v
-//            print(savedView.center)
-//            self.removeSubView()
-//            savedView.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
-//            print(savedView.center)
-//            window.addSubview(savedView)
-//            print("Landscape")
-//        } else {
-//            print("Portrait")
-//            let savedView = v
-////            v.center = window.convert(window.center, from: v)
-//            self.removeSubView()
-//            savedView.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
-//            window.addSubview(savedView)
-//        }
-//    }
-    
+    //Remove me for forced portrait
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if popupOnScreen == true {
@@ -123,10 +102,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         coordinator.animate(alongsideTransition: nil, completion: {
             _ in
             if UIDevice.current.orientation.isLandscape {
-                            self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                            self.window.addSubview(self.savedView)
-                            self.popupOnScreen = true
-                        }
+                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+                self.window.addSubview(self.savedView)
+                self.popupOnScreen = true
+            }
             if UIDevice.current.orientation.isPortrait {
                 self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
                 self.window.addSubview(self.savedView)
@@ -516,15 +495,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
         
         v.removeFromSuperview()
-        savedView.removeFromSuperview()
-//        let window = UIApplication.shared.keyWindow!
-//        if (UIDevice.current.orientation == .portrait) {
+        savedView.removeFromSuperview() //Remove me for force portrait
             subViewX = window.frame.width/2
             subViewY = window.frame.height/2
-//        } else {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        }
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
@@ -632,11 +605,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
         v.layer.backgroundColor = background
-        savedView = v
+        savedView = v //Remove me for forced portrait
         //Add subView to main view
         popupOnScreen = true
+        self.window.addSubview(self.v) 
 //        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
-        self.window.addSubview(self.v)
     }
 
     //Function to remove subView
@@ -646,7 +619,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
-        savedView.removeFromSuperview()
+        savedView.removeFromSuperview() //Remove me for forced portrait
     }
     
 
