@@ -242,13 +242,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             penquin.removeFromParentNode()
             penguinArray = [SCNNode]()
         }
-        print("deletepenguin")
     }
     
     @objc func switchPlayers() {
-        print("Switchplayers")
         removeSubView()
-        currentPlayer = 2
         //reset timeisUp
         timeIsUp = false
         if winDistance < Float(penguinToPOVDistance) { penguinArray.first?.isHidden = true }
@@ -307,15 +304,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             title = "Time's Up! "
         }
         addCustomSubView(title, "player 2 is on now!", "", "Go!", "GetPlayer2")
-          currentPlayer = 2
+//          currentPlayer = 2
     }
     
 
     @objc func readyPlayer2() {
-        print("ready player2")
         removeSubView()
         setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
+        currentPlayer = 2
     }
     
     func playWithinRangeSound (){
@@ -628,7 +625,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func winAlert() {
-        print("won")
          addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
     }
 }
