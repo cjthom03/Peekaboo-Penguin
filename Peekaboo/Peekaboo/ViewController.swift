@@ -66,7 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var audioSource: SCNAudioSource?
 
     @IBOutlet weak var readyLabel: UILabel!
-
+    var popupOnScreen = false
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
     var virtualText = SCNNode() // initialize as an empty scene node
@@ -116,36 +116,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        if popupOnScreen == true {
         self.removeSubView()
         coordinator.animate(alongsideTransition: nil, completion: {
             _ in
-
-            // Your code here
             if UIDevice.current.orientation.isLandscape {
-                            print(self.savedView.center)
-//                            self.removeSubView()
                             self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                            print(self.savedView.center)
                             self.window.addSubview(self.savedView)
-                            print("Landscape")
+                            self.popupOnScreen = true
                         }
             if UIDevice.current.orientation.isPortrait {
-                print(self.savedView.center)
-                //                            self.removeSubView()
                 self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                print(self.savedView.center)
                 self.window.addSubview(self.savedView)
-                print("Portrait")
+                self.popupOnScreen = true
             }
-            //else {
-//                            print("Portrait")
-////                            let savedView = self.v
-//                //            v.center = window.convert(window.center, from: v)
-////                            self.removeSubView()
-//                            self.savedView.center = CGPoint(x: self.window.frame.height/2, y: self.window.frame.width/2)
-//                            self.window.addSubview(self.savedView)
-//                        }
+ 
         })
+       }
     }
 
     
@@ -516,7 +503,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
         
-
+//            self.removeSubView()
 //        let window = UIApplication.shared.keyWindow!
 //        if (UIDevice.current.orientation == .portrait) {
             subViewX = window.frame.width/2
@@ -529,8 +516,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
-  
-           let popupWidth = window.frame.width/1.5
+        var popupWidth = window.frame.width/1.5
+        if (UIDevice.current.orientation != .portrait) {
+        popupWidth = window.frame.height/1.5
+        }
+        
         
         let titleFieldHeight: CGFloat = 40
         let titleFieldY: CGFloat = 10
@@ -631,12 +621,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.layer.backgroundColor = background
         savedView = v
         //Add subView to main view
+        popupOnScreen = true
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
 
     //Function to remove subView
     
     func removeSubView() {
+        popupOnScreen = false
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
