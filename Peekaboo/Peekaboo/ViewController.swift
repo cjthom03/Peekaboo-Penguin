@@ -71,6 +71,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
   
     @IBOutlet weak var timerLabel: UILabel!
     
+    @IBOutlet weak var instructionLabel: UILabel!
+  
     @IBOutlet weak var quit: UIBarButtonItem!
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
@@ -381,9 +383,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    // MARK: - READY TIMER
     
     func runReadyTimer(){
+          instructionLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
     }
     
