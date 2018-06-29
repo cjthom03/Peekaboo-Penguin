@@ -480,7 +480,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         //Define title field
         let titleFieldHeight: CGFloat = 40
-        let titleFieldY: CGFloat = v.frame.height/7
+        let titleFieldY: CGFloat = 10
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
 //        titleField.backgroundColor = UIColor.cyan
