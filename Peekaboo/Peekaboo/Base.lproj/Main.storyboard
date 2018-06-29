@@ -37,17 +37,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Yr8-Hn-y39">
-<<<<<<< HEAD
-                                <rect key="frame" x="90" y="276" width="844" height="146"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="844" height="38"/>
-=======
+
                                 <rect key="frame" x="80" y="236" width="160" height="146"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELV-et-S7O" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="38"/>
->>>>>>> feature
                                         <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="22"/>
                                         <state key="normal" title="New Game">
                                             <color key="titleColor" red="0.0" green="0.73281304707777783" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,11 +51,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfQ-S1-m2I" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="53" width="844" height="39"/>
-=======
                                         <rect key="frame" x="0.0" y="53" width="160" height="39"/>
->>>>>>> feature
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Directions">
                                             <color key="titleColor" red="0.0" green="0.73243327277222225" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,11 +61,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-qo-Wfj" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
-<<<<<<< HEAD
-                                        <rect key="frame" x="0.0" y="107" width="844" height="39"/>
-=======
                                         <rect key="frame" x="0.0" y="107" width="160" height="39"/>
->>>>>>> feature
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="About Us">
                                             <color key="titleColor" red="0.0" green="0.73251465298055551" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -210,28 +196,12 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-<<<<<<< HEAD
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ce-hy-toy">
-                                <rect key="frame" x="16" y="137" width="992" height="1175"/>
-                                <color key="backgroundColor" red="0.54117647058823526" green="0.78159754136029413" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-=======
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zl1-gq-Rnk">
                                 <rect key="frame" x="40" y="152" width="240" height="322"/>
                                 <connections>
                                     <segue destination="Sjq-W3-eHL" kind="embed" id="Ol9-ex-wsA"/>
                                 </connections>
                             </containerView>
->>>>>>> feature
                         </subviews>
                         <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
