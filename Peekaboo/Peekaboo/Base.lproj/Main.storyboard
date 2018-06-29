@@ -376,16 +376,27 @@ Nate - Little description of Nate</string>
                                 <color key="shadowColor" red="0.059397034347057343" green="0.035557430237531662" blue="0.0145633639767766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide Panguine by tapping!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLY-xf-wdZ">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MFu-1R-7qF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="25"/>
+                                <color key="textColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="centerX" secondItem="Emr-0w-0E0" secondAttribute="centerX" id="7ZZ-rk-Cx5"/>
+                            <constraint firstAttribute="bottom" secondItem="jLY-xf-wdZ" secondAttribute="bottom" id="8e0-E0-onq"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="top" secondItem="8o4-45-NuQ" secondAttribute="top" constant="30" id="BRi-d4-DZw"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="FJF-YH-KeR"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="bottom" secondItem="QAy-7e-IKW" secondAttribute="bottom" id="Mmn-bB-fie"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="RfK-yP-3bH"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="centerX" secondItem="Emr-0w-0E0" secondAttribute="centerX" id="Twx-mp-fnX"/>
                             <constraint firstItem="QAy-7e-IKW" firstAttribute="top" secondItem="8o4-45-NuQ" secondAttribute="top" id="UKx-0G-WKU"/>
+                            <constraint firstItem="jLY-xf-wdZ" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" id="WVY-M5-JvW"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="QAy-7e-IKW" secondAttribute="trailing" id="aPd-Qj-dch"/>
                             <constraint firstItem="8o4-45-NuQ" firstAttribute="trailing" secondItem="6XP-Q1-buF" secondAttribute="trailing" constant="80" id="cBg-X7-wP0"/>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" id="e8o-eU-csS"/>
@@ -394,6 +405,7 @@ Nate - Little description of Nate</string>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="centerY" secondItem="Emr-0w-0E0" secondAttribute="centerY" id="p9n-jo-Tch"/>
                             <constraint firstItem="ZYv-KD-vv4" firstAttribute="trailing" secondItem="8o4-45-NuQ" secondAttribute="trailing" id="t56-pv-aZw"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" constant="80" id="tBJ-bi-hw1"/>
+                            <constraint firstItem="jLY-xf-wdZ" firstAttribute="trailing" secondItem="8o4-45-NuQ" secondAttribute="trailing" id="tNm-zs-Fcc"/>
                             <constraint firstItem="6XP-Q1-buF" firstAttribute="leading" secondItem="8o4-45-NuQ" secondAttribute="leading" constant="80" id="ueD-DA-chO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8o4-45-NuQ"/>
@@ -417,6 +429,7 @@ Nate - Little description of Nate</string>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="instructionLabel" destination="jLY-xf-wdZ" id="4lE-eC-Wb9"/>
                         <outlet property="quit" destination="qWP-RA-caZ" id="c1e-yO-Tk1"/>
                         <outlet property="readyLabel" destination="ZYv-KD-vv4" id="n9K-ht-lOu"/>
                         <outlet property="sceneView" destination="QAy-7e-IKW" id="yyg-uC-eJ9"/>
