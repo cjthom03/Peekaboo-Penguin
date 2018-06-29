@@ -69,6 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
+
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var quit: UIBarButtonItem!
@@ -138,10 +139,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
     
+    
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.delegate = self
-        
         sceneView.autoenablesDefaultLighting = true
         audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
         audioSource?.load()
@@ -171,18 +175,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Run the view's session
         sceneView.session.run(configuration)
     }
-    
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        super.viewWillLayoutSubviews()
-//
-//        if (UIDevice.current.orientation == .portrait) {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        } else {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        }
-//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -473,9 +465,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let subViewHeight = cancelButtonY + buttonHeight + 20
         //Define height of frame depending on number of buttons needed
 
-        v = UIView(frame: CGRect(x: window.frame.origin.x, y: window.frame.origin.y, width: popupWidth, height: subViewHeight))
-
-        v.center = CGPoint(x: subViewX, y: subViewY)
+        v = UIView(frame: CGRect(x: 0, y: 0, width: popupWidth, height: subViewHeight))
+        v.center = window.convert(window.center, from: v)
         v.backgroundColor = UIColor.white
         v.layer.borderWidth = 2
         
