@@ -74,6 +74,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var gaveUp = false
 //            var cancelButton = UIButton(type: .system)
     var v = UIView()
+    var savedView = UIView()
     var timer = Timer()
     var readyTimer = Timer()
     var readySeconds = 3
@@ -93,12 +94,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
 //        if UIDevice.current.orientation.isLandscape {
 //            let savedView = v
 //            print(savedView.center)
-//            UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.removeSubView() })
+//            self.removeSubView()
 //            savedView.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
 //            print(savedView.center)
 //            window.addSubview(savedView)
@@ -107,13 +108,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //            print("Portrait")
 //            let savedView = v
 ////            v.center = window.convert(window.center, from: v)
-//            UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.removeSubView() })
-//
-//            v.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
+//            self.removeSubView()
+//            savedView.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
 //            window.addSubview(savedView)
 //        }
-    }
+//    }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.removeSubView()
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+
+            // Your code here
+            if UIDevice.current.orientation.isLandscape {
+                            print(self.savedView.center)
+//                            self.removeSubView()
+                            self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+                            print(self.savedView.center)
+                            self.window.addSubview(self.savedView)
+                            print("Landscape")
+                        }
+            if UIDevice.current.orientation.isPortrait {
+                print(self.savedView.center)
+                //                            self.removeSubView()
+                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+                print(self.savedView.center)
+                self.window.addSubview(self.savedView)
+                print("Portrait")
+            }
+            //else {
+//                            print("Portrait")
+////                            let savedView = self.v
+//                //            v.center = window.convert(window.center, from: v)
+////                            self.removeSubView()
+//                            self.savedView.center = CGPoint(x: self.window.frame.height/2, y: self.window.frame.width/2)
+//                            self.window.addSubview(self.savedView)
+//                        }
+        })
+    }
 
     
     @IBAction func goBack(_ sender: Any) {
@@ -596,7 +629,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
         v.layer.backgroundColor = background
-        
+        savedView = v
         //Add subView to main view
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
@@ -607,6 +640,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
+        savedView.removeFromSuperview()
     }
     
 
