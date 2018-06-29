@@ -12,9 +12,10 @@ import ARKit
 import Foundation
 import AVFoundation
 
-var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+//var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
 
 var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
+
 
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
@@ -37,12 +38,18 @@ extension UIButton {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
     }
-    
-    override open var isHighlighted: Bool {
-        didSet {
-            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
-        }
-    }
+
+//    override open var isHighlighted: Bool {
+//        didSet {
+//            if self.currentTitleColor != CGColorSpace.extendedGray {
+//            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
+//            }
+//        }
+//    }
+//
+//    @IBAction func buttonReleased(sender: AnyObject) { //Touch Down action
+//        print(sender.tag)
+//    }
     
     
 }

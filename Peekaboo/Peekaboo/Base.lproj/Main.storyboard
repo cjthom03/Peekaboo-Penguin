@@ -368,7 +368,7 @@ Nate - Little description of Nate</string>
                     </view>
                     <navigationItem key="navigationItem" title="Test" id="OWN-10-ehk">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="stop" id="qWP-RA-caZ">
+                            <barButtonItem tag="10" systemItem="stop" id="qWP-RA-caZ">
                                 <connections>
                                     <action selector="goBack:" destination="EHa-1p-Yb4" id="vaH-gU-rAC"/>
                                 </connections>
