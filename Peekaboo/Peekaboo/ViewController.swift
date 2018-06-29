@@ -434,6 +434,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerIsRunning = false
         timerLabel.text = ""
         timerLabel.isHidden = true
+        instructionLabel.isHidden = true
     }
     
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
