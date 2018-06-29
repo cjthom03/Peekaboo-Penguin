@@ -635,7 +635,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         savedView = v
         //Add subView to main view
         popupOnScreen = true
-        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
+//        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
+        self.window.addSubview(self.v)
     }
 
     //Function to remove subView
