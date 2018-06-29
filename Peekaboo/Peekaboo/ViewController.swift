@@ -314,7 +314,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func readyPlayer2() {
         print("ready player2")
         removeSubView()
-        setTimer(startTime: 2)
+        setTimer(startTime: 30)
         updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
     }
     
