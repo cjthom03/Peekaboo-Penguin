@@ -248,6 +248,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             penguinArray.first?.isHidden = false
             sceneView.scene.rootNode.addChildNode(sceneNode)
             addQuackToPenguin()
+            //this is the right branch
         }
     }
     
