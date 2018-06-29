@@ -251,6 +251,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
         
+        timer.invalidate()
+        readyTimer.invalidate()
+        
         // Pause the view's session
         sceneView.session.pause()
     }
@@ -374,7 +377,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @objc func readyPlayer2() {
         removeSubView()
-        setTimer(startTime: 30)
+        setTimer(startTime: 60)
         instructionLabel.text = "Find Panguine!"
         instructionLabel.isHidden = false
 //        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
@@ -469,7 +472,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 15)
+        setTimer(startTime: 10)
         self.navigationItem.title = "Player 1"
     }
     
@@ -681,7 +684,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //MARK: - Win Logic
     func win() {
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
-            DispatchQueue.main.async { // Correct
+            DispatchQueue.main.async {
                 self.winAlert()
             }
            

@@ -12,7 +12,9 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.newVc(viewController: "page1"),
-                self.newVc(viewController: "page2")]
+                self.newVc(viewController: "page2"),
+                self.newVc(viewController: "page3"),
+                self.newVc(viewController: "page4")]
     }()
     var pageControl = UIPageControl()
     
@@ -43,7 +45,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("test")
         let pageContentViewController = pageViewController.viewControllers![0]
         self.pageControl.currentPage = orderedViewControllers.index(of: pageContentViewController)!
         
