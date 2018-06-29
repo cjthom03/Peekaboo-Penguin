@@ -39,22 +39,26 @@ extension UIButton {
 class ViewController: UIViewController, ARSCNViewDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
+    
+
 
     var subViewX: CGFloat = 1
     var subViewY: CGFloat = 1
    
     var audioSource: SCNAudioSource?
-//        var goButton = UIButton(type: .system)
-    
+
+    @IBOutlet weak var readyLabel: UILabel!
+
     var winTimer: DispatchWorkItem?
     var winDistance: Float = 1
-//    var queue: DispatchQueue?
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
 //            var cancelButton = UIButton(type: .system)
     var v = UIView()
     var timer = Timer()
+    var readyTimer = Timer()
+    var readySeconds = 3
     var timerIsRunning = false
     var timeIsUp = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
@@ -147,8 +151,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let startPos = SCNVector3(-0.45, 0, -1.5)
         virtualText = createText(text: startText, atPosition: startPos)
         
-        setTimer(startTime: 15)
-        
+        runReadyTimer()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -202,22 +205,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // get the location of the touch event in the sceneview
             let touchLocation = touch.location(in: sceneView)
             //No penguin on the screen yet? Try to add one
-            if penguinArray.isEmpty {
+            if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
         
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
                          addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
+                }else {
+                    findPenguinLocation()
+    addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
+//                    askConfirmation()
                 }
             } else {
-                //penquin already on the screen? Test if the penguin was tapped
+                //penguin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
                 if (!hitTest.isEmpty && currentPlayer == 2 && gaveUp == false && timeIsUp == false){
                    // If the penguin was tapped by player 2, the game is won!
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
                             stopTimer()
-                            addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
+//                            addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
+
+                            win()
+
                         }
                     }
                 }
@@ -281,6 +291,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    //Add penguin in front of camera
+    func findPenguinLocation(){
+        guard let currentFrame = self.sceneView.session.currentFrame else {return}
+        let transform = currentFrame.camera.transform
+        var translateMatrix = matrix_identity_float4x4
+        translateMatrix.columns.3.z = -0.2
+        let modifiedMatrix = simd_mul(transform, translateMatrix)
+        addPenguin(matrix: modifiedMatrix)
+    }
+    
     @objc func getPlayer2Ready() {
         var title = "Get Ready! "
         if timeIsUp {
@@ -331,14 +351,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
         winTimer = DispatchWorkItem { closure() }
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
 
     }
     
-    // TEXT FUNCTIONS -------------------------------------------------------------
+
+    
+    //MARK: - Text Functions
+    //-------------------------------------------------------------
+
     
     func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
@@ -356,9 +379,36 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textNode.geometry = textGeometry
     }
     
-    // END OF TEXT FUNCTIONS -------------------------------------------------------------
     
-    //TIMER FUNCTIONS -------------------------------------------------------------
+    // MARK: - READY TIMER var readySeconds = 3 var readyTimer = Timer()
+    
+    func runReadyTimer(){
+        readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateReadyTimer(){
+        if readySeconds > 0 {
+            readyLabel.text = "\(readySeconds)"
+            readySeconds -= 1
+        }else if(readySeconds == 0) {
+            readyLabel.font = readyLabel.font.withSize(180)
+            readyLabel.textColor = UIColor(displayP3Red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            readyLabel.text = "GO!"
+            readySeconds -= 1
+        }else{
+            stopReadyTimer()
+        }
+    }
+    
+    func stopReadyTimer(){
+        readyTimer.invalidate()
+        readyLabel.text = ""
+        readyLabel.isHidden = true
+        setTimer(startTime: 15)
+    }
+    
+    // MARK: - Timer Functions
+    //-------------------------------------------------------------
     func setTimer(startTime: Int) {
         seconds = startTime
         timerLabel.isHidden = false
@@ -542,12 +592,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if currentPlayer == 1 {
                 // put the penguin somewhere
                 if penguinArray.count == 0 {
-                    guard let currentFrame = self.sceneView.session.currentFrame else {return}
-                    let transform = currentFrame.camera.transform
-                    var translateMatrix = matrix_identity_float4x4
-                    translateMatrix.columns.3.z = -0.2
-                    let modifiedMatrix = simd_mul(transform, translateMatrix)
-                    addPenguin(matrix: modifiedMatrix)
+                    findPenguinLocation()
                 }
                 
                 //remove any alerts that are present
@@ -563,23 +608,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
-    // END OF TIMER FUNCTIONS ------------------------------------------------------------------
 
+    
+    //MARK: - Game Over
     
     func gameOver() {
         addCustomSubView("Game Over", "Oh no! You could not find the penguin in time... wanna know where it was hiding?", "Show me!", "Nope", "gameOver")
     }
-
-
-    @IBAction func RemovePenquin(_ sender: Any) {
-        if !penguinArray.isEmpty{
-            for penquin in penguinArray{
-                penquin.removeFromParentNode()
-                penguinArray = [SCNNode]()
+    
+    //MARK: - Win Logic
+    func win() {
+        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
+            DispatchQueue.main.async { // Correct
+                self.winAlert()
             }
-        }
+           
+            
+        })
     }
     
+    func winAlert() {
+        print("won")
+         addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
+    }
 }
 
