@@ -482,25 +482,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //Add subView styling here
         
         let buttonWidth = v.frame.width/2
-//        let buttonHeight: CGFloat = 45
         
         //Define title field
-//        let titleFieldHeight: CGFloat = 40
-//        let titleFieldY: CGFloat = 10
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
-//        titleField.backgroundColor = UIColor.cyan
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
         
         
         //Define text field
-//        let textFieldY: CGFloat = titleFieldY + titleFieldHeight
-//        var textFieldHeight: CGFloat = 40
-//        if typeOfView == "gameOver" { textFieldHeight = 80 }
         let textField = UILabel(frame: CGRect(x: 0, y: textFieldY, width: v.frame.width, height: textFieldHeight))
         textField.text = textString
-//        textField.backgroundColor = UIColor.cyan
         textField.textAlignment = NSTextAlignment.center
         if typeOfView == "gameOver" {
             
@@ -512,7 +504,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         //Define goButton
         let goButton = UIButton(type: .system)
-//        let goButtonY: CGFloat = textFieldY + textFieldHeight
         goButton.layer.borderWidth = 1
         goButton.backgroundColor = UIColor.white
         goButton.setTitle(button1Text, for: UIControlState.normal)
@@ -525,16 +516,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: goButtonY, width: buttonWidth - 10, height: buttonHeight)
         goButton.layer.cornerRadius = 20
         //Add goButton styling here
-        
-//        let spaceBetweenButtons = 10
+
         //Define CancelButton
         let cancelButton = UIButton(type: .system)
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = UIColor.white
-//        var cancelButtonY: CGFloat = goButtonY
-//        cancelButton.layer.borderColor = UIColor.green.cgColor
-//        cancelButton.backgroundColor = UIColor.green
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
         //Add cancelbutton styling here
   
@@ -550,16 +537,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else {
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         }
-//        if typeOfView == "HIDE" || typeOfView == "gameOver" {
-//        cancelButtonY = goButtonY + buttonHeight + CGFloat(spaceBetweenButtons)
-//        }
+
         cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: cancelButtonY, width: buttonWidth - 10, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 20
-        
-        
-  
-
         
         //Add all buttons and text to subView
         v.addSubview(titleField)
@@ -571,8 +552,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.layer.cornerRadius = 20
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
-//        let borderColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 0.5)
         v.layer.backgroundColor = background
+        
         //Add subView to main view
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
