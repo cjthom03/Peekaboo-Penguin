@@ -152,18 +152,27 @@
                     <view key="view" contentMode="scaleToFill" id="wSI-tf-u0O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.056774062583245355" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkx-8k-3hM">
+                                <rect key="frame" x="139" y="465" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="mWt-cN-peq"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H0F-D7-amy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1333" y="1612"/>
+            <point key="canvasLocation" x="-1372.5" y="1663.7323943661972"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="OJd-zS-bvZ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Sjq-W3-eHL" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Sjq-W3-eHL" customClass="PageViewController" customModule="Peekaboo" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMV-Hq-z98" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1011" y="1079"/>
@@ -195,7 +204,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zl1-gq-Rnk">
-                                <rect key="frame" x="40" y="152" width="240" height="322"/>
+                                <rect key="frame" x="0.0" y="142" width="320" height="382"/>
                                 <connections>
                                     <segue destination="Sjq-W3-eHL" kind="embed" id="Ol9-ex-wsA"/>
                                 </connections>
@@ -203,13 +212,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="top" secondItem="ePI-bE-mbj" secondAttribute="bottom" constant="35" id="QtA-oX-7By"/>
+                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="trailing" secondItem="qDZ-TS-VFV" secondAttribute="trailing" id="6Je-pN-48t"/>
+                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="bottom" secondItem="qDZ-TS-VFV" secondAttribute="bottom" id="8XM-EG-ONc"/>
+                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" id="V9D-iT-zxz"/>
                             <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="ePI-bE-mbj" secondAttribute="trailing" constant="68.5" id="aA9-aR-53E"/>
+                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="top" secondItem="ePI-bE-mbj" secondAttribute="bottom" constant="25" id="c1O-Tu-WeX"/>
                             <constraint firstItem="ePI-bE-mbj" firstAttribute="top" secondItem="qDZ-TS-VFV" secondAttribute="top" constant="40" id="efo-2c-kWO"/>
-                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="trailing" secondItem="Zl1-gq-Rnk" secondAttribute="trailing" constant="40" id="g34-b5-3bb"/>
                             <constraint firstItem="ePI-bE-mbj" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="68.5" id="keo-ax-qhm"/>
-                            <constraint firstItem="Zl1-gq-Rnk" firstAttribute="leading" secondItem="qDZ-TS-VFV" secondAttribute="leading" constant="40" id="p0b-jj-2yz"/>
-                            <constraint firstItem="qDZ-TS-VFV" firstAttribute="bottom" secondItem="Zl1-gq-Rnk" secondAttribute="bottom" constant="50" id="uMP-4r-JqW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qDZ-TS-VFV"/>
                     </view>
@@ -402,19 +411,20 @@ Nate - Little description of Nate</string>
                     <view key="view" contentMode="scaleToFill" id="vwa-Ml-oI4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.3510848631684359" green="1" blue="0.61290474069218803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Qn-XP-Bxf"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCi-rm-ryM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-581" y="1612"/>
+            <point key="canvasLocation" x="-581" y="1664"/>
         </scene>
     </scenes>
     <resources>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WeL-yw-umR"/>
         <segue reference="Q3z-Vd-63G"/>
     </inferredMetricsTieBreakers>
 </document>
