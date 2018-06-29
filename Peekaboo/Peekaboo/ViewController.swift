@@ -73,6 +73,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var quit: UIBarButtonItem!
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+//        if UIDevice.current.orientation.isLandscape {
+//            let savedView = v
+//            print(savedView.center)
+//            UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.removeSubView() })
+//            savedView.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
+//            print(savedView.center)
+//            window.addSubview(savedView)
+//            print("Landscape")
+//        } else {
+//            print("Portrait")
+//            let savedView = v
+////            v.center = window.convert(window.center, from: v)
+//            UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.removeSubView() })
+//
+//            v.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
+//            window.addSubview(savedView)
+//        }
+    }
+    
+
+    
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
@@ -436,13 +460,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
 //        let window = UIApplication.shared.keyWindow!
-        if (UIDevice.current.orientation == .portrait) {
+//        if (UIDevice.current.orientation == .portrait) {
             subViewX = window.frame.width/2
             subViewY = window.frame.height/2
-        } else {
-            subViewX = window.frame.width/2
-            subViewY = window.frame.height/2
-        }
+//        } else {
+//            subViewX = window.frame.width/2
+//            subViewY = window.frame.height/2
+//        }
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
@@ -497,6 +521,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let goButton = UIButton(type: .system)
         goButton.layer.borderWidth = 1
         goButton.backgroundColor = UIColor.white
+        goButton.showsTouchWhenHighlighted = true
         goButton.setTitle(button1Text, for: UIControlState.normal)
         if typeOfView == "HIDE" {
         goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
@@ -513,6 +538,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderWidth = 1
         cancelButton.backgroundColor = UIColor.white
+        cancelButton.showsTouchWhenHighlighted = true
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
         //Add cancelbutton styling here
   
@@ -549,8 +575,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
     }
 
-    
-    
     //Function to remove subView
     
     func removeSubView() {
