@@ -170,15 +170,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     }
     
     func animate() {
-        gaveUp = true
         stopTimer()
+        gaveUp = true
         let scale = 10
+        let penguinNode = penguinArray.first
+        lookAtCamera(node: penguinNode!)
         SCNTransaction.animationDuration = 10.0
-        let penguineNode = penguinArray.first
-        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
-        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
-        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
-        penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+        let pinchScaleX = Float(scale) * (penguinNode?.scale.x)!
+        let pinchScaleY = Float(scale) * (penguinNode?.scale.y)!
+        let pinchScaleZ = Float(scale) * (penguinNode?.scale.z)!
+        penguinNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
     
     
@@ -327,10 +328,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     @objc func switchPlayers() {
         removeSubView()
-        //reset timeisUp
         timeIsUp = false
-        if winDistance < Float(penguinToPOVDistance) { penguinArray.first?.isHidden = true }
-        // Stop the hide timer; Start the search timer
+        
+        if winDistance < Float(penguinToPOVDistance) {
+            penguinArray.first?.isHidden = true
+        }
         penguinPlaced = true
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
@@ -370,18 +372,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         penguinArray.append(penguin)
         penguinArray.first?.isHidden = false
         sceneView.scene.rootNode.addChildNode(penguin)
+        
         penguinPivot(penguin: penguin)
-        print(penguin.pivot)
+        lookAtCamera(node: penguin)
         addQuackToPenguin()
     }
     
     func penguinPivot (penguin: SCNNode) {
+        // change the pivot point of the penguin
         let box = penguin.boundingBox
         let x = (box.max.x - box.min.x) / 2
-        print(penguin.pivot)
         let translationMatrix = SCNMatrix4Mult(SCNMatrix4MakeTranslation(-x, 0, 0), SCNMatrix4MakeRotation(Float(37 * Float.pi/180), 0, 1, 0))
         penguin.pivot = translationMatrix
-
+    }
+    
+    func lookAtCamera(node penguin: SCNNode) {
+        //force the penguin to face the camera
+        let yaw = sceneView.session.currentFrame?.camera.eulerAngles.y
+        penguin.eulerAngles.y = (2 * Float.pi) - yaw!
     }
     
     //Add penguin in front of camera
@@ -449,7 +457,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
         
         if(!penguinArray.isEmpty){
-//            print(penguinArray[0].audioPlayers)
             
             if(currentPlayer != 2){
                 penguinArray[0].removeAllAudioPlayers()
@@ -465,7 +472,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 withinView = false
                 penguinArray.first?.isHidden = true
             }
-            
+           
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
         }
         
@@ -525,7 +532,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 10)
+        setTimer(startTime: 60)
         self.navigationItem.title = "Player 1"
     }
     
@@ -707,8 +714,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         }
         else {
             stopTimer()
-            // this is where we would put lose conditions / call other methods etc
-            // depending on whoever is the current player
             if currentPlayer == 1 {
                 // put the penguin somewhere
                 if penguinArray.count == 0 {
@@ -742,8 +747,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             DispatchQueue.main.async {
                 self.winAlert()
             }
-           
-            
         })
     }
     
