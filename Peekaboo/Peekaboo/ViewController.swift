@@ -68,7 +68,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var readyLabel: UILabel!
     var popupOnScreen = false
     var winTimer: DispatchWorkItem?
-    var winDistance: Float = 1
+    var winDistance: Float = 2.5
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
@@ -195,7 +195,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func animate() {
         gaveUp = true
         stopTimer()
-        let scale = 20
+        let scale = 10
         SCNTransaction.animationDuration = 10.0
         let penguineNode = penguinArray.first
         let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
@@ -360,17 +360,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
         let transform = currentFrame.camera.transform
         var translateMatrix = matrix_identity_float4x4
-        translateMatrix.columns.3.z = -0.2
+        translateMatrix.columns.3.z = -0.3
         let modifiedMatrix = simd_mul(transform, translateMatrix)
         addPenguin(matrix: modifiedMatrix)
     }
     
     @objc func getPlayer2Ready() {
-        var title = "Get Ready! "
+        var title = "Ready?! "
         if timeIsUp {
             title = "Time's Up! "
         }
-        addCustomSubView(title, "player 2 is on now!", "", "Go!", "GetPlayer2")
+        addCustomSubView(title, "Player 2, it's your turn.", "", "Go!", "GetPlayer2")
 //          currentPlayer = 2
     }
     
