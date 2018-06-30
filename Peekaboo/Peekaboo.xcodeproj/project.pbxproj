@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CDDD3C520E6835600AB74AB /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDD3C420E6835600AB74AB /* PageViewController.swift */; };
 		3CED3EC220E023DA0081C9F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CED3EC120E023DA0081C9F1 /* AppDelegate.swift */; };
 		3CED3EC420E023DA0081C9F1 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CED3EC320E023DA0081C9F1 /* art.scnassets */; };
 		3CED3EC620E023DA0081C9F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CED3EC520E023DA0081C9F1 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CDDD3C420E6835600AB74AB /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		3CED3EBE20E023DA0081C9F1 /* Peekaboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekaboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CED3EC120E023DA0081C9F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CED3EC320E023DA0081C9F1 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				784DA41220E04196009BA1A2 /* aboutUsViewController.swift */,
 				7802058E20E29F190097A96A /* Button.swift */,
 				3CED3EC720E023DA0081C9F1 /* Main.storyboard */,
+				3CDDD3C420E6835600AB74AB /* PageViewController.swift */,
 				3CED3EC320E023DA0081C9F1 /* art.scnassets */,
 				3CED3ECA20E023DB0081C9F1 /* Assets.xcassets */,
 				3CED3ECC20E023DB0081C9F1 /* LaunchScreen.storyboard */,
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				784DA41120E0417D009BA1A2 /* directionsViewController.swift in Sources */,
+				3CDDD3C520E6835600AB74AB /* PageViewController.swift in Sources */,
 				7802058F20E29F190097A96A /* Button.swift in Sources */,
 				784DA41320E04196009BA1A2 /* aboutUsViewController.swift in Sources */,
 				3CED3EC620E023DA0081C9F1 /* ViewController.swift in Sources */,
@@ -317,13 +321,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = 749CYD36Q4;
+
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+
 				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -335,13 +343,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = 749CYD36Q4;
+
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+
 				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
