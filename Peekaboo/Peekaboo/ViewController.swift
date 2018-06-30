@@ -96,25 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     
 
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        if UIDevice.current.orientation.isLandscape {
-//            let savedView = v
-//            print(savedView.center)
-//            self.removeSubView()
-//            savedView.center = CGPoint(x: window.frame.width/2, y: window.frame.height/2)
-//            print(savedView.center)
-//            window.addSubview(savedView)
-//            print("Landscape")
-//        } else {
-//            print("Portrait")
-//            let savedView = v
-////            v.center = window.convert(window.center, from: v)
-//            self.removeSubView()
-//            savedView.center = CGPoint(x: window.frame.height/2, y: window.frame.width/2)
-//            window.addSubview(savedView)
-//        }
-//    }
+
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -258,7 +240,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     
     // Allow rotation
-    @objc func canRotate() -> Void {}
+//    @objc func canRotate() -> Void {}
     
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -318,7 +300,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.navigationItem.title = ""
     }
 
-    
+    //Mark: - Adding penguin
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
         
@@ -333,6 +315,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             penguinArray.append(sceneNode)
             
             sceneView.scene.rootNode.addChildNode(sceneNode)
+
+
         }
     }
     
@@ -344,10 +328,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let y = matrix.columns.3.y
             let z = matrix.columns.3.z
             sceneNode.position = SCNVector3(x, y, z)
-
             sceneNode.name = "penguin"
+            sceneNode.geometry?.firstMaterial?.specular.contents = UIColor.white
             penguinArray.append(sceneNode)
-            
+        
             sceneView.scene.rootNode.addChildNode(sceneNode)
         }
     }
@@ -361,6 +345,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let modifiedMatrix = simd_mul(transform, translateMatrix)
         addPenguin(matrix: modifiedMatrix)
     }
+    
     
     @objc func getPlayer2Ready() {
         var title = "Get Ready! "
