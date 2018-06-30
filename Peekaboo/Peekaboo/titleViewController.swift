@@ -26,7 +26,7 @@ class titleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let path = Bundle.main.path(forResource: "happy.mp3", ofType: nil)!
+        let path = Bundle.main.path(forResource: "art.scnassets/happy.mp3", ofType: nil)!
         let url = URL(fileURLWithPath: path)
         
         do {
