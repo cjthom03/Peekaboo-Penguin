@@ -35,18 +35,6 @@ extension UIButton {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
     }
-    
-    //    override open var isHighlighted: Bool {
-    //        didSet {
-    //            if self.currentTitleColor != CGColorSpace.extendedGray {
-    //            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
-    //            }
-    //        }
-    //    }
-    //
-    //    @IBAction func buttonReleased(sender: AnyObject) { //Touch Down action
-    //        print(sender.tag)
-    //    }
 }
 
 
@@ -674,10 +662,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         //Add subView to main view
         popupOnScreen = true
         self.window.addSubview(self.v)
-//        let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
-//        let systemNode = SCNNode()
-//        systemNode.addParticleSystem(particleSystem!)
-//        self.sceneView.scene.rootNode.addChildNode(systemNode)
 //        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
     }
 
@@ -698,7 +682,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
             seconds -= 1
-            if seconds < 10 { }//Add red halo
+            if seconds < 10 && currentPlayer == 2 {
+                        let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
+                        let systemNode = SCNNode()
+                        systemNode.addParticleSystem(particleSystem!)
+                        self.sceneView.scene.rootNode.addChildNode(systemNode)
+            }
+            //Add red halo
+            
         }
         else {
             stopTimer()
