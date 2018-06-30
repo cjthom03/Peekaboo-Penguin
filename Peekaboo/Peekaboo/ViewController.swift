@@ -188,20 +188,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if (UIDevice.current.orientation != .portrait) {
-//            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
-//        }
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
-
-//        let startText = "Hide the Penguin!"
-//        let startPos = SCNVector3(-0.45, 0, -1.5)
-//        virtualText = createText(text: startText, atPosition: startPos)
-        
         runReadyTimer()
 
         self.navigationItem.title = "Get Ready!"
@@ -290,7 +282,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         confirmView.addSubview(confirmButton)
         confirmView.addSubview(noButton)
         self.window.addSubview(confirmView)
-//        addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
     }
     
     // called when a touch is detected in the view/window
@@ -308,8 +299,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                     addPenquin(atLocation: hitPlaneResult)
                     ///add delay here
                     askConfirmation()
-//                    playerDelay(0.5, closure: askConfirmation)
-//                         addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
                 }else {
                     findPenguinLocation()
                     askConfirmation()
@@ -596,7 +585,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let goButtonY: CGFloat = textFieldY + textFieldHeight
         var cancelButtonY: CGFloat = goButtonY
         let spaceBetweenButtons = 10
-        if typeOfView == "HIDE" || typeOfView == "gameOver" {
+        if typeOfView == "gameOver" {
             cancelButtonY = goButtonY + buttonHeight + CGFloat(spaceBetweenButtons)
         }
         let subViewHeight = cancelButtonY + buttonHeight + 20
@@ -637,10 +626,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         goButton.backgroundColor = UIColor.white
         goButton.showsTouchWhenHighlighted = true
         goButton.setTitle(button1Text, for: UIControlState.normal)
-        if typeOfView == "HIDE" {
-        goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
-        }
-        else if typeOfView == "gameOver" {
+        if typeOfView == "gameOver" {
         goButton.addTarget(self, action:#selector(biggerObject), for: .touchUpInside)
         }
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: goButtonY, width: buttonWidth - 10, height: buttonHeight)
@@ -675,7 +661,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         
         //Add all buttons and text to subView
         v.addSubview(titleField)
-        if (typeOfView == "HIDE" || typeOfView == "gameOver") {
+        if (typeOfView == "gameOver") {
         v.addSubview(goButton)
         }
         v.addSubview(cancelButton)
