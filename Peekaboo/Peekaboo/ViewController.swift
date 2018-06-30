@@ -24,18 +24,18 @@ extension UIButton {
         } else {
             __.action?()
         }
-        
+
     }
-    
+
     @objc private func triggerActionHandleBlock() {
         self.actionHandleBlock()
     }
-    
+
     func actionHandle(controlEvents control :UIControlEvents, ForAction action:@escaping () -> Void) {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
     }
-    
+
     //    override open var isHighlighted: Bool {
     //        didSet {
     //            if self.currentTitleColor != CGColorSpace.extendedGray {
@@ -85,14 +85,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     var window = UIApplication.shared.keyWindow!
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
-  
+
 
     @IBOutlet weak var timerLabel: UILabel!
-    
+
     @IBOutlet weak var instructionLabel: UILabel!
-  
+
     @IBOutlet weak var quit: UIBarButtonItem!
-    
+
     //Remove me for forced portrait
 //    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 //        super.viewWillTransition(to: size, with: coordinator)
@@ -115,11 +115,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //       }
 //    }
 
-    
+
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
-            
+
         }
 
         var textforPlayer = ""
@@ -143,7 +143,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         if currentPlayer == 1 {
         alert.addAction(clearAction)
         } else if currentPlayer == 2 {
-            
+
             if(gaveUp == false) { alert.addAction(scaleObject) }
             alert.addAction(pushQuit)
         }
@@ -156,20 +156,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     func cancelQuit() {
         toggleTimer()
     }
-    
+
     @objc func quitGame() {
         removeSubView()
         stopTimer()
         currentPlayer = 1
         self.performSegue(withIdentifier: "title", sender: self)
     }
-    
+
     @objc func biggerObject() {
         removeSubView()
         winDistance += 50
         animate()
     }
-    
+
     func animate() {
         gaveUp = true
         stopTimer()
@@ -181,11 +181,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
-    
-    
 
-    
-    
+
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.delegate = self
@@ -198,30 +198,30 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
         self.navigationItem.title = "Get Ready!"
     }
-        
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.hidesBackButton = true
-        
+
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        
+
         configuration.planeDetection = .horizontal
 
 
         // Run the view's session
         sceneView.session.run(configuration)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if (self.isMovingFromParentViewController) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
-        
+
         timer.invalidate()
         readyTimer.invalidate()
 
@@ -229,40 +229,41 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         // Pause the view's session
         sceneView.session.pause()
     }
-    
+
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.white
         let textFont = UIFont(name: "Helvetica Bold", size: 12)!
-        
+
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
-        
+
         let textFontAttributes = [
             NSAttributedStringKey.font: textFont,
             NSAttributedStringKey.foregroundColor: textColor,
             ] as [NSAttributedStringKey : Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
-        
+
         let rect = CGRect(origin: point, size: image.size)
         text.draw(in: rect, withAttributes: textFontAttributes)
-        
+
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return newImage!
     }
 
-    
+
+
     // Allow rotation
 //    @objc func canRotate() -> Void {}
-    
+
     func askConfirmation() {
         let barHeight: CGFloat = 50
-        
+
         confirmView = UIView(frame: CGRect(x: 0, y: window.frame.height - barHeight, width: window.frame.width, height: barHeight))
         let redButton = UIColor.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         let greenButton = UIColor.init(red: 0.0, green: 0.537, blue: 0.0, alpha: 1.0)
-        
+
         let noButton = UIButton(type: .custom)
         noButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         noButton.frame = CGRect(x: 0, y: 0, width: window.frame.width/2, height: barHeight)
@@ -270,7 +271,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         noButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         noButton.setImage(UIImage(named: "closeButton.png"), for: .normal)
         noButton.showsTouchWhenHighlighted = true
-        
+
         let confirmButton = UIButton(type: .custom)
         confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
         confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
@@ -278,15 +279,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         confirmButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         confirmButton.setImage(UIImage(named: "Confirm.png"), for: .normal)
         confirmButton.showsTouchWhenHighlighted = true
-        
+
         confirmView.addSubview(confirmButton)
         confirmView.addSubview(noButton)
         self.window.addSubview(confirmView)
     }
-    
+
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+
         // ensure that a touch was detected
         if let touch = touches.first {
             // get the location of the touch event in the sceneview
@@ -294,7 +295,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             //No penguin on the screen yet? Try to add one
             if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
-        
+
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
                     ///add delay here
@@ -317,10 +318,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                     }
                 }
             }
-         
+
         }
     }
-    
+
     @objc func deletePenquin() {
         removeSubView()
         for penquin in penguinArray {
@@ -328,7 +329,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             penguinArray = [SCNNode]()
         }
     }
-    
+
 
     @objc func switchPlayers() {
         removeSubView()
@@ -342,17 +343,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         self.navigationItem.title = ""
     }
 
-    
+    //Mark: - Adding penguin
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
-        
+
         if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
             sceneNode.position = SCNVector3(
                 x: location.worldTransform.columns.3.x,
                 y: location.worldTransform.columns.3.y + 0.022,
                 z: location.worldTransform.columns.3.z
             )
-            
+
             sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
             penguinArray.first?.isHidden = false
@@ -360,17 +361,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             addQuackToPenguin()
         }
     }
-    
+
     func addPenguin(matrix: float4x4) {
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
-        
+
         if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
             let x = matrix.columns.3.x
             let y = matrix.columns.3.y
             let z = matrix.columns.3.z
             sceneNode.position = SCNVector3(x, y, z)
-            
             sceneNode.name = "penguin"
+            sceneNode.geometry?.firstMaterial?.specular.contents = UIColor.white
             penguinArray.append(sceneNode)
             penguinArray.first?.isHidden = false
             sceneView.scene.rootNode.addChildNode(sceneNode)
@@ -378,7 +379,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             //this is the right branch
         }
     }
-    
+
     //Add penguin in front of camera
     func findPenguinLocation(){
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
@@ -388,7 +389,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let modifiedMatrix = simd_mul(transform, translateMatrix)
         addPenguin(matrix: modifiedMatrix)
     }
-    
+
+
     @objc func getPlayer2Ready() {
         var title = "Ready?! "
         if timeIsUp {
@@ -412,21 +414,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         self.navigationItem.title = "Player 2"
         currentPlayer = 2
     }
-    
+
     func addQuackToPenguin (){
         penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
     }
-    
+
     func playWithinRangeSound (){
-       
-        
+
+
         if (currentPlayer == 2) {
             penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
         } else {
             penguinArray[0].removeAllAudioPlayers()
         }
     }
-    
+
     func findCameraToPenguinDistance() -> Float {
         guard let pointOfView = self.sceneView.pointOfView else {return (0)}
         let transform = pointOfView.transform
@@ -439,19 +441,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         distance += zDistance * zDistance
         return sqrt(distance)
     }
-    
+
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
-        
+
         if(!penguinArray.isEmpty){
 //            print(penguinArray[0].audioPlayers)
-            
+
             if(currentPlayer != 2){
                 penguinArray[0].removeAllAudioPlayers()
             }
-            
+
             let tempPenguinToPOVDistance = findCameraToPenguinDistance()
-            
+
             if (penguinPlaced && tempPenguinToPOVDistance <= winDistance && !withinView  ) {
                 withinView = true
                 penguinArray.first?.isHidden = false
@@ -460,24 +462,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 withinView = false
                 penguinArray.first?.isHidden = true
             }
-            
+
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
         }
-        
+
     }
-    
+
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
         winTimer = DispatchWorkItem { closure() }
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
 
     }
-    
 
-    
+
+
     //MARK: - Text Functions
     //-------------------------------------------------------------
 
-    
+
     func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
         textGeometry.firstMaterial?.diffuse.contents = textColor
@@ -487,21 +489,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         sceneView.scene.rootNode.addChildNode(textNode)
         return textNode
     }
-    
+
     func updateText(textNode: SCNNode, text: String) {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
         textGeometry.firstMaterial?.diffuse.contents = textColor
         textNode.geometry = textGeometry
     }
-    
-    
+
+
     // MARK: - READY TIMER
-    
+
     func runReadyTimer(){
           instructionLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
     }
-    
+
     @objc func updateReadyTimer(){
         if readySeconds > 0 {
             readyLabel.text = "\(readySeconds)"
@@ -515,7 +517,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             stopReadyTimer()
         }
     }
-    
+
     func stopReadyTimer(){
         readyTimer.invalidate()
         readyLabel.text = ""
@@ -523,7 +525,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         setTimer(startTime: 10)
         self.navigationItem.title = "Player 1"
     }
-    
+
     // MARK: - Timer Functions
     //-------------------------------------------------------------
     func setTimer(startTime: Int) {
@@ -531,7 +533,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         timerLabel.isHidden = false
         runTimer()
     }
-    
+
     func toggleTimer() {
         if timerIsRunning == true {
             timer.invalidate()
@@ -540,7 +542,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             runTimer()
         }
     }
-    
+
     func stopTimer() {
         timer.invalidate()
         timerIsRunning = false
@@ -548,18 +550,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         timerLabel.isHidden = true
         instructionLabel.isHidden = true
     }
-    
+
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-        
+
         timerIsRunning = true
     }
-    
+
     //Function to add subview without acitons
-    
+
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
-        
+
         v.removeFromSuperview()
 //        savedView.removeFromSuperview() //Remove me for force portrait
             subViewX = window.frame.width/2
@@ -569,13 +571,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
         let popupWidth = window.frame.width/1.5 //make it var when adding rotation
-        
+
         //Remove me for forced portrait
 //        if (UIDevice.current.orientation != .portrait) {
 //        popupWidth = window.frame.height/1.5
 //        }
-        
-        
+
+
         let titleFieldHeight: CGFloat = 40
         let titleFieldY: CGFloat = 10
         let buttonHeight: CGFloat = 45
@@ -595,11 +597,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         v.center = window.convert(window.center, from: v)
         v.backgroundColor = UIColor.white
         v.layer.borderWidth = 2
-        
+
         //Add subView styling here
-        
+
         let buttonWidth = v.frame.width/2
-        
+
         //Define title field
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
@@ -608,8 +610,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         titleField.font = UIFont.boldSystemFont(ofSize: fontSize)
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
-        
-        
+
+
         //Define text field
         let textField = UILabel(frame: CGRect(x: 0, y: textFieldY, width: v.frame.width, height: textFieldHeight))
         textField.text = textString
@@ -619,7 +621,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             textField.numberOfLines = 3
         }
         //Add text field styling here
-        
+
         //Define goButton
         let goButton = UIButton(type: .system)
         goButton.layer.borderWidth = 1
@@ -641,7 +643,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         cancelButton.showsTouchWhenHighlighted = true
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
         //Add cancelbutton styling here
-  
+
         if typeOfView == "GetPlayer2"
         {
             cancelButton.addTarget(self, action:#selector(readyPlayer2), for: .touchUpInside)
@@ -649,7 +651,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         else if typeOfView == "GameWon" || typeOfView == "gameOver"
         {
             cancelButton.addTarget(self, action:#selector(quitGame), for: .touchUpInside)
-            
+
         }
         else {
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
@@ -658,7 +660,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: cancelButtonY, width: buttonWidth - 10, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 20
-        
+
         //Add all buttons and text to subView
         v.addSubview(titleField)
         if (typeOfView == "gameOver") {
@@ -682,7 +684,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     }
 
     //Function to remove subView
-    
+
     func removeSubView() {
         popupOnScreen = false
         navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -691,9 +693,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         confirmView.removeFromSuperview()
 //        savedView.removeFromSuperview() //Remove me for forced portrait
     }
-    
 
-    
+
+
     @objc func updateTimer() {
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
@@ -709,14 +711,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 if penguinArray.count == 0 {
                     findPenguinLocation()
                 }
-                
+
                 //remove any alerts that are present
                 alert.dismiss(animated: true, completion: nil)
-                
+
                 // trigger changing players
                 timeIsUp = true
                 switchPlayers()
-                
+
             } else if currentPlayer == 2 {
                 timeIsUp = true
                 gameOver()
@@ -724,26 +726,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         }
     }
 
-    
+
     //MARK: - Game Over
-    
+
     func gameOver() {
         addCustomSubView("Game Over", "Oh no! You could not find the penguin in time... wanna know where it was hiding?", "Show me!", "Nope", "gameOver")
     }
-    
+
     //MARK: - Win Logic
     func win() {
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
             DispatchQueue.main.async {
                 self.winAlert()
             }
-           
-            
+
+
         })
     }
-    
+
     func winAlert() {
          addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
     }
 }
-
