@@ -13,6 +13,7 @@ import Foundation
 import AVFoundation
 
 
+
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
         struct __ {
@@ -56,7 +57,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     var subViewX: CGFloat = 1
     var subViewY: CGFloat = 1
     var audioSource: SCNAudioSource?
-
     @IBOutlet weak var readyLabel: UILabel!
     var popupOnScreen = false
     var winTimer: DispatchWorkItem?
@@ -70,7 +70,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
 //  var cancelButton = UIButton(type: .system)
     var v = UIView()
-    var savedView = UIView()
+    var confirmView = UIView()
+//    var savedView = UIView() //Remove me for forced portrait
     var timer = Timer()
     var readyTimer = Timer()
     var readySeconds = 3
@@ -92,29 +93,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     @IBOutlet weak var quit: UIBarButtonItem!
 
-
-
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if popupOnScreen == true {
-        self.removeSubView()
-        coordinator.animate(alongsideTransition: nil, completion: {
-            _ in
-            if UIDevice.current.orientation.isLandscape {
-                            self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                            self.window.addSubview(self.savedView)
-                            self.popupOnScreen = true
-                        }
-            if UIDevice.current.orientation.isPortrait {
-                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                self.window.addSubview(self.savedView)
-                self.popupOnScreen = true
-            }
-
-        })
-       }
-    }
+    //Remove me for forced portrait
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        if popupOnScreen == true {
+//        self.removeSubView()
+//        coordinator.animate(alongsideTransition: nil, completion: {
+//            _ in
+//            if UIDevice.current.orientation.isLandscape {
+//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+//                self.window.addSubview(self.savedView)
+//                self.popupOnScreen = true
+//            }
+//            if UIDevice.current.orientation.isPortrait {
+//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+//                self.window.addSubview(self.savedView)
+//                self.popupOnScreen = true
+//            }
+//
+//        })
+//       }
+//    }
 
 
     @IBAction func goBack(_ sender: Any) {
@@ -189,20 +188,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if (UIDevice.current.orientation != .portrait) {
-//            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
-//        }
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         audioSource = SCNAudioSource(fileNamed: "/art.scnassets/duck.wav")!
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
-
-//        let startText = "Hide the Penguin!"
-//        let startPos = SCNVector3(-0.45, 0, -1.5)
-//        virtualText = createText(text: startText, atPosition: startPos)
-
         runReadyTimer()
 
         self.navigationItem.title = "Get Ready!"
@@ -230,7 +221,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         if (self.isMovingFromParentViewController) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
-        
+
         timer.invalidate()
         readyTimer.invalidate()
 
@@ -239,10 +230,60 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         sceneView.session.pause()
     }
 
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+        let textColor = UIColor.white
+        let textFont = UIFont(name: "Helvetica Bold", size: 12)!
+
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
+
 
 
     // Allow rotation
 //    @objc func canRotate() -> Void {}
+
+    func askConfirmation() {
+        let barHeight: CGFloat = 50
+
+        confirmView = UIView(frame: CGRect(x: 0, y: window.frame.height - barHeight, width: window.frame.width, height: barHeight))
+        let redButton = UIColor.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        let greenButton = UIColor.init(red: 0.0, green: 0.537, blue: 0.0, alpha: 1.0)
+
+        let noButton = UIButton(type: .custom)
+        noButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
+        noButton.frame = CGRect(x: 0, y: 0, width: window.frame.width/2, height: barHeight)
+        noButton.backgroundColor = redButton
+        noButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        noButton.setImage(UIImage(named: "closeButton.png"), for: .normal)
+        noButton.showsTouchWhenHighlighted = true
+
+        let confirmButton = UIButton(type: .custom)
+        confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
+        confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
+        confirmButton.backgroundColor = greenButton
+        confirmButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        confirmButton.setImage(UIImage(named: "Confirm.png"), for: .normal)
+        confirmButton.showsTouchWhenHighlighted = true
+
+        confirmView.addSubview(confirmButton)
+        confirmView.addSubview(noButton)
+        self.window.addSubview(confirmView)
+    }
 
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -257,11 +298,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
-                         addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
+                    ///add delay here
+                    askConfirmation()
                 }else {
                     findPenguinLocation()
-    addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
-//                    askConfirmation()
+                    askConfirmation()
                 }
             } else {
                 //penguin already on the screen? Test if the penguin was tapped
@@ -271,8 +312,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
                             stopTimer()
-//                            addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
-
                             win()
 
                         }
@@ -407,7 +446,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
 
         if(!penguinArray.isEmpty){
-            print(penguinArray[0].audioPlayers)
+//            print(penguinArray[0].audioPlayers)
 
             if(currentPlayer != 2){
                 penguinArray[0].removeAllAudioPlayers()
@@ -523,23 +562,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
 
-//            self.removeSubView()
-//        let window = UIApplication.shared.keyWindow!
-//        if (UIDevice.current.orientation == .portrait) {
+        v.removeFromSuperview()
+//        savedView.removeFromSuperview() //Remove me for force portrait
             subViewX = window.frame.width/2
             subViewY = window.frame.height/2
-//        } else {
-//            subViewX = window.frame.width/2
-//            subViewY = window.frame.height/2
-//        }
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
-        var popupWidth = window.frame.width/1.5
-        if (UIDevice.current.orientation != .portrait) {
-        popupWidth = window.frame.height/1.5
-        }
+        let popupWidth = window.frame.width/1.5 //make it var when adding rotation
+
+        //Remove me for forced portrait
+//        if (UIDevice.current.orientation != .portrait) {
+//        popupWidth = window.frame.height/1.5
+//        }
 
 
         let titleFieldHeight: CGFloat = 40
@@ -551,7 +587,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let goButtonY: CGFloat = textFieldY + textFieldHeight
         var cancelButtonY: CGFloat = goButtonY
         let spaceBetweenButtons = 10
-        if typeOfView == "HIDE" || typeOfView == "gameOver" {
+        if typeOfView == "gameOver" {
             cancelButtonY = goButtonY + buttonHeight + CGFloat(spaceBetweenButtons)
         }
         let subViewHeight = cancelButtonY + buttonHeight + 20
@@ -592,10 +628,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         goButton.backgroundColor = UIColor.white
         goButton.showsTouchWhenHighlighted = true
         goButton.setTitle(button1Text, for: UIControlState.normal)
-        if typeOfView == "HIDE" {
-        goButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
-        }
-        else if typeOfView == "gameOver" {
+        if typeOfView == "gameOver" {
         goButton.addTarget(self, action:#selector(biggerObject), for: .touchUpInside)
         }
         goButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: goButtonY, width: buttonWidth - 10, height: buttonHeight)
@@ -630,7 +663,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
         //Add all buttons and text to subView
         v.addSubview(titleField)
-        if (typeOfView == "HIDE" || typeOfView == "gameOver") {
+        if (typeOfView == "gameOver") {
         v.addSubview(goButton)
         }
         v.addSubview(cancelButton)
@@ -639,10 +672,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
         v.layer.backgroundColor = background
-        savedView = v
+//        savedView = v //Remove me for forced portrait
         //Add subView to main view
         popupOnScreen = true
-        UIView.animate(withDuration: 1.2, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveEaseInOut, animations: { self.window.addSubview(self.v) })
+        self.window.addSubview(self.v)
+//        let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
+//        let systemNode = SCNNode()
+//        systemNode.addParticleSystem(particleSystem!)
+//        self.sceneView.scene.rootNode.addChildNode(systemNode)
+//        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
     }
 
     //Function to remove subView
@@ -652,7 +690,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
-        savedView.removeFromSuperview()
+        confirmView.removeFromSuperview()
+//        savedView.removeFromSuperview() //Remove me for forced portrait
     }
 
 
@@ -661,7 +700,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
             seconds -= 1
-        } else {
+            if seconds < 10 { }//Add red halo
+        }
+        else {
             stopTimer()
             // this is where we would put lose conditions / call other methods etc
             // depending on whoever is the current player
