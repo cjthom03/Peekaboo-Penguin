@@ -12,10 +12,6 @@ import ARKit
 import Foundation
 import AVFoundation
 
-//var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
-
-var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
-
 
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
@@ -27,42 +23,38 @@ extension UIButton {
         } else {
             __.action?()
         }
-        
+
     }
-    
+
     @objc private func triggerActionHandleBlock() {
         self.actionHandleBlock()
     }
-    
+
     func actionHandle(controlEvents control :UIControlEvents, ForAction action:@escaping () -> Void) {
         self.actionHandleBlock(action: action)
         self.addTarget(self, action: #selector(UIButton.triggerActionHandleBlock), for: control)
     }
 
-//    override open var isHighlighted: Bool {
-//        didSet {
-//            if self.currentTitleColor != CGColorSpace.extendedGray {
-//            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
-//            }
-//        }
-//    }
-//
-//    @IBAction func buttonReleased(sender: AnyObject) { //Touch Down action
-//        print(sender.tag)
-//    }
-    
-    
+    //    override open var isHighlighted: Bool {
+    //        didSet {
+    //            if self.currentTitleColor != CGColorSpace.extendedGray {
+    //            backgroundColor = isHighlighted ? highlitedColor : UIColor.white
+    //            }
+    //        }
+    //    }
+    //
+    //    @IBAction func buttonReleased(sender: AnyObject) { //Touch Down action
+    //        print(sender.tag)
+    //    }
 }
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+
+
+class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate {
     var penguinToPOVDistance: Double = 0
     var penguinArray = [SCNNode]()
-    
-
-
     var subViewX: CGFloat = 1
     var subViewY: CGFloat = 1
-   
     var audioSource: SCNAudioSource?
 
     @IBOutlet weak var readyLabel: UILabel!
@@ -72,7 +64,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
-//            var cancelButton = UIButton(type: .system)
+
+    var player2IsFinding: Bool = false
+
+//var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+//  var cancelButton = UIButton(type: .system)
     var v = UIView()
     var savedView = UIView()
     var timer = Timer()
@@ -82,22 +78,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var timeIsUp = false
     var seconds = 0 //default timer set to 0 - start times must be explicitly set
     var withinView = false
+    var penguinPlaced = false
     var currentPlayer = 1
     var alert: UIAlertController = UIAlertController()
     var window = UIApplication.shared.keyWindow!
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
-  
+
 
     @IBOutlet weak var timerLabel: UILabel!
-    
+
     @IBOutlet weak var instructionLabel: UILabel!
-  
+
     @IBOutlet weak var quit: UIBarButtonItem!
-    
 
 
-    
+
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if popupOnScreen == true {
@@ -114,16 +111,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.window.addSubview(self.savedView)
                 self.popupOnScreen = true
             }
- 
+
         })
        }
     }
 
-    
+
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
-            
+
         }
 
         var textforPlayer = ""
@@ -147,7 +144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if currentPlayer == 1 {
         alert.addAction(clearAction)
         } else if currentPlayer == 2 {
-            
+
             if(gaveUp == false) { alert.addAction(scaleObject) }
             alert.addAction(pushQuit)
         }
@@ -160,20 +157,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func cancelQuit() {
         toggleTimer()
     }
-    
+
     @objc func quitGame() {
         removeSubView()
         stopTimer()
         currentPlayer = 1
         self.performSegue(withIdentifier: "title", sender: self)
     }
-    
+
     @objc func biggerObject() {
         removeSubView()
         winDistance += 50
         animate()
     }
-    
+
     func animate() {
         gaveUp = true
         stopTimer()
@@ -185,11 +182,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
-    
-    
 
-    
-    
+
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        if (UIDevice.current.orientation != .portrait) {
@@ -201,50 +198,51 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         audioSource?.load()
         audioSource?.loops = true
         audioSource?.shouldStream = false
+
 //        let startText = "Hide the Penguin!"
 //        let startPos = SCNVector3(-0.45, 0, -1.5)
 //        virtualText = createText(text: startText, atPosition: startPos)
-        
+
         runReadyTimer()
 
         self.navigationItem.title = "Get Ready!"
     }
-        
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.hidesBackButton = true
-        
+
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        
+
         configuration.planeDetection = .horizontal
 
 
         // Run the view's session
         sceneView.session.run(configuration)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if (self.isMovingFromParentViewController) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
-        
+        self.deletePenquin()
         // Pause the view's session
         sceneView.session.pause()
     }
-    
 
-    
+
+
     // Allow rotation
 //    @objc func canRotate() -> Void {}
-    
+
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+
         // ensure that a touch was detected
         if let touch = touches.first {
             // get the location of the touch event in the sceneview
@@ -252,7 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             //No penguin on the screen yet? Try to add one
             if penguinArray.isEmpty && readySeconds < 0 {
                 let planeResults = sceneView.hitTest(touchLocation, types: [.existingPlaneUsingExtent, .estimatedHorizontalPlane, .featurePoint])
-        
+
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
                          addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
@@ -277,10 +275,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
-         
+
         }
     }
-    
+
     @objc func deletePenquin() {
         removeSubView()
         for penquin in penguinArray {
@@ -288,13 +286,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             penguinArray = [SCNNode]()
         }
     }
-    
+
+
     @objc func switchPlayers() {
         removeSubView()
         //reset timeisUp
         timeIsUp = false
         if winDistance < Float(penguinToPOVDistance) { penguinArray.first?.isHidden = true }
         // Stop the hide timer; Start the search timer
+        penguinPlaced = true
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
         self.navigationItem.title = ""
@@ -303,26 +303,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     //Mark: - Adding penguin
     func addPenquin(atLocation location: ARHitTestResult){
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
-        
+
         if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
             sceneNode.position = SCNVector3(
                 x: location.worldTransform.columns.3.x,
                 y: location.worldTransform.columns.3.y + 0.022,
                 z: location.worldTransform.columns.3.z
             )
-            
+
             sceneNode.name = "penguin"
             penguinArray.append(sceneNode)
-            
+            penguinArray.first?.isHidden = false
             sceneView.scene.rootNode.addChildNode(sceneNode)
-
-
+            addQuackToPenguin()
         }
     }
-    
+
     func addPenguin(matrix: float4x4) {
         let scene = SCNScene(named: "art.scnassets/tux.scn")!
-        
+
         if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
             let x = matrix.columns.3.x
             let y = matrix.columns.3.y
@@ -331,11 +330,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             sceneNode.name = "penguin"
             sceneNode.geometry?.firstMaterial?.specular.contents = UIColor.white
             penguinArray.append(sceneNode)
-        
+            penguinArray.first?.isHidden = false
             sceneView.scene.rootNode.addChildNode(sceneNode)
+            addQuackToPenguin()
+            //this is the right branch
         }
     }
-    
+
     //Add penguin in front of camera
     func findPenguinLocation(){
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
@@ -345,19 +346,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let modifiedMatrix = simd_mul(transform, translateMatrix)
         addPenguin(matrix: modifiedMatrix)
     }
-    
-    
+
+
     @objc func getPlayer2Ready() {
         var title = "Get Ready! "
         if timeIsUp {
             title = "Time's Up! "
         }
+
         addCustomSubView(title, "player 2 is on now!", "", "Go!", "GetPlayer2")
-//          currentPlayer = 2
     }
-    
 
     @objc func readyPlayer2() {
+        player2IsFinding = true
+        let tempPenguinToPOVDistance = findCameraToPenguinDistance()
+        if (penguinArray[0].audioPlayers.isEmpty && tempPenguinToPOVDistance <= winDistance){
+            penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
+            withinView = true
+        }
         removeSubView()
         setTimer(startTime: 30)
         instructionLabel.text = "Find Panguine!"
@@ -366,52 +372,72 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.navigationItem.title = "Player 2"
         currentPlayer = 2
     }
-    
-    func playWithinRangeSound (){
-         penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
+
+    func addQuackToPenguin (){
+        penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
     }
-    
+
+    func playWithinRangeSound (){
+
+
+        if (currentPlayer == 2) {
+            penguinArray[0].addAudioPlayer(SCNAudioPlayer(source: audioSource!))
+        } else {
+            penguinArray[0].removeAllAudioPlayers()
+        }
+    }
+
+    func findCameraToPenguinDistance() -> Float {
+        guard let pointOfView = self.sceneView.pointOfView else {return (0)}
+        let transform = pointOfView.transform
+        let currentPosition = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let xDistance = currentPosition.x - penguinArray[0].position.x
+        let yDistance = currentPosition.y - penguinArray[0].position.y
+        let zDistance = currentPosition.z - penguinArray[0].position.z
+        var distance = xDistance * xDistance
+        distance += yDistance * yDistance
+        distance += zDistance * zDistance
+        return sqrt(distance)
+    }
+
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
-        
-        if(!penguinArray.isEmpty){
-            guard let pointOfView = self.sceneView.pointOfView else {return}
-            let transform = pointOfView.transform
-            let currentPosition = SCNVector3(transform.m41, transform.m42, transform.m43)
-            let xDistance = currentPosition.x - penguinArray[0].position.x
-            let yDistance = currentPosition.y - penguinArray[0].position.y
-            let zDistance = currentPosition.z - penguinArray[0].position.z
-            let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
 
-            if (tempPenguinToPOVDistance <= winDistance && !withinView) {
-                
+        if(!penguinArray.isEmpty){
+            print(penguinArray[0].audioPlayers)
+
+            if(currentPlayer != 2){
+                penguinArray[0].removeAllAudioPlayers()
+            }
+
+            let tempPenguinToPOVDistance = findCameraToPenguinDistance()
+
+            if (penguinPlaced && tempPenguinToPOVDistance <= winDistance && !withinView  ) {
                 withinView = true
                 penguinArray.first?.isHidden = false
-                self.playWithinRangeSound()
-                // play event
-            } else if(withinView && tempPenguinToPOVDistance > winDistance){
+                playWithinRangeSound()
+            } else if(penguinPlaced && tempPenguinToPOVDistance > winDistance && withinView){
                 withinView = false
-
-                if (currentPlayer == 2 ) { penguinArray.first?.isHidden = true }
+                penguinArray.first?.isHidden = true
             }
+
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
-            
         }
-        
+
     }
-    
+
     func playerDelay(_ delay:Double, closure:@escaping ()->()) {
         winTimer = DispatchWorkItem { closure() }
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: winTimer!)
 
     }
-    
 
-    
+
+
     //MARK: - Text Functions
     //-------------------------------------------------------------
 
-    
+
     func createText(text: String, atPosition position: SCNVector3) -> SCNNode {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
         textGeometry.firstMaterial?.diffuse.contents = textColor
@@ -421,21 +447,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(textNode)
         return textNode
     }
-    
+
     func updateText(textNode: SCNNode, text: String) {
         let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
         textGeometry.firstMaterial?.diffuse.contents = textColor
         textNode.geometry = textGeometry
     }
-    
-    
+
+
     // MARK: - READY TIMER
-    
+
     func runReadyTimer(){
           instructionLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         readyTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateReadyTimer)), userInfo: nil, repeats: true)
     }
-    
+
     @objc func updateReadyTimer(){
         if readySeconds > 0 {
             readyLabel.text = "\(readySeconds)"
@@ -449,7 +475,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             stopReadyTimer()
         }
     }
-    
+
     func stopReadyTimer(){
         readyTimer.invalidate()
         readyLabel.text = ""
@@ -457,7 +483,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         setTimer(startTime: 15)
         self.navigationItem.title = "Player 1"
     }
-    
+
     // MARK: - Timer Functions
     //-------------------------------------------------------------
     func setTimer(startTime: Int) {
@@ -465,7 +491,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerLabel.isHidden = false
         runTimer()
     }
-    
+
     func toggleTimer() {
         if timerIsRunning == true {
             timer.invalidate()
@@ -474,7 +500,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             runTimer()
         }
     }
-    
+
     func stopTimer() {
         timer.invalidate()
         timerIsRunning = false
@@ -482,18 +508,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         timerLabel.isHidden = true
         instructionLabel.isHidden = true
     }
-    
+
     //------- PRIVATE TIMER FUNCTIONS - do not call directly ------
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-        
+
         timerIsRunning = true
     }
-    
+
     //Function to add subview without acitons
-    
+
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
-        
+
 //            self.removeSubView()
 //        let window = UIApplication.shared.keyWindow!
 //        if (UIDevice.current.orientation == .portrait) {
@@ -511,8 +537,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if (UIDevice.current.orientation != .portrait) {
         popupWidth = window.frame.height/1.5
         }
-        
-        
+
+
         let titleFieldHeight: CGFloat = 40
         let titleFieldY: CGFloat = 10
         let buttonHeight: CGFloat = 45
@@ -532,11 +558,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.center = window.convert(window.center, from: v)
         v.backgroundColor = UIColor.white
         v.layer.borderWidth = 2
-        
+
         //Add subView styling here
-        
+
         let buttonWidth = v.frame.width/2
-        
+
         //Define title field
         let titleField = UILabel(frame: CGRect(x: 0, y: titleFieldY, width: v.frame.width, height: titleFieldHeight))
         titleField.text = titleString
@@ -545,8 +571,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         titleField.font = UIFont.boldSystemFont(ofSize: fontSize)
         titleField.textAlignment = NSTextAlignment.center
         //Add title field styling here
-        
-        
+
+
         //Define text field
         let textField = UILabel(frame: CGRect(x: 0, y: textFieldY, width: v.frame.width, height: textFieldHeight))
         textField.text = textString
@@ -556,7 +582,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             textField.numberOfLines = 3
         }
         //Add text field styling here
-        
+
         //Define goButton
         let goButton = UIButton(type: .system)
         goButton.layer.borderWidth = 1
@@ -581,7 +607,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         cancelButton.showsTouchWhenHighlighted = true
         cancelButton.setTitle(button2Text, for: UIControlState.normal)
         //Add cancelbutton styling here
-  
+
         if typeOfView == "GetPlayer2"
         {
             cancelButton.addTarget(self, action:#selector(readyPlayer2), for: .touchUpInside)
@@ -589,7 +615,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         else if typeOfView == "GameWon" || typeOfView == "gameOver"
         {
             cancelButton.addTarget(self, action:#selector(quitGame), for: .touchUpInside)
-            
+
         }
         else {
             cancelButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
@@ -598,7 +624,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         cancelButton.frame = CGRect(x: v.frame.width/2 - buttonWidth/2, y: cancelButtonY, width: buttonWidth - 10, height: buttonHeight)
 
         cancelButton.layer.cornerRadius = 20
-        
+
         //Add all buttons and text to subView
         v.addSubview(titleField)
         if (typeOfView == "HIDE" || typeOfView == "gameOver") {
@@ -617,7 +643,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     //Function to remove subView
-    
+
     func removeSubView() {
         popupOnScreen = false
         navigationController?.navigationBar.isUserInteractionEnabled = true
@@ -625,9 +651,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         v.removeFromSuperview()
         savedView.removeFromSuperview()
     }
-    
 
-    
+
+
     @objc func updateTimer() {
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
@@ -641,14 +667,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 if penguinArray.count == 0 {
                     findPenguinLocation()
                 }
-                
+
                 //remove any alerts that are present
                 alert.dismiss(animated: true, completion: nil)
-                
+
                 // trigger changing players
                 timeIsUp = true
                 switchPlayers()
-                
+
             } else if currentPlayer == 2 {
                 timeIsUp = true
                 gameOver()
@@ -656,26 +682,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    
+
     //MARK: - Game Over
-    
+
     func gameOver() {
         addCustomSubView("Game Over", "Oh no! You could not find the penguin in time... wanna know where it was hiding?", "Show me!", "Nope", "gameOver")
     }
-    
+
     //MARK: - Win Logic
     func win() {
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
             DispatchQueue.main.async { // Correct
                 self.winAlert()
             }
-           
-            
+
+
         })
     }
-    
+
     func winAlert() {
          addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
     }
 }
-
