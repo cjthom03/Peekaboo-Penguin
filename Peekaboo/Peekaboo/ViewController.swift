@@ -119,7 +119,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
-            
         }
 
         var textforPlayer = ""
@@ -181,9 +180,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
         penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
-    
-    
-
     
     
     override func viewDidLoad() {
@@ -284,6 +280,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         self.window.addSubview(confirmView)
     }
     
+    //MARK: - Hit Test; Touches Began
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -297,12 +294,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
-                    ///add delay here
-                    askConfirmation()
-                }else {
+                } else {
                     findPenguinLocation()
-                    askConfirmation()
                 }
+                askConfirmation()
             } else {
                 //penguin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
@@ -353,11 +348,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 z: location.worldTransform.columns.3.z
             )
             
-            sceneNode.name = "penguin"
-            penguinArray.append(sceneNode)
-            penguinArray.first?.isHidden = false
-            sceneView.scene.rootNode.addChildNode(sceneNode)
-            addQuackToPenguin()
+            appendPenguinToScene(penguin: sceneNode)
         }
     }
     
@@ -370,13 +361,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             let z = matrix.columns.3.z
             sceneNode.position = SCNVector3(x, y, z)
             
-            sceneNode.name = "penguin"
-            penguinArray.append(sceneNode)
-            penguinArray.first?.isHidden = false
-            sceneView.scene.rootNode.addChildNode(sceneNode)
-            addQuackToPenguin()
-            //this is the right branch
+            appendPenguinToScene(penguin: sceneNode)
         }
+    }
+    
+    func appendPenguinToScene(penguin: SCNNode) {
+        penguin.name = "penguin"
+        penguinArray.append(penguin)
+        penguinArray.first?.isHidden = false
+        sceneView.scene.rootNode.addChildNode(penguin)
+        penguinPivot(penguin: penguin)
+        print(penguin.pivot)
+        addQuackToPenguin()
+    }
+    
+    func penguinPivot (penguin: SCNNode) {
+        let box = penguin.boundingBox
+        let x = (box.max.x - box.min.x) / 2
+        print(penguin.pivot)
+        let translationMatrix = SCNMatrix4Mult(SCNMatrix4MakeTranslation(-x, 0, 0), SCNMatrix4MakeRotation(Float(37 * Float.pi/180), 0, 1, 0))
+        penguin.pivot = translationMatrix
+
     }
     
     //Add penguin in front of camera
