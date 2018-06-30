@@ -69,6 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //var highlitedColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
 //  var cancelButton = UIButton(type: .system)
     var v = UIView()
+    var confirmView = UIView()
 //    var savedView = UIView() //Remove me for forced portrait
     var timer = Timer()
     var readyTimer = Timer()
@@ -242,7 +243,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //    @objc func canRotate() -> Void {}
     
     func askConfirmation() {
-        addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
+        let barHeight: CGFloat = 50
+        let confirmButton = UIButton(type: .system)
+        confirmView = UIView(frame: CGRect(x: 0, y: window.frame.height - barHeight, width: window.frame.width, height: barHeight))
+        confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
+        let noButton = UIButton(type: .system)
+        noButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
+        noButton.frame = CGRect(x: 0, y: 0, width: window.frame.width/2, height: barHeight)
+        confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
+        noButton.backgroundColor = UIColor.red
+        noButton.showsTouchWhenHighlighted = true
+        noButton.setTitle("X", for: UIControlState.normal)
+        confirmButton.backgroundColor = UIColor.green
+        confirmButton.showsTouchWhenHighlighted = true
+        confirmButton.setTitle("yes", for: UIControlState.normal)
+        confirmView.addSubview(confirmButton)
+        confirmView.addSubview(noButton)
+        self.window.addSubview(confirmView)
+//        addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
     }
     
     // called when a touch is detected in the view/window
@@ -259,7 +277,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
                     ///add delay here
-                    playerDelay(0.5, closure: askConfirmation)
+                    askConfirmation()
+//                    playerDelay(0.5, closure: askConfirmation)
 //                         addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
                 }else {
                     findPenguinLocation()
@@ -653,6 +672,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
+        confirmView.removeFromSuperview()
 //        savedView.removeFromSuperview() //Remove me for forced portrait
     }
     
