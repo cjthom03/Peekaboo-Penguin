@@ -272,7 +272,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
                          addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
-                }else {
+                } else {
                     findPenguinLocation()
     addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
 //                    askConfirmation()
