@@ -60,7 +60,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     @IBOutlet weak var readyLabel: UILabel!
     var popupOnScreen = false
     var winTimer: DispatchWorkItem?
-    var winDistance: Float = 1
+    var winDistance: Float = 2.5
     var virtualText = SCNNode() // initialize as an empty scene node
     var textColor = UIColor.init(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
     var gaveUp = false
@@ -174,7 +174,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     func animate() {
         gaveUp = true
         stopTimer()
-        let scale = 20
+        let scale = 10
         SCNTransaction.animationDuration = 10.0
         let penguineNode = penguinArray.first
         let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
@@ -230,6 +230,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         if (self.isMovingFromParentViewController) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
+        
+        timer.invalidate()
+        readyTimer.invalidate()
+
         self.deletePenquin()
         // Pause the view's session
         sceneView.session.pause()
@@ -342,19 +346,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
         let transform = currentFrame.camera.transform
         var translateMatrix = matrix_identity_float4x4
-        translateMatrix.columns.3.z = -0.2
+        translateMatrix.columns.3.z = -0.3
         let modifiedMatrix = simd_mul(transform, translateMatrix)
         addPenguin(matrix: modifiedMatrix)
     }
 
 
     @objc func getPlayer2Ready() {
-        var title = "Get Ready! "
+        var title = "Ready?! "
         if timeIsUp {
             title = "Time's Up! "
         }
-
-        addCustomSubView(title, "player 2 is on now!", "", "Go!", "GetPlayer2")
+        addCustomSubView(title, "Player 2, it's your turn.", "", "Go!", "GetPlayer2")
     }
 
     @objc func readyPlayer2() {
@@ -365,7 +368,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             withinView = true
         }
         removeSubView()
-        setTimer(startTime: 30)
+        setTimer(startTime: 60)
         instructionLabel.text = "Find Panguine!"
         instructionLabel.isHidden = false
 //        updateText(textNode: virtualText, text: "FIND THE PENGUIN!!")
@@ -480,7 +483,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 15)
+        setTimer(startTime: 10)
         self.navigationItem.title = "Player 1"
     }
 
@@ -692,7 +695,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     //MARK: - Win Logic
     func win() {
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
-            DispatchQueue.main.async { // Correct
+            DispatchQueue.main.async {
                 self.winAlert()
             }
 
