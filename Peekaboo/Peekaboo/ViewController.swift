@@ -73,7 +73,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var gaveUp = false
 //            var cancelButton = UIButton(type: .system)
     var v = UIView()
-    var savedView = UIView() //Remove me for forced portrait
+//    var savedView = UIView() //Remove me for forced portrait
     var timer = Timer()
     var readyTimer = Timer()
     var readySeconds = 3
@@ -95,26 +95,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var quit: UIBarButtonItem!
     
     //Remove me for forced portrait
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if popupOnScreen == true {
-        self.removeSubView()
-        coordinator.animate(alongsideTransition: nil, completion: {
-            _ in
-            if UIDevice.current.orientation.isLandscape {
-                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                self.window.addSubview(self.savedView)
-                self.popupOnScreen = true
-            }
-            if UIDevice.current.orientation.isPortrait {
-                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-                self.window.addSubview(self.savedView)
-                self.popupOnScreen = true
-            }
- 
-        })
-       }
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        if popupOnScreen == true {
+//        self.removeSubView()
+//        coordinator.animate(alongsideTransition: nil, completion: {
+//            _ in
+//            if UIDevice.current.orientation.isLandscape {
+//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+//                self.window.addSubview(self.savedView)
+//                self.popupOnScreen = true
+//            }
+//            if UIDevice.current.orientation.isPortrait {
+//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
+//                self.window.addSubview(self.savedView)
+//                self.popupOnScreen = true
+//            }
+//
+//        })
+//       }
+//    }
 
     
     @IBAction func goBack(_ sender: Any) {
@@ -237,7 +237,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     
     // Allow rotation
-    @objc func canRotate() -> Void {}
+//    @objc func canRotate() -> Void {}
     
     func askConfirmation() {
         addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
@@ -261,8 +261,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //                         addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
                 }else {
                     findPenguinLocation()
-    addCustomSubView("Hide Penguin here?","","Yes","Cancel", "HIDE")
-//                    askConfirmation()
+                    askConfirmation()
                 }
             } else {
                 //penguin already on the screen? Test if the penguin was tapped
@@ -272,8 +271,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     if let nodeName = hitTest.first?.node.name {
                         if nodeName == "penguin" {
                             stopTimer()
-//                            addCustomSubView("You Win!", "You're awesome", "", "Ok!", "GameWon")
-
                             win()
 
                         }
@@ -382,16 +379,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let yDistance = currentPosition.y - penguinArray[0].position.y
             let zDistance = currentPosition.z - penguinArray[0].position.z
             let tempPenguinToPOVDistance = sqrt(xDistance * xDistance + yDistance * yDistance + zDistance * zDistance)
-
+//            let systemNode = SCNNode()
+//            let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
+//            systemNode.addParticleSystem(particleSystem!)
+//                    if currentPlayer == 2 { self.sceneView.scene.rootNode.addChildNode(systemNode) }
             if (tempPenguinToPOVDistance <= winDistance && !withinView) {
-                
+                print("I am in")
                 withinView = true
                 penguinArray.first?.isHidden = false
                 self.playWithinRangeSound()
                 // play event
             } else if(withinView && tempPenguinToPOVDistance > winDistance){
                 withinView = false
-
+//                systemNode.removeFromParentNode()
+                print("Iam out")
                 if (currentPlayer == 2 ) { penguinArray.first?.isHidden = true }
             }
             penguinToPOVDistance = Double(tempPenguinToPOVDistance)
@@ -495,17 +496,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func addCustomSubView(_ titleString:String, _ textString:String, _ button1Text:String, _ button2Text:String, _ typeOfView:String){
         
         v.removeFromSuperview()
-        savedView.removeFromSuperview() //Remove me for force portrait
+//        savedView.removeFromSuperview() //Remove me for force portrait
             subViewX = window.frame.width/2
             subViewY = window.frame.height/2
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
-        var popupWidth = window.frame.width/1.5
-        if (UIDevice.current.orientation != .portrait) {
-        popupWidth = window.frame.height/1.5
-        }
+        let popupWidth = window.frame.width/1.5 //make it var when adding rotation
+        
+        //Remove me for forced portrait
+//        if (UIDevice.current.orientation != .portrait) {
+//        popupWidth = window.frame.height/1.5
+//        }
         
         
         let titleFieldHeight: CGFloat = 40
@@ -605,10 +608,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let backgroundColorUI = UIColor.init(red: 0.537, green: 0.776, blue: 1.0, alpha: 1.0)
         let background = backgroundColorUI.cgColor
         v.layer.backgroundColor = background
-        savedView = v //Remove me for forced portrait
+//        savedView = v //Remove me for forced portrait
         //Add subView to main view
         popupOnScreen = true
-        self.window.addSubview(self.v) 
+        self.window.addSubview(self.v)
+//        let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
+//        let systemNode = SCNNode()
+//        systemNode.addParticleSystem(particleSystem!)
+//        self.sceneView.scene.rootNode.addChildNode(systemNode)
 //        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
     }
 
@@ -619,7 +626,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.white
         v.removeFromSuperview()
-        savedView.removeFromSuperview() //Remove me for forced portrait
+//        savedView.removeFromSuperview() //Remove me for forced portrait
     }
     
 
@@ -628,7 +635,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if seconds >= 0 {
             timerLabel.text = "\(seconds)"
             seconds -= 1
-        } else {
+            if seconds < 10 { }//Add red halo
+        }
+        else {
             stopTimer()
             // this is where we would put lose conditions / call other methods etc
             // depending on whoever is the current player

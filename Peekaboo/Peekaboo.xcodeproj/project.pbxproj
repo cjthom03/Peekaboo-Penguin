@@ -17,6 +17,8 @@
 		784DA40F20E0415A009BA1A2 /* titleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA40E20E0415A009BA1A2 /* titleViewController.swift */; };
 		784DA41120E0417D009BA1A2 /* directionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41020E0417D009BA1A2 /* directionsViewController.swift */; };
 		784DA41320E04196009BA1A2 /* aboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41220E04196009BA1A2 /* aboutUsViewController.swift */; };
+		A5FECA5D20E6FE3D0066C6C2 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A5FECA5B20E6FE3D0066C6C2 /* spark.png */; };
+		A5FECA5E20E6FE3D0066C6C2 /* Halo.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		784DA40E20E0415A009BA1A2 /* titleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleViewController.swift; sourceTree = "<group>"; };
 		784DA41020E0417D009BA1A2 /* directionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = directionsViewController.swift; sourceTree = "<group>"; };
 		784DA41220E04196009BA1A2 /* aboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutUsViewController.swift; sourceTree = "<group>"; };
+		A5FECA5B20E6FE3D0066C6C2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Halo.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		3CED3EC020E023DA0081C9F1 /* Peekaboo */ = {
 			isa = PBXGroup;
 			children = (
+				A5FECA5A20E6FC9E0066C6C2 /* Particle */,
 				3CED3EC120E023DA0081C9F1 /* AppDelegate.swift */,
 				3CED3EC520E023DA0081C9F1 /* ViewController.swift */,
 				784DA40E20E0415A009BA1A2 /* titleViewController.swift */,
@@ -77,6 +82,15 @@
 				3CED3ECF20E023DB0081C9F1 /* Info.plist */,
 			);
 			path = Peekaboo;
+			sourceTree = "<group>";
+		};
+		A5FECA5A20E6FC9E0066C6C2 /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				A5FECA5B20E6FE3D0066C6C2 /* spark.png */,
+				A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */,
+			);
+			path = Particle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +151,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5FECA5D20E6FE3D0066C6C2 /* spark.png in Resources */,
 				3CED3EC420E023DA0081C9F1 /* art.scnassets in Resources */,
 				3CED3ECE20E023DB0081C9F1 /* LaunchScreen.storyboard in Resources */,
+				A5FECA5E20E6FE3D0066C6C2 /* Halo.scnp in Resources */,
 				3CED3ECB20E023DB0081C9F1 /* Assets.xcassets in Resources */,
 				3CED3EC920E023DA0081C9F1 /* Main.storyboard in Resources */,
 			);
@@ -301,15 +317,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = 749CYD36Q4;
-
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -322,17 +335,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = 749CYD36Q4;
-
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
-
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
