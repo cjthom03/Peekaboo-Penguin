@@ -13,6 +13,7 @@ import Foundation
 import AVFoundation
 
 
+
 extension UIButton {
     private func actionHandleBlock(action:(() -> Void)? = nil) {
         struct __ {
@@ -237,6 +238,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         sceneView.session.pause()
     }
     
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+        let textColor = UIColor.white
+        let textFont = UIFont(name: "Helvetica Bold", size: 12)!
+        
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+        
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+        
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 
     
     // Allow rotation
@@ -244,19 +266,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     
     func askConfirmation() {
         let barHeight: CGFloat = 50
-        let confirmButton = UIButton(type: .system)
+        
         confirmView = UIView(frame: CGRect(x: 0, y: window.frame.height - barHeight, width: window.frame.width, height: barHeight))
-        confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
-        let noButton = UIButton(type: .system)
+        let redButton = UIColor.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        let greenButton = UIColor.init(red: 0.0, green: 0.537, blue: 0.0, alpha: 1.0)
+        
+        let noButton = UIButton(type: .custom)
         noButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
         noButton.frame = CGRect(x: 0, y: 0, width: window.frame.width/2, height: barHeight)
-        confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
-        noButton.backgroundColor = UIColor.red
+        noButton.backgroundColor = redButton
+        noButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        noButton.setImage(UIImage(named: "closeButton.png"), for: .normal)
         noButton.showsTouchWhenHighlighted = true
-        noButton.setTitle("X", for: UIControlState.normal)
-        confirmButton.backgroundColor = UIColor.green
+        
+        let confirmButton = UIButton(type: .custom)
+        confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
+        confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
+        confirmButton.backgroundColor = greenButton
+        confirmButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        confirmButton.setImage(UIImage(named: "Confirm.png"), for: .normal)
         confirmButton.showsTouchWhenHighlighted = true
-        confirmButton.setTitle("yes", for: UIControlState.normal)
+        
         confirmView.addSubview(confirmButton)
         confirmView.addSubview(noButton)
         self.window.addSubview(confirmView)
@@ -425,7 +455,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
         
         if(!penguinArray.isEmpty){
-            print(penguinArray[0].audioPlayers)
+//            print(penguinArray[0].audioPlayers)
             
             if(currentPlayer != 2){
                 penguinArray[0].removeAllAudioPlayers()
