@@ -254,7 +254,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         
         let msgLabel = UILabel(frame: CGRect(x: 0, y: 0, width: confirmView.frame.width, height: barHeight/2))
         msgLabel.font = readyLabel.font.withSize(30)
-        msgLabel.textColor = UIColor(displayP3Red: 0.0, green: 255.0, blue: 0.0, alpha: 1.0)
+        msgLabel.textColor = UIColor(red: 0.467, green: 0.733, blue: 1.0, alpha: 1.0)
         msgLabel.textAlignment = .center
         msgLabel.text = "Hide here?"
         
