@@ -4,7 +4,7 @@
 
 ## Background and Overview
 
-![demo](https://res.cloudinary.com/dchen3/image/upload/v1530483601/penguin.gif)
+![demo](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_675/v1530483601/penguin.gif)
 
 Peekaboo Penguin is a mobile application and hide-n-seek style game in which one player hides a small, digital 3D Penguin somewhere in augmented reality and another player must find that penguin within a given timeframe.
 
@@ -99,7 +99,7 @@ func lookAtCamera(node penguin: SCNNode) {
 
 In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the the new pivot point we found earlier. We then call in SCNNode's built in pivot function and pass it the matrix we created with the rotation points.
 
-![spin](https://res.cloudinary.com/dchen3/image/upload/v1530483031/spin.gif)
+![spin](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_663/v1530483031/spin.gif)
 
 In lookAtCamera, we find the camera's current y position. The penguins y angle is then set to ???Nate please fill in.
 
