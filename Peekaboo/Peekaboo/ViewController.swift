@@ -71,6 +71,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     var currentPlayer = 1
     var alert: UIAlertController = UIAlertController()
     var window = UIApplication.shared.keyWindow!
+    var isIdleTimerDisabled = true
     @IBOutlet var sceneView: ARSCNView!
     //@IBOutlet weak var quit: UIBarButtonItem!
   
