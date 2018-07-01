@@ -119,7 +119,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
-
         }
 
         var textforPlayer = ""
@@ -171,20 +170,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     }
 
     func animate() {
-        gaveUp = true
         stopTimer()
+        gaveUp = true
         let scale = 10
+        let penguinNode = penguinArray.first
+        lookAtCamera(node: penguinNode!)
         SCNTransaction.animationDuration = 10.0
-        let penguineNode = penguinArray.first
-        let pinchScaleX = Float(scale) * (penguineNode?.scale.x)!
-        let pinchScaleY = Float(scale) * (penguineNode?.scale.y)!
-        let pinchScaleZ = Float(scale) * (penguineNode?.scale.z)!
-        penguineNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
+        let pinchScaleX = Float(scale) * (penguinNode?.scale.x)!
+        let pinchScaleY = Float(scale) * (penguinNode?.scale.y)!
+        let pinchScaleZ = Float(scale) * (penguinNode?.scale.z)!
+        penguinNode?.scale = SCNVector3(pinchScaleX,pinchScaleY,pinchScaleZ)
     }
-
-
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,7 +280,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         confirmView.addSubview(noButton)
         self.window.addSubview(confirmView)
     }
-
+    
+    //MARK: - Hit Test; Touches Began
     // called when a touch is detected in the view/window
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
@@ -298,12 +295,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
-                    ///add delay here
-                    askConfirmation()
-                }else {
+                } else {
                     findPenguinLocation()
-                    askConfirmation()
                 }
+                askConfirmation()
             } else {
                 //penguin already on the screen? Test if the penguin was tapped
                 let hitTest = sceneView.hitTest(touchLocation)
@@ -333,10 +328,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     @objc func switchPlayers() {
         removeSubView()
-        //reset timeisUp
         timeIsUp = false
-        if winDistance < Float(penguinToPOVDistance) { penguinArray.first?.isHidden = true }
-        // Stop the hide timer; Start the search timer
+        
+        if winDistance < Float(penguinToPOVDistance) {
+            penguinArray.first?.isHidden = true
+        }
         penguinPlaced = true
         stopTimer()
         playerDelay(0.3, closure: getPlayer2Ready)
@@ -353,12 +349,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
                 y: location.worldTransform.columns.3.y + 0.022,
                 z: location.worldTransform.columns.3.z
             )
-
-            sceneNode.name = "penguin"
-            penguinArray.append(sceneNode)
-            penguinArray.first?.isHidden = false
-            sceneView.scene.rootNode.addChildNode(sceneNode)
-            addQuackToPenguin()
+            
+            appendPenguinToScene(penguin: sceneNode)
         }
     }
 
@@ -370,16 +362,36 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             let y = matrix.columns.3.y
             let z = matrix.columns.3.z
             sceneNode.position = SCNVector3(x, y, z)
-            sceneNode.name = "penguin"
-            sceneNode.geometry?.firstMaterial?.specular.contents = UIColor.white
-            penguinArray.append(sceneNode)
-            penguinArray.first?.isHidden = false
-            sceneView.scene.rootNode.addChildNode(sceneNode)
-            addQuackToPenguin()
-            //this is the right branch
+            
+            appendPenguinToScene(penguin: sceneNode)
         }
     }
-
+    
+    func appendPenguinToScene(penguin: SCNNode) {
+        penguin.name = "penguin"
+        penguinArray.append(penguin)
+        penguinArray.first?.isHidden = false
+        sceneView.scene.rootNode.addChildNode(penguin)
+        
+        penguinPivot(penguin: penguin)
+        lookAtCamera(node: penguin)
+        addQuackToPenguin()
+    }
+    
+    func penguinPivot (penguin: SCNNode) {
+        // change the pivot point of the penguin
+        let box = penguin.boundingBox
+        let x = (box.max.x - box.min.x) / 2
+        let translationMatrix = SCNMatrix4Mult(SCNMatrix4MakeTranslation(-x, 0, 0), SCNMatrix4MakeRotation(Float(37 * Float.pi/180), 0, 1, 0))
+        penguin.pivot = translationMatrix
+    }
+    
+    func lookAtCamera(node penguin: SCNNode) {
+        //force the penguin to face the camera
+        let yaw = sceneView.session.currentFrame?.camera.eulerAngles.y
+        penguin.eulerAngles.y = (2 * Float.pi) - yaw!
+    }
+    
     //Add penguin in front of camera
     func findPenguinLocation(){
         guard let currentFrame = self.sceneView.session.currentFrame else {return}
@@ -446,8 +458,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //      guard let currentFrame = self.sceneView.session.currentFrame else {return}
 
         if(!penguinArray.isEmpty){
-//            print(penguinArray[0].audioPlayers)
-
             if(currentPlayer != 2){
                 penguinArray[0].removeAllAudioPlayers()
             }
@@ -522,7 +532,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 10)
+        setTimer(startTime: 15)
         self.navigationItem.title = "Player 1"
     }
 
@@ -704,8 +714,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         }
         else {
             stopTimer()
-            // this is where we would put lose conditions / call other methods etc
-            // depending on whoever is the current player
             if currentPlayer == 1 {
                 // put the penguin somewhere
                 if penguinArray.count == 0 {
@@ -735,12 +743,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
     //MARK: - Win Logic
     func win() {
-        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
-            DispatchQueue.main.async {
-                self.winAlert()
-            }
-
-
+        let animateDuration = 0.5
+        let penguin = penguinArray.first
+        let jump = SCNAction.moveBy(x: 0, y: 0.1, z: 0, duration: animateDuration / 2)
+        penguin?.runAction(jump, completionHandler: {penguin?.runAction(jump.reversed())})
+        penguin?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 6, z: 0, duration: animateDuration), completionHandler: {
+            DispatchQueue.main.async { self.winAlert() }
         })
     }
 
