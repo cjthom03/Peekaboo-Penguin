@@ -267,72 +267,168 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="RBu-du-u25">
-                                <rect key="frame" x="76" y="60" width="223" height="57"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
+                                <rect key="frame" x="40" y="120" width="240" height="383"/>
+                                <color key="backgroundColor" red="0.53725490196078429" green="0.77718290441176463" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="383" id="esS-af-3s6"/>
+                                </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="About Us">
+                                    <fragment content=" ">
                                         <attributes>
-                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="40" name="ChalkboardSE-Regular"/>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Charlie ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">Thomas
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Aakash</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> Sarang
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> 
+Daniel</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> Chen
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Nate ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
+                                            <font key="NSOriginalFont" size="16" name=".SFNSDisplay"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Cunha">
+                                        <attributes>
+                                            <color key="NSColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="ChalkboardSE-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0F-MQ-Xy2">
-                                <rect key="frame" x="16" y="131" width="343" height="482"/>
-                                <color key="backgroundColor" red="0.53725490196078429" green="0.77718290441176463" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <string key="text">Bored at home?
-Don't wanna go out?
-
-Try Peekaboo!
-
-An AR game inspired by the british series of children's puzzle book "Where's Waldo?"
-Whether you are a kid or not, Peekaboo is a fun game for everyone.
-Play it by yourself or play it with a partner!
-Panguine the Penguin is waiting for you to find him.
-Peekaboo is totally free to download and use.
-So what are you waiting for? Download from the IOS app store now and start having fun!
-
-Creators of Peekaboo
-
-Charlie - Little description of charlie
-Aakash - Little description of Aakash
-Daniel - Little description of Daniel
-Nate - Little description of Nate</string>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="penguin_background" translatesAutoresizingMaskIntoConstraints="NO" id="4gV-x9-C9F">
+                                <rect key="frame" x="0.0" y="396" width="320" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4gV-x9-C9F" secondAttribute="height" multiplier="5:2" id="OTj-dw-Z9W"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzp-D4-61c" customClass="Button" customModule="Peekaboo" customModuleProvider="target">
+                                <rect key="frame" x="55" y="302" width="210" height="44"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="22"/>
+                                <state key="normal" title="Visit Our Website!">
+                                    <color key="titleColor" red="0.61960784313725492" green="0.7686274509803922" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="websiteLink:" destination="cRu-jw-dPd" eventType="touchUpInside" id="J7x-nd-Ygv"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="The Creators" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbd-rl-Wxm">
+                                <rect key="frame" x="10" y="40" width="300" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="A4U-tg-Uie"/>
+                                </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.53557304432189534" green="0.777020143995098" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.46666666666666667" green="0.73333333333333328" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="RBu-du-u25" secondAttribute="trailing" constant="76" id="AAA-fj-K1P"/>
-                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="bottom" secondItem="I0F-MQ-Xy2" secondAttribute="bottom" constant="10" id="LyW-HG-5Ik"/>
-                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="RBu-du-u25" secondAttribute="bottom" constant="14" id="RYd-Eo-ks3"/>
-                            <constraint firstItem="RBu-du-u25" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="76" id="Ult-f8-U0r"/>
-                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="I0F-MQ-Xy2" secondAttribute="trailing" constant="16" id="Xcx-eq-9LU"/>
-                            <constraint firstItem="RBu-du-u25" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="40" id="eIT-Nh-ceB"/>
-                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="16" id="lyy-FR-Vta"/>
+                            <constraint firstItem="qbd-rl-Wxm" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="20" id="48z-C2-uFw"/>
+                            <constraint firstItem="xzp-D4-61c" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="55" id="5yO-WO-qrO"/>
+                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="qbd-rl-Wxm" secondAttribute="trailing" constant="10" id="8cT-aW-9DW"/>
+                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="xzp-D4-61c" secondAttribute="trailing" constant="55" id="OT9-ZV-56i"/>
+                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="top" secondItem="tOK-Ca-TKF" secondAttribute="top" constant="100" id="VpV-dh-Oco"/>
+                            <constraint firstItem="I0F-MQ-Xy2" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="40" id="cJL-fr-aWw"/>
+                            <constraint firstItem="qbd-rl-Wxm" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" constant="10" id="dzR-2x-DMM"/>
+                            <constraint firstItem="4gV-x9-C9F" firstAttribute="bottom" secondItem="tOK-Ca-TKF" secondAttribute="bottom" id="erK-so-Zde"/>
+                            <constraint firstItem="4gV-x9-C9F" firstAttribute="trailing" secondItem="tOK-Ca-TKF" secondAttribute="trailing" id="fVJ-aT-l1V"/>
+                            <constraint firstItem="4gV-x9-C9F" firstAttribute="top" secondItem="xzp-D4-61c" secondAttribute="bottom" constant="50" id="oEB-gN-eYV"/>
+                            <constraint firstItem="tOK-Ca-TKF" firstAttribute="trailing" secondItem="I0F-MQ-Xy2" secondAttribute="trailing" constant="40" id="obt-Qa-iOI"/>
+                            <constraint firstItem="4gV-x9-C9F" firstAttribute="leading" secondItem="tOK-Ca-TKF" secondAttribute="leading" id="vmu-JQ-w9f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tOK-Ca-TKF"/>
                     </view>
                     <connections>
+                        <outlet property="ButtonStyle" destination="xzp-D4-61c" id="OfA-Ca-2iJ"/>
                         <outlet property="textView" destination="I0F-MQ-Xy2" id="wSk-SB-YUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPb-5n-pJY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="694" y="806"/>
+            <point key="canvasLocation" x="693.75" y="805.9859154929577"/>
         </scene>
         <!--Peekaboo-->
         <scene sceneID="j18-vg-XEF">
@@ -601,6 +697,7 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WeL-yw-umR"/>
         <segue reference="Q3z-Vd-63G"/>
     </inferredMetricsTieBreakers>
 </document>

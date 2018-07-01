@@ -9,10 +9,18 @@
 import UIKit
 
 class aboutUsViewController: UIViewController {
-
+    
+    @IBAction func websiteLink(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "http://peekaboopenguin.com/")! as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBOutlet weak var ButtonStyle: Button!
+    
     @IBOutlet weak var textView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        ButtonStyle.layer.cornerRadius = 4
 
         // Do any additional setup after loading the view.
     }

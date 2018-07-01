@@ -295,6 +295,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 
                 if let hitPlaneResult = planeResults.first {
                     addPenquin(atLocation: hitPlaneResult)
+
                 } else {
                     findPenguinLocation()
                 }
