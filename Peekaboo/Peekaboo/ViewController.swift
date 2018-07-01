@@ -677,6 +677,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //        savedView.removeFromSuperview() //Remove me for forced portrait
     }
     
+    func addParticle(_ type:String) {
+        let systemNode = SCNNode()
+        let particleSystem2 = SCNParticleSystem(named: type, inDirectory: nil)
+        systemNode.addParticleSystem(particleSystem2!)
+        self.sceneView.scene.rootNode.addChildNode(systemNode)
+    }
 
     
     @objc func updateTimer() {
@@ -684,10 +690,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             timerLabel.text = "\(seconds)"
             seconds -= 1
             if seconds < 10 && currentPlayer == 2 {
-                        let particleSystem = SCNParticleSystem(named: "Halo", inDirectory: nil)
-                        let systemNode = SCNNode()
-                        systemNode.addParticleSystem(particleSystem!)
-                        self.sceneView.scene.rootNode.addChildNode(systemNode)
+                addParticle("Halo")
             }
             //Add red halo
             
