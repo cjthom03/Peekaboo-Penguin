@@ -2,29 +2,29 @@
 
 ## Functionality and MVP
 ### Base Gameplay Logic
-- [ ] Hider will be able to attach a digital object to a physical surface for a Seeker to find
-- [ ] Both the Hider and the Seeker will have limited time to place and find the object(players lose on timeout)
-- [ ] Object will be invisible until Seeker close enough to the object (at which point audio feedback will provided)
-- [ ] Seeker will be able to tap on the object to win the game
-- [ ] If the Seeker gives up or runs out of time, the object's location will be revealed
+- [x] Hider will be able to attach a digital object to a physical surface for a Seeker to find
+- [x] Both the Hider and the Seeker will have limited time to place and find the object(players lose on timeout)
+- [x] Object will be invisible until Seeker close enough to the object (at which point audio feedback will provided)
+- [x] Seeker will be able to tap on the object to win the game
+- [x] If the Seeker gives up or runs out of time, the object's location will be revealed
 
 ## User Interface and Experience
-- [ ] App will include a main menu with a “Start Game” button, directions, and an about page
-- [ ] “Start Game” starts the hiding countdown, opens the camera, and tells the Hider to place the “Treasure”
-- [ ] Hider will be able to confirm or deny the correct placement of the object or cancel the game
-- [ ] If Hider runs out of time, a losing message is displayed which allows for a new game to start
-- [ ] The Game will have a staging screen for letting the Hider hand over the phone to the Seeker who can activate the Search
-- [ ] The searching phase ends with give up or timeout and a winning or losing message, allowing the user to start a new Game
-- [ ] UX will be adequately styled with smooth, bug-free navigation
+- [x] App will include a main menu with a “Start Game” button, directions, and an about page
+- [x] “Start Game” starts the hiding countdown, opens the camera, and tells the Hider to place the “Treasure”
+- [x] Hider will be able to confirm or deny the correct placement of the object or cancel the game
+- [x] If Hider runs out of time, a losing message is displayed which allows for a new game to start
+- [x] The Game will have a staging screen for letting the Hider hand over the phone to the Seeker who can activate the Search
+- [x] The searching phase ends with give up or timeout and a winning or losing message, allowing the user to start a new Game
+- [x] UX will be adequately styled with smooth, bug-free navigation
 
 ## Documentation
-- [ ] Full readme
-- [ ] Demo Site
-- [ ] App Store details
+- [x] Full readme
+- [x] Demo Site
+- [x] App Store details
 
 ### Bonus Features
-- [ ] Single player version
-- [ ] Instructions and UI components rendered in AR
+- [x] Single player version
+- [x] Instructions and UI components rendered in AR
 
 ***
 
@@ -35,16 +35,15 @@ The application will consist of 4 views, outlines in the image below. There will
 
 The `ARSCNVIEW` will consist of basic navigation buttons, pop-ups and prompts to the user to confirm object location or start the 2nd player's turn, etc. Most of the application will take place through the users's camera with prompt's and pop-ups similar to the images below.
 
-![Object Placement Confirmation](PlanningDocs/confirmation.jpg)
+![Object Placement Confirmation](confirmation.jpg)
 
-![Ready player 2](PlanningDocs/Ready.jpg)
+![Ready player 2](Ready.jpg)
 
 A full storyboard view of application is available in the Planning Docs folder.
 
 ***
 
-## Technologies and Technological Challenges
-This mobile iOS application will be built in Swift, using xCode 9.4 - Apple’s Model-View-Controller (MVC) framework and development environment. Given project time constraints, building this app in Swift has a few key advantages:
+## Technological Challenges
 
 * Access to ARKit, Apple’s developers toolkit for augmented reality apps
 * Access to SceneKit, Apple’s software for creating and using 3d models
