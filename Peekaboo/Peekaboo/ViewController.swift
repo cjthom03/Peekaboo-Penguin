@@ -532,7 +532,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         readyTimer.invalidate()
         readyLabel.text = ""
         readyLabel.isHidden = true
-        setTimer(startTime: 60)
+        setTimer(startTime: 15)
         self.navigationItem.title = "Player 1"
     }
     
@@ -743,10 +743,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     
     //MARK: - Win Logic
     func win() {
-        penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
-            DispatchQueue.main.async {
-                self.winAlert()
-            }
+        let animateDuration = 0.5
+        let penguin = penguinArray.first
+        let jump = SCNAction.moveBy(x: 0, y: 0.1, z: 0, duration: animateDuration / 2)
+        penguin?.runAction(jump, completionHandler: {penguin?.runAction(jump.reversed())})
+        penguin?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 6, z: 0, duration: animateDuration), completionHandler: {
+            DispatchQueue.main.async { self.winAlert() }
         })
     }
     

@@ -601,7 +601,6 @@ Nate - Little description of Nate</string>
         <image name="penguin_background" width="1019" height="760"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WeL-yw-umR"/>
         <segue reference="Q3z-Vd-63G"/>
     </inferredMetricsTieBreakers>
 </document>
