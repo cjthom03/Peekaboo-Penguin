@@ -73,7 +73,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDelegate, UI
     }
 
     func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 30))
+        pageControl = UIPageControl(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 20))
         self.pageControl.numberOfPages = orderedViewControllers.count
         self.pageControl.currentPage = 0
         self.pageControl.tintColor = UIColor.black
