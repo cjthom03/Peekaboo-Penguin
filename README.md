@@ -4,14 +4,16 @@
 
 ## Background and Overview
 
-![demo](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_529/v1530483601/penguin.gif)
-
 Peekaboo Penguin is a mobile application and hide-n-seek style game in which one player hides a small, digital 3D Penguin somewhere in augmented reality and another player must find that penguin within a given timeframe.
 
 The penguin can be placed on a flat surface or simply anywhere in 3d space that the hiding player would like. The hiding player is also subject to a time constraint, to keep the game play fast paced and interesting.
 
-The searching player will not be able to see the penguin unless they are within a certain distance, to avoid being able to detect the penguin through walls or other physical objects. If the searching player cannot find the penguin in the timeframe given, the penguin will become visible and will grow - revealing its hiding spot to the player.
+The searching player will not be able to see the penguin unless they are within a certain distance, to avoid being able to detect the penguin through walls or other physical objects. If the searching player cannot find the penguin in the timeframe given, the searcher will have the option to make the penguin visible and grow in size - revealing its hiding spot to the player.
 
+
+![demo](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_529/v1530483601/penguin.gif)
+
+Peekaboo Penguin was a 7 day project made from scratch. To see more details on how this project was planned, here is a link to the [proposal](https://github.com/cjthom03/Flex-Project/blob/Staging/PlanningDocs/plan.md).
 
 ***
 
