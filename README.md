@@ -4,7 +4,7 @@
 
 ## Background and Overview
 
-![demo](https://res.cloudinary.com/dchen3/image/upload/v1530482557/penguin.gif)
+![demo](https://res.cloudinary.com/dchen3/image/upload/v1530483601/penguin.gif)
 
 Peekaboo Penguin is a mobile application and hide-n-seek style game in which one player hides a small, digital 3D Penguin somewhere in augmented reality and another player must find that penguin within a given timeframe.
 
