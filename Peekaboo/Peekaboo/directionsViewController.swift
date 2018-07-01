@@ -29,6 +29,7 @@ class directionsViewController: UIViewController {
     //align text to top of text field box
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
     }
     
     /*
