@@ -729,6 +729,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     //MARK: - Win Logic
     func win() {
         addParticle("confetti")
+        playWinMusic()
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
             DispatchQueue.main.async {
                 self.winAlert()
@@ -736,6 +737,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
            
             
         })
+    }
+    
+    func playWinMusic() {
+        let path = Bundle.main.path(forResource: "art.scnassets/Won!.wav", ofType: nil)!
+        let url = URL(fileURLWithPath: path)
+        do {
+            happyMusic = try AVAudioPlayer(contentsOf: url)
+            happyMusic?.play()
+            happyMusic?.numberOfLoops = 0
+            happyMusic?.volume = 0.5
+        } catch {}
     }
     
     func winAlert() {
