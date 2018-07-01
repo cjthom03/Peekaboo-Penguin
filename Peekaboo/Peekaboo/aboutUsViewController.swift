@@ -38,7 +38,6 @@ class aboutUsViewController: UIViewController {
     //align text to top of page
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textView.setContentOffset(.zero, animated: false)
     }
     
     /*
