@@ -18,6 +18,8 @@
 		784DA40F20E0415A009BA1A2 /* titleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA40E20E0415A009BA1A2 /* titleViewController.swift */; };
 		784DA41120E0417D009BA1A2 /* directionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41020E0417D009BA1A2 /* directionsViewController.swift */; };
 		784DA41320E04196009BA1A2 /* aboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784DA41220E04196009BA1A2 /* aboutUsViewController.swift */; };
+		A532224C20E8576A00C4854B /* confetti.png in Resources */ = {isa = PBXBuildFile; fileRef = A532224A20E8576A00C4854B /* confetti.png */; };
+		A532224D20E8576A00C4854B /* confetti.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A532224B20E8576A00C4854B /* confetti.scnp */; };
 		A5FECA5D20E6FE3D0066C6C2 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = A5FECA5B20E6FE3D0066C6C2 /* spark.png */; };
 		A5FECA5E20E6FE3D0066C6C2 /* Halo.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		784DA40E20E0415A009BA1A2 /* titleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleViewController.swift; sourceTree = "<group>"; };
 		784DA41020E0417D009BA1A2 /* directionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = directionsViewController.swift; sourceTree = "<group>"; };
 		784DA41220E04196009BA1A2 /* aboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutUsViewController.swift; sourceTree = "<group>"; };
+		A532224A20E8576A00C4854B /* confetti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confetti.png; sourceTree = "<group>"; };
+		A532224B20E8576A00C4854B /* confetti.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = confetti.scnp; sourceTree = "<group>"; };
 		A5FECA5B20E6FE3D0066C6C2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Halo.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +96,8 @@
 			children = (
 				A5FECA5B20E6FE3D0066C6C2 /* spark.png */,
 				A5FECA5C20E6FE3D0066C6C2 /* Halo.scnp */,
+				A532224A20E8576A00C4854B /* confetti.png */,
+				A532224B20E8576A00C4854B /* confetti.scnp */,
 			);
 			path = Particle;
 			sourceTree = "<group>";
@@ -155,7 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5FECA5D20E6FE3D0066C6C2 /* spark.png in Resources */,
+				A532224C20E8576A00C4854B /* confetti.png in Resources */,
 				3CED3EC420E023DA0081C9F1 /* art.scnassets in Resources */,
+				A532224D20E8576A00C4854B /* confetti.scnp in Resources */,
 				3CED3ECE20E023DB0081C9F1 /* LaunchScreen.storyboard in Resources */,
 				A5FECA5E20E6FE3D0066C6C2 /* Halo.scnp in Resources */,
 				3CED3ECB20E023DB0081C9F1 /* Assets.xcassets in Resources */,
@@ -321,13 +329,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VT597ERBEY;
+				DEVELOPMENT_TEAM = 749CYD36Q4;
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.charlie.peekaboo;
+				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -339,13 +347,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VT597ERBEY;
+				DEVELOPMENT_TEAM = 749CYD36Q4;
 				INFOPLIST_FILE = Peekaboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.charlie.peekaboo;
+				PRODUCT_BUNDLE_IDENTIFIER = me.Aakash.Peekaboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
