@@ -95,7 +95,9 @@ func lookAtCamera(node penguin: SCNNode) {
 
 In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the the new pivot point we found earlier. We then call in SCNNode's built in pivot function and pass it the matrix we created with the rotation points.
 
-In lookAtCamera, we find the camera's current y position. The penguins y angle is then set to ???Nate please fill in.
+In lookAtCamera, we find the camera's current yaw angle: "y". The penguins yaw is then set to -y:
+
+![highschool geometry ftw](https://imgur.com/a/aOnjVR0)
 
 ***
 
