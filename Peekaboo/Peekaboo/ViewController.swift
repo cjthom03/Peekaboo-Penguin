@@ -82,29 +82,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
   
     @IBOutlet weak var quit: UIBarButtonItem!
     
-    //Remove me for forced portrait
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        if popupOnScreen == true {
-//        self.removeSubView()
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            _ in
-//            if UIDevice.current.orientation.isLandscape {
-//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-//                self.window.addSubview(self.savedView)
-//                self.popupOnScreen = true
-//            }
-//            if UIDevice.current.orientation.isPortrait {
-//                self.savedView.center = CGPoint(x: self.window.frame.width/2, y: self.window.frame.height/2)
-//                self.window.addSubview(self.savedView)
-//                self.popupOnScreen = true
-//            }
-//
-//        })
-//       }
-//    }
-
-    
     @IBAction func goBack(_ sender: Any) {
         if timerIsRunning == true {
             toggleTimer()
@@ -562,16 +539,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
             subViewY = window.frame.height/2
         navigationController?.navigationBar.isUserInteractionEnabled = false
         navigationController?.navigationBar.tintColor = UIColor.lightGray
+        
         //Define subView
 //        let window = UIApplication.shared.keyWindow!
         let popupWidth = window.frame.width/1.5 //make it var when adding rotation
-        
-        //Remove me for forced portrait
-//        if (UIDevice.current.orientation != .portrait) {
-//        popupWidth = window.frame.height/1.5
-//        }
-        
-        
         let titleFieldHeight: CGFloat = 40
         let titleFieldY: CGFloat = 10
         let buttonHeight: CGFloat = 45
@@ -670,7 +641,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         //Add subView to main view
         popupOnScreen = true
         self.window.addSubview(self.v)
-//        UIView.animate(withDuration: 2.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 30.0, options: .curveLinear, animations: { self.window.addSubview(self.v) })
     }
 
     //Function to remove subView
