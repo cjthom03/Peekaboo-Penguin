@@ -740,6 +740,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     }
     
     func playWinMusic() {
+        penguinArray[0].removeAllAudioPlayers()
         let path = Bundle.main.path(forResource: "art.scnassets/Won!.wav", ofType: nil)!
         let url = URL(fileURLWithPath: path)
         do {
