@@ -12,7 +12,6 @@ class directionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -27,12 +26,10 @@ class directionsViewController: UIViewController {
     
     @IBOutlet weak var direction: UITextField!
     
-    @IBOutlet weak var textView: UITextView!
-    
     //align text to top of text field box
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
     }
     
     /*
