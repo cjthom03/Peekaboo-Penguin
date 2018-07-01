@@ -93,94 +93,17 @@ func lookAtCamera(node penguin: SCNNode) {
 
 ```
 
-In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the 
+In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the the new pivot point we found earlier. We then call in SCNNode's built in pivot function and pass it the matrix we created with the rotation points.
 
-
-
-
-
-## Documentation
-- [ ] Full readme
-- [ ] Demo Site
-- [ ] App Store details
-
-### Bonus Features
-- [ ] Single player version
-- [ ] Instructions and UI components rendered in AR
+In lookAtCamera, we find the camera's current y position. The penguins y angle is then set to ???Nate please fill in.
 
 ***
 
-## Group Members and Responsibilities
-The team includes 4 members: Charlie Thomas, Aakash Sarang, Nate Cunha, and Daniel Chen
+## Additional Resources
+  To learn more about the technologies we used for this project....
+  * [Swift](https://developer.apple.com/swift/)
+  * [ARKit](https://developer.apple.com/arkit/)
+  * [SceneKit](https://developer.apple.com/scenekit/)
 
-Charlie’s primary responsibilities include:
-* Managing Timeline
-* Logic for object hit testing (user can tap on an object to end the game)
-* Handling the game’s Win condition(s) and outcome
-* Writing the game directions/rules to be displayed to the user
-* Getting Application deployed on the app store
-
-Aakash’s primary responsibilities include:
-* Feature Manager - Game functions as planned
-* Handles all button actions and transitions
-* Logic for quit/lose conditions and game restart
-* Writing the ‘About Us’ section of the app
-
-Nate’s primary responsibilities include:
-* UX Manager - The game runs smoothly and is fun to play
-* Play testing manager - Gather playtest feedback to improve game
-* Logic for calculating relative distances in 3D space
-* Handles location-based events (e.g. to provide user with feedback)
-
-Daniel’s primary responsibilities include:
-* UI Manager - The game layout is intuitive and aesthetically pleasing
-* Rendering and placement of objects in 3D space
-* Styling ‘Directions’ & ‘About Us’ views
-* Manage Demo Site setup (will be assisted by all)
-
-***
-
-## Schedule & Work Breakdown
-
-Each day will begin with a Stand Up meeting at 9:05am to review the schedule and goals for the day, discuss roadblocks, and adjust the schedule and workload as needed. Each day will conclude with one person doing a code review for another on the team.
-
-### Phase 1 - Basic Game Logic - (2.5 days)
-* All UI components (unstyled) are in place (Daniel)
-* 3D Object render in user designated placements (Daniel)
-* Button actions are linked to View Controller and functional (Aakash)
-* Transition between views are functional (Aakash)
-* Object hitTesting is functional (Charlie)
-* Basic Win conditions (Charlie)
-* Basic Lose/Quit conditions (Aakash)
-* Distance relative to origin / user is calculated (Nate)
-* Object rendering distance events are functional (Nate)
-* Game Directions are complete (Charlie)
-* About Us section is complete (Aakash)
-
-
-### Phase 2 - Polish and Playtest (1.5 days)
-* PlayTest (All)
-* Gather playtest feedback and provide adjustments needed (Nate)
-* UX/UI adjustments based on playtest feedback (All)
-* User feedback distance events are functional (Nate)
-* Timer(s) are functional (Charlie)
-* Timer events are functional (Nate)
-* Finalize Plane detection logic (Daniel)
-* UI components are styled appropriately (Daniel)
-* Advanced win conditions are complete (Charlie)
-* Advanced lose conditions are complete (Charlie)
-
-
-### Phase 3 - Go Live - (1 day)
-* Final styling/UI/UX adjustments (Aakash and Nate)
-* Gather final assets and info needed to submit to App store (Aakash and Nate)
-* Submit to the App Store for review (Charlie)
-* Register Domain for Demo Site (Charlie)
-* Build Demo Site (Daniel + All)
-
-***
-
-## Getting Users and Reviews
-* Charlie will submit the app for review on the App store.
-* All members will each share with at least 20 friends and family members.
-* Soft launch with close friends.
+## Future Features
+  * Single player version
