@@ -11,22 +11,93 @@ The searching player will not be able to see the penguin unless they are within 
 
 ***
 
-## Functionality and MVP
-### Base Gameplay Logic
-- [ ] Hider will be able to attach a digital object to a physical surface for a Seeker to find
-- [ ] Both the Hider and the Seeker will have limited time to place and find the object(players lose on timeout)
-- [ ] Object will be invisible until Seeker close enough to the object (at which point audio feedback will provided)
-- [ ] Seeker will be able to tap on the object to win the game
-- [ ] If the Seeker gives up or runs out of time, the object's location will be revealed
+## Technology
 
-## User Interface and Experience
-- [ ] App will include a main menu with a “Start Game” button, directions, and an about page
-- [ ] “Start Game” starts the hiding countdown, opens the camera, and tells the Hider to place the “Treasure”
-- [ ] Hider will be able to confirm or deny the correct placement of the object or cancel the game
-- [ ] If Hider runs out of time, a losing message is displayed which allows for a new game to start
-- [ ] The Game will have a staging screen for letting the Hider hand over the phone to the Seeker who can activate the Search
-- [ ] The searching phase ends with give up or timeout and a winning or losing message, allowing the user to start a new Game
-- [ ] UX will be adequately styled with smooth, bug-free navigation
+Peekaboo Penguin is built with...
+  * Swift, using xCode 9.4 - Apple’s Model-View-Controller (MVC) framework and development environment.
+
+  * ARKit, Apple’s developers toolkit for augmented reality apps.
+
+  * SceneKit, Apple’s software for creating and using 3D models.
+
+***
+
+## Key Features
+  * Users can scroll through direction pages to learn how to play the game
+  * Users can go to the about us page to directly visit our website.
+  * Users can click new game to begin a new game.
+  * A timer runs to give users a limited time to either hide or find the penguin.
+  * The game has button popups that will prompt or congratulate users upon interactions.
+  * The hider will be able to hide the penguin in virtual space.
+  * The hider can confirm or deny the penguin placement.
+  * If the timer runs out of time for the hider, the penguin will be placed automatically in front of the user's current location.
+  * The penguin will become hidden when the phone is 3m away from the penguin.
+  * The penguin will become visible and provide audio feedback if it is less than 3m away from the phone.
+  * If the seeker finds the penguin and taps the penguin, the penguin will spin upon winning.
+  * If the timer runs out for the seeker or if they give up, the seeker will have an option to either return to the main page or have the penguin increase in size.
+
+### Adding Penguin
+
+We created two ways to add the penguin. The penguin will be added upon screen touch or if the user runs out of time.
+
+```swift
+func addPenquin(atLocation location: ARHitTestResult){
+    let scene = SCNScene(named: "art.scnassets/tux.scn")!
+
+    if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
+        sceneNode.position = SCNVector3(
+            x: location.worldTransform.columns.3.x,
+            y: location.worldTransform.columns.3.y + 0.022,
+            z: location.worldTransform.columns.3.z
+        )
+
+        appendPenguinToScene(penguin: sceneNode)
+    }
+}
+
+func addPenguin(matrix: float4x4) {
+    let scene = SCNScene(named: "art.scnassets/tux.scn")!
+
+    if let sceneNode = scene.rootNode.childNode(withName: "penguin", recursively:true) {
+        let x = matrix.columns.3.x
+        let y = matrix.columns.3.y
+        let z = matrix.columns.3.z
+        sceneNode.position = SCNVector3(x, y, z)
+
+        appendPenguinToScene(penguin: sceneNode)
+    }
+}
+
+```
+
+In the first function, we pass in the location that the users touch on their screens. From that, we are able to set the penguin location using SCNVector3 and passing it those values. The y location has an offset of 0.022 to account for the height of the penguin, so it does not stay below a plane surface. The second function will only run if the timer has ran out for the seeker. The phone's current location when the timer runs out will be passed to the function. From that, we will place the penguin in virtual space in front of the screen automatically.
+
+### Penguin Rotation
+
+A challenge we had was making the penguin face and rotate from the center of the penguin. The penguin object we used in SceneKit had its pivot point on its left hand. To account for the pivot point, we had to adjust the penguin's pivot point like so :
+
+```swift
+func penguinPivot (penguin: SCNNode) {
+    // change the pivot point of the penguin
+    let box = penguin.boundingBox
+    let x = (box.max.x - box.min.x) / 2
+    let translationMatrix = SCNMatrix4Mult(SCNMatrix4MakeTranslation(-x, 0, 0), SCNMatrix4MakeRotation(Float(37 * Float.pi/180), 0, 1, 0))
+    penguin.pivot = translationMatrix
+}
+
+func lookAtCamera(node penguin: SCNNode) {
+    //force the penguin to face the camera
+    let yaw = sceneView.session.currentFrame?.camera.eulerAngles.y
+    penguin.eulerAngles.y = (2 * Float.pi) - yaw!
+}
+
+```
+
+In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the 
+
+
+
+
 
 ## Documentation
 - [ ] Full readme
@@ -36,55 +107,6 @@ The searching player will not be able to see the penguin unless they are within 
 ### Bonus Features
 - [ ] Single player version
 - [ ] Instructions and UI components rendered in AR
-
-***
-
-## Wireframes
-The application will consist of 4 views, outlines in the image below. There will be a main navigation view that directs the user to the other 3 views. There will be a Directions view, explaining the rules of the game to the user. There will be an 'About Us' view, with basic details about the application and the development team. And there will be an `ARSCNVIEW` or Augmented Reality Scene View, where the game will be played (represented below as the blue frame).
-
-![All Wireframe Panels](PlanningDocs/All_panels.png)
-
-The `ARSCNVIEW` will consist of basic navigation buttons, pop-ups and prompts to the user to confirm object location or start the 2nd player's turn, etc. Most of the application will take place through the users's camera with prompt's and pop-ups similar to the images below.
-
-![Object Placement Confirmation](PlanningDocs/confirmation.jpg)
-
-![Ready player 2](PlanningDocs/Ready.jpg)
-
-A full storyboard view of application is available in the Planning Docs folder.
-
-***
-
-## Technologies and Technological Challenges
-This mobile iOS application will be built in Swift, using xCode 9.4 - Apple’s Model-View-Controller (MVC) framework and development environment. Given project time constraints, building this app in Swift has a few key advantages:
-
-* Access to ARKit, Apple’s developers toolkit for augmented reality apps
-* Access to SceneKit, Apple’s software for creating and using 3d models
-* For our minimum viable product, there will be no need to set up a backend (all data can be stored on the user’s device)
-* Building a native app allows for more control in AR than we would have with cross platform technologies
-
-Technical challenges for this project will include:
-* Learning new tech (Swift, xCode and ARKit) to quickly build and deploy a mobile app
-* Rendering and interacting with objects in augmented reality
-* Determining relative distance in 3d space between objects and registering events depending on that distance
-* Creating a fun user experience on a medium for which we have not developed before (mobile)
-
-***
-
-## Completed over the weekend
-To get up to speed with the new technologies, each team member completed the following:
-* Tutorials: 2-3 online courses specific to Swift, ARKit and iOS development
-* Docs: Overview of documentation for Swift, xCode, ARKit and SceneKit
-* Demo Apps: Build at least one simple demo app on personal device
-* Demo Site - Decided on template
-* Object - Decided on 3d object to render
-* Basic UI - components (e.g Fonts)
-
-To get started on this project, the following was completed:
-* Setup - Github Repo and initial xCode project
-* Created basic views in order to run the application
-* Basic UI setup using some demo code and objects to test functionality
-* Identified template for Demo Site
-* Determined 3d object model and animations to use as primary hidden object
 
 ***
 
