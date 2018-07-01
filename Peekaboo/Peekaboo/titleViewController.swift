@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 var happyMusic: AVAudioPlayer?
+var happyMusicPlaying: Bool = false
 
 class titleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -26,17 +27,21 @@ class titleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let path = Bundle.main.path(forResource: "art.scnassets/happy.mp3", ofType: nil)!
-        let url = URL(fileURLWithPath: path)
-        
-        do {
-            happyMusic = try AVAudioPlayer(contentsOf: url)
-            happyMusic?.play()
-            happyMusic?.numberOfLoops = -1
-            happyMusic?.volume = 0.1
-        } catch {
+        if !happyMusicPlaying {
+            let path = Bundle.main.path(forResource: "art.scnassets/happy.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
             
+            do {
+                happyMusic = try AVAudioPlayer(contentsOf: url)
+                happyMusic?.play()
+                happyMusic?.numberOfLoops = -1
+                happyMusic?.volume = 0.1
+                happyMusicPlaying = true
+            } catch {
+                
+            }
         }
+       
 
         // Do any additional setup after loading the view.
     }
