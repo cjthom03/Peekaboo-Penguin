@@ -362,7 +362,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     func lookAtCamera(node penguin: SCNNode) {
         //force the penguin to face the camera
         let yaw = sceneView.session.currentFrame?.camera.eulerAngles.y
-        penguin.eulerAngles.y = (2 * Float.pi) - yaw!
+        penguin.eulerAngles.y = -yaw!
     }
     
     //Add penguin in front of camera
