@@ -728,6 +728,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     
     //MARK: - Win Logic
     func win() {
+        addParticle("confetti")
         penguinArray.first?.runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi * 4, z: 0, duration: 1), completionHandler: {
             DispatchQueue.main.async {
                 self.winAlert()
