@@ -246,15 +246,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
 //    @objc func canRotate() -> Void {}
     
     func askConfirmation() {
-        let barHeight: CGFloat = 50
+        let barHeight: CGFloat = 100
         
         confirmView = UIView(frame: CGRect(x: 0, y: window.frame.height - barHeight, width: window.frame.width, height: barHeight))
         let redButton = UIColor.init(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
         let greenButton = UIColor.init(red: 0.0, green: 0.537, blue: 0.0, alpha: 1.0)
         
+        let msgLabel = UILabel(frame: CGRect(x: 0, y: 0, width: confirmView.frame.width, height: barHeight/2))
+        msgLabel.font = readyLabel.font.withSize(30)
+        msgLabel.textColor = UIColor(displayP3Red: 0.0, green: 255.0, blue: 0.0, alpha: 1.0)
+        msgLabel.textAlignment = .center
+        msgLabel.text = "Hide here?"
+        
         let noButton = UIButton(type: .custom)
         noButton.addTarget(self, action:#selector(deletePenquin), for: .touchUpInside)
-        noButton.frame = CGRect(x: 0, y: 0, width: window.frame.width/2, height: barHeight)
+        noButton.frame = CGRect(x: 0, y: barHeight/2, width: window.frame.width/2, height: barHeight/2)
         noButton.backgroundColor = redButton
         noButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         noButton.setImage(UIImage(named: "closeButton.png"), for: .normal)
@@ -262,12 +268,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
         
         let confirmButton = UIButton(type: .custom)
         confirmButton.addTarget(self, action:#selector(switchPlayers), for: .touchUpInside)
-        confirmButton.frame = CGRect(x: window.frame.width/2, y: 0, width: window.frame.width/2, height: barHeight)
+        confirmButton.frame = CGRect(x: window.frame.width/2, y: barHeight/2, width: window.frame.width/2, height: barHeight/2)
         confirmButton.backgroundColor = greenButton
         confirmButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         confirmButton.setImage(UIImage(named: "Confirm.png"), for: .normal)
         confirmButton.showsTouchWhenHighlighted = true
         
+        confirmView.addSubview(msgLabel)
         confirmView.addSubview(confirmButton)
         confirmView.addSubview(noButton)
         self.window.addSubview(confirmView)
