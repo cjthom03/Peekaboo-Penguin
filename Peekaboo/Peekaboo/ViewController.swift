@@ -45,6 +45,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     var subViewX: CGFloat = 1
     var subViewY: CGFloat = 1
     var audioSource: SCNAudioSource?
+    var winMusic: AVAudioPlayer?
     @IBOutlet weak var readyLabel: UILabel!
     var popupOnScreen = false
     var winTimer: DispatchWorkItem?
@@ -732,14 +733,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, AVAudioPlayerDelegate
     
     func playWinMusic() {
         penguinArray[0].removeAllAudioPlayers()
+        happyMusic?.stop()
+        happyMusicPlaying = false
+    
         let path = Bundle.main.path(forResource: "art.scnassets/Won!.wav", ofType: nil)!
         let url = URL(fileURLWithPath: path)
         do {
-            happyMusic = try AVAudioPlayer(contentsOf: url)
-            happyMusic?.play()
-            happyMusic?.numberOfLoops = 0
-            happyMusic?.volume = 0.5
-        } catch {}
+            winMusic = try AVAudioPlayer(contentsOf: url)
+            print("Win Music Set")
+            winMusic?.play()
+            winMusic?.numberOfLoops = 0
+        } catch { print("FAIL") }
     }
     
 
