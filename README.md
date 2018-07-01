@@ -3,11 +3,17 @@
 [Web Page](http://peekaboopenguin.com/)
 
 ## Background and Overview
+
 Peekaboo Penguin is a mobile application and hide-n-seek style game in which one player hides a small, digital 3D Penguin somewhere in augmented reality and another player must find that penguin within a given timeframe.
 
 The penguin can be placed on a flat surface or simply anywhere in 3d space that the hiding player would like. The hiding player is also subject to a time constraint, to keep the game play fast paced and interesting.
 
-The searching player will not be able to see the penguin unless they are within a certain distance, to avoid being able to detect the penguin through walls or other physical objects. If the searching player cannot find the penguin in the timeframe given, the penguin will become visible and will grow - revealing its hiding spot to the player.
+The searching player will not be able to see the penguin unless they are within a certain distance, to avoid being able to detect the penguin through walls or other physical objects. If the searching player cannot find the penguin in the timeframe given, the searcher will have the option to make the penguin visible and grow in size - revealing its hiding spot to the player.
+
+
+![demo](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_529/v1530483601/penguin.gif)
+
+Peekaboo Penguin was a 7 day project made from scratch. To see more details on how this project was planned, here is a link to the [proposal](https://github.com/cjthom03/Flex-Project/blob/Staging/PlanningDocs/plan.md).
 
 ***
 
@@ -88,16 +94,19 @@ func penguinPivot (penguin: SCNNode) {
 func lookAtCamera(node penguin: SCNNode) {
     //force the penguin to face the camera
     let yaw = sceneView.session.currentFrame?.camera.eulerAngles.y
-    penguin.eulerAngles.y = (2 * Float.pi) - yaw!
+    penguin.eulerAngles.y = - yaw!
 }
 
 ```
 
 In penguinPivot, we manipulate the penguin's pivot point by finding the width of it using .boundingBox and finding the midpoint. Rotating our penguin by 37 degrees is the solution we found to make the penguin stand up straight when placed in virtual space. Since we only want to make the penguin spin, we just need to rotate it by the the new pivot point we found earlier. We then call in SCNNode's built in pivot function and pass it the matrix we created with the rotation points.
 
-In lookAtCamera, we find the camera's current yaw angle: "y". The penguins yaw is then set to -y:
 
-![highschool geometry ftw](https://imgur.com/a/aOnjVR0)
+![spin](https://res.cloudinary.com/dchen3/image/upload/c_scale,h_541/v1530483031/spin.gif)
+
+In lookAtCamera, we find the camera's current yaw angle: "yaw". The penguin's yaw, "y", is then set to -yaw:
+
+![highschool geometry ftw](https://i.imgur.com/z91sbAB.png)
 
 ***
 
