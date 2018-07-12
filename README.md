@@ -1,6 +1,7 @@
 # Peekaboo Penguin
 
-[Web Page](http://peekaboopenguin.com/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![AppStoreLink](./PlanningDocs/AppStoreLink.png)
+[Web Page](http://peekaboopenguin.com/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://itunes.apple.com/us/app/peekaboo-penguin/id1405166869?mt=8"><img src="./PlanningDocs/AppStoreLink.png"></a>
+
 
 ## Background and Overview
 
