@@ -1,6 +1,6 @@
 # Peekaboo Penguin
 
-[Web Page](http://peekaboopenguin.com/)
+[Web Page](http://peekaboopenguin.com/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![AppStoreLink](./PlanningDocs/AppStoreLink.png)
 
 ## Background and Overview
 
